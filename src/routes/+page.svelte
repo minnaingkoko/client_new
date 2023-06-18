@@ -1,0 +1,583 @@
+<script lang="ts">
+	import visibility_icon from '$lib/images/visibility.svg';
+	import edit_icon from '$lib/images/edit.svg';
+	import delete_icon from '$lib/images/delete.svg';
+	import close_icon from '$lib/images/close.svg';
+	let view = false;
+	let add = false;
+	const addToggle = () => {
+		view = !view;
+		add = !add;
+	};
+
+	let addPage1 = true;
+	let addPage2 = false;
+	let addPage3 = false;
+
+	const addNext = () => {
+		if(addPage1 === true && addPage2 === false && addPage3 === false){
+			addPage1 = false;
+			addPage2 = true;
+		}
+		else if(addPage1 === false && addPage2 === true && addPage3 === false){
+			addPage2 = false;
+			addPage3 = true;
+		}
+	}
+
+	let remove = false;
+	let remove_id: any;
+	const deleteToggle = (value: any) => {
+		remove_id = value;
+		view = !view;
+		remove = !remove;
+	};
+
+	const deleteRequest = async (value: any) => {
+		const response = await fetch('http://localhost:3000/api/delete', {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ idNo: value })
+		});
+		const data = await response.json();
+		console.log(data);
+	};
+
+	import { onMount } from 'svelte';
+	import { userData } from '../stores/MainStores';
+
+	onMount(async () => {
+		// Fetch data from MongoDB
+		const response = await fetch('http://localhost:3000/api/info');
+		const data = await response.json();
+
+		// Update the store with the fetched data
+		userData.set(data);
+	});
+</script>
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="overlay" style="display: {view ? 'flex' : 'none'};">
+	<div class="add-form" style="display: {add ? 'block' : 'none'};">
+		<div class="addForm-heading">
+			<div class="text">Add Employee</div>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="close" on:click={addToggle}>
+				<img src={close_icon} alt="" width="24px" height="24px" />
+			</div>
+		</div>
+		<hr />
+		<form class="addForm" action="/api/uploadmultiple" enctype="multipart/form-data" method="POST">
+			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="name">Name:</label>
+			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="name" id="name" required />
+
+			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="fatherName">Father Name:</label>
+			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="fatherName" id="fatherName" required />
+
+			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="address">Address:</label>
+			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="address" id="address" required />
+
+			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="phNo">Phone Number:</label>
+			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="phNo" id="phNo" required />
+
+			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="nrcNo">NRC No:</label>
+			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="nrcNo" id="nrcNo" required />
+
+			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="religion">Religion:</label>
+			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="religion" id="religion" required />
+
+			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="agent">Agent:</label>
+			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="agent" id="agent" required />
+
+
+
+
+			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="gender">Gender:</label>
+			<select class="add_input" style="display: {addPage2 ? 'block' : 'none'};" name="gender" id="gender" required>
+				<option value="">Select gender</option>
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+			</select>
+
+			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="passport">Passport:</label>
+			<input class="add_input" style="display: {addPage2 ? 'block' : 'none'};" type="text" name="passport" id="passport" required />
+
+			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="dob">Date of Birth:</label>
+			<input class="add_input" style="display: {addPage2 ? 'block' : 'none'};" type="date" name="dob" id="dob" required />
+
+			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="weight">Weight (kg):</label>
+			<input class="add_input" style="display: {addPage2 ? 'block' : 'none'};" type="number" name="weight" id="weight" step="0.1" placeholder="Optional" />
+
+			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="height">Height (cm):</label>
+			<input class="add_input" style="display: {addPage2 ? 'block' : 'none'};" type="number" name="height" id="height" step="0.1" placeholder="Optional" />
+
+			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="marital">Marital Status:</label>
+			<select class="add_input" style="display: {addPage2 ? 'block' : 'none'};" name="marital" id="marital" required>
+				<option value="">Select marital status</option>
+				<option value="single">Single</option>
+				<option value="married">Married</option>
+				<option value="divorced">Divorced</option>
+				<option value="widowed">Widowed</option>
+			</select>
+
+			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="education">Education:</label>
+			<input class="add_input" style="display: {addPage2 ? 'block' : 'none'};" type="text" name="education" id="education" required />
+
+
+
+
+
+			<label class="mg" style="display: {addPage3 ? 'block' : 'none'};" for="experience">Experience:</label>
+			<input class="add_input" style="display: {addPage3 ? 'block' : 'none'};" type="text" name="experience" id="experience" required />
+
+			<label class="mg" style="display: {addPage3 ? 'block' : 'none'};" for="workedCountry">Worked Country:</label>
+			<select class="add_input" style="display: {addPage3 ? 'block' : 'none'};" name="workedCountry" id="workedCountry" required>
+				<option value="myanmar" selected>Myanmar</option>
+				<option value="malaysia">Malaysia</option>
+				<option value="custom">Custom</option>
+			</select>
+			<input
+				class="mg"
+				type="text"
+				name="customCountry"
+				id="customCountry"
+				placeholder="Enter your country"
+				style="display: none"
+			/>
+
+			<label class="mg" style="display: {addPage3 ? 'block' : 'none'};" for="spokenLanguage">Spoken Language:</label>
+			<select class="add_input" style="display: {addPage3 ? 'block' : 'none'};" name="spokenLanguage" id="spokenLanguage" required>
+				<option value="basic" selected>English (Basic)</option>
+				<option value="intermediate">English (Intermediate)</option>
+				<option value="advanced">English (Advanced)</option>
+			</select>
+
+			<label class="mg" style="display: {addPage3 ? 'block' : 'none'};" for="passportScan">Passport Scan:</label>
+			<input type="file" style="display: {addPage3 ? 'block' : 'none'};" class="form-control mg" name="images" id="formFile" multiple />
+
+			<div class="addForm-bot">
+				<div class="cancel-btn" on:click={addToggle}>Cancel</div>
+				<div class="next-btn" on:click={addNext}>Next</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="remove-form" style="display: {remove ? 'block' : 'none'};">
+		<div class="removeForm-heading">
+			<div class="text">Delete Employee</div>
+			<!-- svelte-ignore a11y-click-events-have-key-events  -->
+			<div class="close" on:click={deleteToggle}>
+				<img src={close_icon} alt="" width="24px" height="24px" />
+			</div>
+		</div>
+		<hr />
+		<div class="remove-content">
+			<div class="warning-text">Are you sure you want to delete these Records?</div>
+			<div class="another-text">This action cannot be undone.</div>
+		</div>
+		<form class="removeForm" on:submit={() => deleteRequest(remove_id)}>
+			<div class="removeForm-bot">
+				<input type="hidden" name="idNo" value={remove_id} />	
+				<div class="remove_btn1" on:click={deleteToggle}>Cancel</div>
+				<button class="remove_btn2" type="submit">Delete</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<nav class="nav-bar">
+	<div class="heading">
+		Manage <b>Employees</b>
+	</div>
+	<div class="nav-btns">
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="add-btn" on:click={addToggle}>
+			<i class="material-icons">&#xE147;</i>
+			<span>Add New Employee</span>
+		</div>
+	</div>
+</nav>
+<div class="employees_data">
+	<div class="e_heading">
+		<div class="col1">Select</div>
+		<div class="col2">Name</div>
+		<div class="col3">Passport No</div>
+		<div class="col4">NRC No</div>
+		<div class="col5">Gender</div>
+		<div class="col6">Birthday</div>
+		<div class="col7">Age</div>
+		<div class="col8">Address</div>
+		<div class="col9">Phone Number</div>
+		<!-- <div class="col10">Father Name</div> -->
+		<!-- <div class="col11">Religion</div> -->
+		<div class="col12">Education</div>
+		<!-- <div class="col13">Agent</div> -->
+		<div class="col14">Actions</div>
+	</div>
+	<div class="hr" />
+	<ul>
+		{#each $userData as user, index}
+			<div class={index % 2 === 0 ? 'row-alt' : 'row'}>
+				<div class="col1">
+					<input class="cb" type="checkbox" />
+				</div>
+				<div class="col2">{user.name}</div>
+				<div class="col3">{user.passport}</div>
+				<div class="col4">{user.nrcNo}</div>
+				<div class="col5">{user.gender}</div>
+				<div class="col6">{user.dobString}</div>
+				<div class="col7">{user.age}</div>
+				<div class="col8">{user.address}</div>
+				<div class="col9">{user.phNo}</div>
+				<!-- <div class="col10">{user.fatherName}</div> -->
+				<!-- <div class="col11">{user.religion}</div> -->
+				<div class="col12">{user.education}</div>
+				<!-- <div class="col13">{user.agent}</div>-->
+				<div class="col14">
+					<div>
+						<img class="visibility" src={visibility_icon} alt="" width="22px" height="22px" />
+					</div>
+					<div>
+						<img class="edit" src={edit_icon} alt="" width="22px" height="22px" />
+					</div>
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div on:click={() => deleteToggle(user._id)}>
+						<img class="delete" src={delete_icon} alt="" width="22px" height="22px" />
+					</div>
+				</div> 
+			</div>
+			<div class="hr" />
+		{/each}
+	</ul>
+</div>
+<div class="bot-nav">
+	<div class="bot-left">
+		Showing <b>5</b> out of <b>25</b> entries
+	</div>
+	<div class="bot-right">
+		<div class="bn1">Previous</div>
+		<div class="bn2">1</div>
+		<div class="bn3">2</div>
+		<div class="bn4">3</div>
+		<div class="bn5">4</div>
+		<div class="bn6">5</div>
+		<div class="bn7">Next</div>
+	</div>
+</div>
+
+<style>
+	.overlay {
+		position: fixed;
+		display: none;
+		justify-content: center;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 10;
+		background: rgba(0, 0, 0, 0.3);
+		transition: 0.3s;
+	}
+	.add_input {
+		margin-left: 30px;
+		margin-right: 30px;
+		margin-bottom: 15px;
+		height: 34px;
+	}
+	.add-form,
+	.remove-form {
+		position: absolute;
+		top: 30px;
+		width: 400px;
+		height: calc(100vh - 60px);
+		background-color: white;
+		z-index: 12;
+		border-radius: 4px;
+	}
+	.cancel-btn {
+		background-color: white;
+	}
+	.next-btn {
+		background-color: #4aa84d;
+		color: white;
+	}
+	.remove-form {
+		height: 240px !important;
+	}
+	.remove-content {
+		margin: 20px 30px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.another-text {
+		font-size: 12px;
+		color: #8a6d3b;
+	}
+	.addForm-heading,
+	.removeForm-heading {
+		width: 100%;
+		height: 66px;
+		border-radius: 4px 4px 0 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 30px;
+		font-size: 18px;
+		font-weight: 500;
+		color: black;
+	}
+	.removeForm-bot {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		gap: 12px;
+		align-items: center;
+		padding: 0 30px;
+	}
+	.remove_btn1,
+	.remove_btn2 {
+		width: 100px;
+		height: 33px;
+		font-size: 14px;
+		cursor: pointer;
+		border-radius: 4px;
+	}
+	.remove_btn1 {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: white;
+		border: 1px solid transparent;
+		border-color: #adadad;
+	}
+	.remove_btn2 {
+		border-color: #d43f3a;
+		border: 1px solid transparent;
+		background-color: #d9534f;
+		color: white;
+	}
+	.addForm-bot {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		gap: 12px;
+		border-radius: 4px;
+		padding: 0 30px;
+	}
+	.addForm-bot div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100px;
+		height: 33px;
+		cursor: pointer;
+	}
+	.addForm-bot,
+	.removeForm-bot {
+		position: absolute;
+		bottom: 0;
+		background-color: #e5e5e5;
+		width: 100%;
+		height: 75px;
+		border-radius: 0 0 4px 4px;
+	}
+	.addForm,
+	.removeForm {
+		display: flex;
+		flex-direction: column;
+		margin-top: 20px;
+		margin-bottom: 95px;
+	}
+	.mg {
+		margin: 0 30px;
+	}
+	.nav-bar {
+		display: flex;
+		background-color: #435e7c;
+		width: 100%;
+		height: 65px;
+		padding: 16px 30px;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.heading {
+		color: white;
+		font-size: 24px;
+	}
+	.add-btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 5px;
+		width: 164px;
+		height: 33px;
+		color: white;
+		transition: 0.3s;
+		background-color: #4aa84d;
+		border-radius: 4px;
+		font-size: 13px;
+		cursor: pointer;
+	}
+	.add-btn:hover {
+		background-color: #3b923e;
+	}
+	.employees_data {
+		color: black;
+	}
+	.hr {
+		width: 100%;
+		height: 2px;
+		background-color: #e9e9e9;
+	}
+	.cb {
+		margin: 0;
+	}
+	.e_heading,
+	.row-alt,
+	.row {
+		font-size: 14px;
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+	}
+	.e_heading {
+		height: 50px;
+		font-weight: bold;
+	}
+	.row-alt {
+		height: 52px;
+		background-color: white;
+	}
+	.row {
+		height: 52px;
+		background-color: #f5f5f5;
+	}
+	.e_heading > div,
+	.row > div,
+	.row-alt > div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0 15px;
+		border-right: 1px solid #e9e9e9;
+	}
+	.col1 {
+		min-width: 100px;
+	}
+	.col2 {
+		min-width: 200px;
+	}
+	.col3 {
+		min-width: 120px;
+	}
+	.col4 {
+		min-width: 180px;
+	}
+	.col5 {
+		min-width: 80px;
+	}
+	.col6 {
+		min-width: 120px;
+	}
+	.col7 {
+		min-width: 60px;
+	}
+	.col8 {
+		min-width: 200px;
+	}
+	.col9 {
+		min-width: 140px;
+	}
+	.col10 {
+		min-width: 220px;
+	}
+	.col11 {
+		min-width: 100px;
+	}
+	.col12 {
+		min-width: 130px;
+	}
+	.col13 {
+		min-width: 100px;
+	}
+	.col14 {
+		border-right: 0 !important;
+		display: flex;
+		flex-direction: row;
+		gap: 8px;
+		min-width: 120px;
+	}
+	.visibility,
+	.edit,
+	.delete,
+	.close {
+		cursor: pointer;
+		transition: 0.3s;
+	}
+	.visibility:hover,
+	.edit:hover,
+	.delete:hover {
+		opacity: 0.6;
+	}
+	.bot-nav {
+		display: flex;
+		padding: 0 25px;
+		flex-direction: row;
+		justify-content: space-between;
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 72px;
+	}
+	.bot-left {
+		height: 32px;
+		margin-top: 10px;
+	}
+	.bot-right {
+		display: flex;
+		flex-direction: row;
+		gap: 2px;
+		height: 32px;
+		margin: 20px 0;
+	}
+	.bot-right div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 32px;
+		border: 1px solid #ddd;
+		border-radius: 2px;
+		cursor: pointer;
+		transition: 0.3s;
+	}
+	.bn1 {
+		width: 76px;
+	}
+	.bn2 {
+		background-color: #337ab7;
+		color: white;
+	}
+	.bn2,
+	.bn3,
+	.bn4,
+	.bn5,
+	.bn6 {
+		width: 33px;
+	}
+	.bn1:hover,
+	.bn2:hover,
+	.bn3:hover,
+	.bn4:hover,
+	.bn5:hover,
+	.bn6:hover,
+	.bn7:hover {
+		border: 1px solid rgb(158, 157, 157);
+	}
+	.bn7 {
+		width: 52px;
+	}
+</style>
