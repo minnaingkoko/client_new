@@ -20,6 +20,10 @@
 		addPage3 = false;
 	}
 
+	const resetDelete = () => {
+		remove.set(false);
+	}
+
 	let add = false;
 	const addToggle = () => {
 		resetPage();
@@ -52,9 +56,9 @@
 			},
 			body: JSON.stringify({ idNo: value })
 		});
-		if(response.status === 200){
-			goto('/');
-		}
+		// if(response.status === 200){
+		// 	goto('/');
+		// }
 		const data = await response.json();
 		console.log(data);
 	};
@@ -66,6 +70,7 @@
 
 		// Update the store with the fetched data
 		userData.set(data);
+		// resetDelete();
 	});
 </script>
 
