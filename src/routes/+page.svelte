@@ -3,16 +3,31 @@
 	import edit_icon from '$lib/images/edit.svg';
 	import delete_icon from '$lib/images/delete.svg';
 	import close_icon from '$lib/images/close.svg';
-	let view = false;
-	let add = false;
-	const addToggle = () => {
-		view = !view;
-		add = !add;
-	};
+
+	let gender = '';
+	let marital = '';
+	let workedCountry = '';
+	let spokenLanguage = '';
 
 	let addPage1 = true;
 	let addPage2 = false;
 	let addPage3 = false;
+
+	const resetPage = () => {
+		addPage1 = true;
+		addPage2 = false;
+		addPage3 = false;
+	}
+
+	let view = false;
+	let add = false;
+	const addToggle = () => {
+		resetPage();
+		view = !view;
+		add = !add;
+	};
+
+	
 
 	const addNext = () => {
 		if(addPage1 === true && addPage2 === false && addPage3 === false){
@@ -71,95 +86,105 @@
 		<hr />
 		<form class="addForm" action="/api/uploadmultiple" enctype="multipart/form-data" method="POST">
 			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="name">Name:</label>
-			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="name" id="name" required />
+			<input class="add_input" type="{addPage1 ? 'text' : 'hidden'}" name="name" id="name" required />
 
 			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="fatherName">Father Name:</label>
-			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="fatherName" id="fatherName" required />
+			<input class="add_input" type="{addPage1 ? 'text' : 'hidden'}" name="fatherName" id="fatherName" required />
 
 			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="address">Address:</label>
-			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="address" id="address" required />
+			<input class="add_input" type="{addPage1 ? 'text' : 'hidden'}" name="address" id="address" required />
 
 			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="phNo">Phone Number:</label>
-			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="phNo" id="phNo" required />
+			<input class="add_input" type="{addPage1 ? 'text' : 'hidden'}" name="phNo" id="phNo" required />
 
 			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="nrcNo">NRC No:</label>
-			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="nrcNo" id="nrcNo" required />
+			<input class="add_input" type="{addPage1 ? 'text' : 'hidden'}" name="nrcNo" id="nrcNo" required />
 
 			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="religion">Religion:</label>
-			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="religion" id="religion" required />
+			<input class="add_input" type="{addPage1 ? 'text' : 'hidden'}" name="religion" id="religion" required />
 
 			<label class="mg" style="display: {addPage1 ? 'block' : 'none'};" for="agent">Agent:</label>
-			<input class="add_input" style="display: {addPage1 ? 'block' : 'none'};" type="text" name="agent" id="agent" required />
+			<input class="add_input" type="{addPage1 ? 'text' : 'hidden'}" name="agent" id="agent" required />
 
 
 
 
 			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="gender">Gender:</label>
-			<select class="add_input" style="display: {addPage2 ? 'block' : 'none'};" name="gender" id="gender" required>
+			<select class="add_input" style="display: {addPage2 ? 'block' : 'none'};" bind:value={gender} required>
 				<option value="">Select gender</option>
 				<option value="male">Male</option>
 				<option value="female">Female</option>
 			</select>
+			<input type="hidden" name="gender" value={gender} />
 
 			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="passport">Passport:</label>
-			<input class="add_input" style="display: {addPage2 ? 'block' : 'none'};" type="text" name="passport" id="passport" required />
+			<input class="add_input" type="{addPage2 ? 'text' : 'hidden'}" name="passport" id="passport" required />
 
 			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="dob">Date of Birth:</label>
-			<input class="add_input" style="display: {addPage2 ? 'block' : 'none'};" type="date" name="dob" id="dob" required />
+			<input class="add_input" type="{addPage2 ? 'date' : 'hidden'}" name="dob" id="dob" required />
 
 			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="weight">Weight (kg):</label>
-			<input class="add_input" style="display: {addPage2 ? 'block' : 'none'};" type="number" name="weight" id="weight" step="0.1" placeholder="Optional" />
+			<input class="add_input" type="{addPage2 ? 'number' : 'hidden'}" name="weight" id="weight" step="0.1" placeholder="Optional" />
 
 			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="height">Height (cm):</label>
-			<input class="add_input" style="display: {addPage2 ? 'block' : 'none'};" type="number" name="height" id="height" step="0.1" placeholder="Optional" />
+			<input class="add_input" type="{addPage2 ? 'number' : 'hidden'}" name="height" id="height" step="0.1" placeholder="Optional" />
 
 			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="marital">Marital Status:</label>
-			<select class="add_input" style="display: {addPage2 ? 'block' : 'none'};" name="marital" id="marital" required>
+			<select class="add_input" style="display: {addPage2 ? 'block' : 'none'};" bind:value={marital} required>
 				<option value="">Select marital status</option>
 				<option value="single">Single</option>
 				<option value="married">Married</option>
 				<option value="divorced">Divorced</option>
 				<option value="widowed">Widowed</option>
 			</select>
+			<input type="hidden" name="marital" value={marital} />
 
 			<label class="mg" style="display: {addPage2 ? 'block' : 'none'};" for="education">Education:</label>
-			<input class="add_input" style="display: {addPage2 ? 'block' : 'none'};" type="text" name="education" id="education" required />
+			<input class="add_input" type="{addPage2 ? 'text' : 'hidden'}" name="education" id="education" required />
 
 
 
 
 
 			<label class="mg" style="display: {addPage3 ? 'block' : 'none'};" for="experience">Experience:</label>
-			<input class="add_input" style="display: {addPage3 ? 'block' : 'none'};" type="text" name="experience" id="experience" required />
+			<input class="add_input" type="{addPage3 ? 'text' : 'hidden'}" name="experience" id="experience" required />
 
 			<label class="mg" style="display: {addPage3 ? 'block' : 'none'};" for="workedCountry">Worked Country:</label>
-			<select class="add_input" style="display: {addPage3 ? 'block' : 'none'};" name="workedCountry" id="workedCountry" required>
+			<select class="add_input" style="display: {addPage3 ? 'block' : 'none'};" bind:value={workedCountry} required>
 				<option value="myanmar" selected>Myanmar</option>
 				<option value="malaysia">Malaysia</option>
 				<option value="custom">Custom</option>
 			</select>
-			<input
+			<input type="hidden" name="workedCountry" value={workedCountry} />
+
+			<!-- <input
 				class="mg"
 				type="text"
 				name="customCountry"
 				id="customCountry"
 				placeholder="Enter your country"
 				style="display: none"
-			/>
+			/> -->
 
 			<label class="mg" style="display: {addPage3 ? 'block' : 'none'};" for="spokenLanguage">Spoken Language:</label>
-			<select class="add_input" style="display: {addPage3 ? 'block' : 'none'};" name="spokenLanguage" id="spokenLanguage" required>
+			<select class="add_input" style="display: {addPage3 ? 'block' : 'none'};" bind:value={spokenLanguage} required>
 				<option value="basic" selected>English (Basic)</option>
 				<option value="intermediate">English (Intermediate)</option>
 				<option value="advanced">English (Advanced)</option>
 			</select>
+			<input type="hidden" name="spokenLanguage" value={spokenLanguage} />
 
 			<label class="mg" style="display: {addPage3 ? 'block' : 'none'};" for="passportScan">Passport Scan:</label>
-			<input type="file" style="display: {addPage3 ? 'block' : 'none'};" class="form-control mg" name="images" id="formFile" multiple />
+			<input type="{addPage3 ? 'file' : 'hidden'}" class="form-control mg" name="images" id="formFile" multiple />
 
 			<div class="addForm-bot">
 				<div class="cancel-btn" on:click={addToggle}>Cancel</div>
-				<div class="next-btn" on:click={addNext}>Next</div>
+				{#if addPage3 === true}
+					<button class="submit-btn" type="submit">Submit</button>
+				{:else if addPage3 === false}
+					<div class="next-btn" on:click={addNext}>Next</div>
+				{/if}
+
 			</div>
 		</form>
 	</div>
@@ -299,9 +324,18 @@
 	.cancel-btn {
 		background-color: white;
 	}
-	.next-btn {
+	.submit-btn, .next-btn {
 		background-color: #4aa84d;
 		color: white;
+	}
+	.submit-btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100px;
+		height: 33px;
+		cursor: pointer;
+		border: none;
 	}
 	.remove-form {
 		height: 240px !important;
