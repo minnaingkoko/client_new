@@ -1,10 +1,17 @@
 <script lang="ts">
-    import visibility_icon from '$lib/images/visibility.svg';
+	import visibility_icon from '$lib/images/visibility.svg';
 	import edit_icon from '$lib/images/edit.svg';
 	import delete_icon from '$lib/images/delete.svg';
-    import { userData, view, remove, remove_id } from '../stores/MainStores';
+	import { userData, view, remove, remove_id, list, list_id } from '../stores/MainStores';
 
-    const deleteToggle = (value: any) => {
+	const listToggle = (value: any) => {
+		console.log(userData);
+		list_id.update(() => value);
+		view.update((currentValue) => !currentValue);
+		list.update((currentValue) => !currentValue);
+	};
+
+	const deleteToggle = (value: any) => {
 		remove_id.update(() => value);
 		view.update((currentValue) => !currentValue);
 		remove.update((currentValue) => !currentValue);
@@ -48,7 +55,8 @@
 				<div class="col12">{user.education}</div>
 				<!-- <div class="col13">{user.agent}</div>-->
 				<div class="col14">
-					<div>
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div on:click={() => listToggle(user._id)}>
 						<img class="visibility" src={visibility_icon} alt="" width="22px" height="22px" />
 					</div>
 					<div>
@@ -58,7 +66,7 @@
 					<div on:click={() => deleteToggle(user._id)}>
 						<img class="delete" src={delete_icon} alt="" width="22px" height="22px" />
 					</div>
-				</div> 
+				</div>
 			</div>
 			<div class="hr" />
 		{/each}
@@ -66,7 +74,7 @@
 </div>
 
 <style>
-    .employees_data {
+	.employees_data {
 		color: black;
 	}
 	.hr {
