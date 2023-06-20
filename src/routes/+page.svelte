@@ -20,9 +20,9 @@
 		addPage3 = false;
 	}
 
-	const resetDelete = () => {
-		remove.set(false);
-	}
+	// const resetDelete = () => {
+	// 	remove.set(false);
+	// }
 
 	let add = false;
 	const addToggle = () => {
@@ -56,9 +56,10 @@
 			},
 			body: JSON.stringify({ idNo: value })
 		});
-		// if(response.status === 200){
-		// 	goto('/');
-		// }
+		if(response.status === 200){
+			goto('/');
+			location.reload();
+		}
 		const data = await response.json();
 		console.log(data);
 	};
@@ -203,7 +204,7 @@
 			<div class="warning-text">Are you sure you want to delete these Records?</div>
 			<div class="another-text">This action cannot be undone.</div>
 		</div>
-		<form class="removeForm" on:submit={() => deleteRequest($remove_id)}>
+		<form class="removeForm" on:submit|preventDefault={() => deleteRequest($remove_id)}>
 			<div class="removeForm-bot">
 				<input type="hidden" name="idNo" value={$remove_id} />	
 				<div class="remove_btn1" on:click={deleteToggle}>Cancel</div>
