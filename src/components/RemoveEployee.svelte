@@ -1,15 +1,15 @@
 <script lang="ts">
-    import close_icon from '$lib/images/close.svg';
-    import { view, remove, remove_id } from '../stores/MainStores';
-    import { goto } from '$app/navigation';
+	import close_icon from '$lib/images/close.svg';
+	import { view, remove, remove_id } from '../stores/MainStores';
+	import { goto } from '$app/navigation';
 
-    const deleteToggle = (value: any) => {
+	const deleteToggle = (value: any) => {
 		remove_id.update(() => value);
 		view.update((currentValue) => !currentValue);
 		remove.update((currentValue) => !currentValue);
 	};
 
-    const deleteRequest = async (value: any) => {
+	const deleteRequest = async (value: any) => {
 		const response = await fetch('http://localhost:3000/api/delete', {
 			method: 'DELETE',
 			headers: {
@@ -21,36 +21,34 @@
 			goto('/');
 			location.reload();
 		}
-		const data = await response.json();
-		console.log(data);
 	};
 </script>
 
 <div class="remove-form" style="display: {$remove ? 'block' : 'none'};">
-    <div class="removeForm-heading">
-        <div class="text">Delete Employee</div>
-        <!-- svelte-ignore a11y-click-events-have-key-events  -->
-        <div class="close" on:click={deleteToggle}>
-            <img src={close_icon} alt="" width="24px" height="24px" />
-        </div>
-    </div>
-    <hr />
-    <div class="remove-content">
-        <div class="warning-text">Are you sure you want to delete these Records?</div>
-        <div class="another-text">This action cannot be undone.</div>
-    </div>
-    <form class="removeForm" on:submit|preventDefault={() => deleteRequest($remove_id)}>
-        <div class="removeForm-bot">
-            <input type="hidden" name="idNo" value={$remove_id} />
-            <!-- svelte-ignore a11y-click-events-have-key-events  -->
-            <div class="remove_btn1" on:click={deleteToggle}>Cancel</div>
-            <button class="remove_btn2" type="submit">Delete</button>
-        </div>
-    </form>
+	<div class="removeForm-heading">
+		<div class="text">Delete Employee</div>
+		<!-- svelte-ignore a11y-click-events-have-key-events  -->
+		<div class="close" on:click={deleteToggle}>
+			<img src={close_icon} alt="" width="24px" height="24px" />
+		</div>
+	</div>
+	<hr />
+	<div class="remove-content">
+		<div class="warning-text">Are you sure you want to delete these Records?</div>
+		<div class="another-text">This action cannot be undone.</div>
+	</div>
+	<form class="removeForm" on:submit|preventDefault={() => deleteRequest($remove_id)}>
+		<div class="removeForm-bot">
+			<input type="hidden" name="idNo" value={$remove_id} />
+			<!-- svelte-ignore a11y-click-events-have-key-events  -->
+			<div class="remove_btn1" on:click={deleteToggle}>Cancel</div>
+			<button class="remove_btn2" type="submit">Delete</button>
+		</div>
+	</form>
 </div>
 
 <style>
-    .close {
+	.close {
 		@apply cursor-pointer;
 	}
 	input {

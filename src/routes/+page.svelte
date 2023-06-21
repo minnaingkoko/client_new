@@ -1,7 +1,7 @@
 <script lang="ts">
 	import EmployeeData from '../components/EmployeeData.svelte';
 	import { onMount } from 'svelte';
-	import { userData, view, add, modify } from '../stores/MainStores';
+	import { userData, modifyData, view, add, modify } from '../stores/MainStores';
 	import AddEmployee from '../components/AddEmployee.svelte';
 	import RemoveEployee from '../components/RemoveEployee.svelte';
 	import ListEmployee from '../components/ListEmployee.svelte';
@@ -38,8 +38,10 @@
 
 	<RemoveEployee />
 
-	<ModifyEmployee />
-	
+	{#if modifyData}
+		<ModifyEmployee />
+	{/if}
+
 	<ListEmployee />
 </div>
 

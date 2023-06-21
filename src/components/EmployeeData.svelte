@@ -10,9 +10,9 @@
 		list.update((currentValue) => !currentValue);
 	};
 
-	const modifyRequest = async (value: any) => {
+	const modifyPost = async (value: any) => {
 		const response = await fetch('http://localhost:3000/api/modify', {
-			method: 'PUT',
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
@@ -25,7 +25,7 @@
 	};
 
 	const modifyToggle = (value: any) => {
-		modifyRequest(value);
+		modifyPost(value);
 		view.update((currentValue) => !currentValue);
 		modify.update((currentValue) => !currentValue);
 	};
