@@ -1,10 +1,11 @@
 <script lang="ts">
 	import EmployeeData from '../components/EmployeeData.svelte';
 	import { onMount } from 'svelte';
-	import { userData, view, add } from '../stores/MainStores';
+	import { userData, view, add, modify } from '../stores/MainStores';
 	import AddEmployee from '../components/AddEmployee.svelte';
 	import RemoveEployee from '../components/RemoveEployee.svelte';
 	import ListEmployee from '../components/ListEmployee.svelte';
+	import ModifyEmployee from '../components/ModifyEmployee.svelte';
 
 	let Page1 = true;
 	let Page2 = false;
@@ -36,6 +37,8 @@
 	<AddEmployee />
 
 	<RemoveEployee />
+
+	<ModifyEmployee />
 	
 	<ListEmployee />
 </div>

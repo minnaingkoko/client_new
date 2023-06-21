@@ -2,13 +2,32 @@
 	import visibility_icon from '$lib/images/visibility.svg';
 	import edit_icon from '$lib/images/edit.svg';
 	import delete_icon from '$lib/images/delete.svg';
-	import { userData, view, remove, remove_id, list, list_id } from '../stores/MainStores';
+	import { userData, view, modify, modifyData, remove, remove_id, list, list_id } from '../stores/MainStores';
 
 	const listToggle = (value: any) => {
-		console.log(userData);
 		list_id.update(() => value);
 		view.update((currentValue) => !currentValue);
 		list.update((currentValue) => !currentValue);
+	};
+
+	const modifyRequest = async (value: any) => {
+		const response = await fetch('http://localhost:3000/api/modify', {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ idNo: value })
+		});
+		const data = await response.json();
+
+		// Update the store with the fetched data
+		modifyData.set(data);
+	};
+
+	const modifyToggle = (value: any) => {
+		modifyRequest(value);
+		view.update((currentValue) => !currentValue);
+		modify.update((currentValue) => !currentValue);
 	};
 
 	const deleteToggle = (value: any) => {
@@ -59,7 +78,8 @@
 					<div on:click={() => listToggle(user._id)}>
 						<img class="visibility" src={visibility_icon} alt="" width="22px" height="22px" />
 					</div>
-					<div>
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div on:click={() => modifyToggle(user._id)}>
 						<img class="edit" src={edit_icon} alt="" width="22px" height="22px" />
 					</div>
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
