@@ -32,10 +32,6 @@
 	});
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div>
-	{$view}
-</div>
 <div class="overlay" style="display: {$view ? 'flex' : 'none'};">
 	<AddEmployee />
 

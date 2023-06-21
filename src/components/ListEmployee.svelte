@@ -24,11 +24,12 @@
             Page3.update(() => true);
 		}
 	};
+
 </script>
 
 <div class="list-data" style="display: {$list ? 'block' : 'none'};">
     <div class="addForm-heading">
-        <div class="text">Add Employee</div>
+        <div class="text">Employee's Data</div>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="close" on:click={listToggle}>
             <img src={close_icon} alt="" width="24px" height="24px" />
@@ -43,72 +44,111 @@
                 enctype="multipart/form-data"
                 method="POST"
             >
-                <label class="mg" style="display: {$Page1 ? 'block' : 'none'};" for="name">Name:</label>
-                <div style="display: {$Page1 ? 'block' : 'none'};">{user.name}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="name">Name:</label>
+                    <div>{user.name}</div>
+                </div>
+                
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="fatherName">Father Name:</label>
+                    <div>{user.fatherName}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page1 ? 'block' : 'none'};" for="fatherName">Father Name:</label>
-                <div style="display: {$Page1 ? 'block' : 'none'};">{user.fatherName}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="address">Address:</label>
+                    <div>{user.address}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page1 ? 'block' : 'none'};" for="address">Address:</label>
-                <div style="display: {$Page1 ? 'block' : 'none'};">{user.address}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="phNo">Phone Number:</label>
+                    <div>{user.phNo}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page1 ? 'block' : 'none'};" for="phNo">Phone Number:</label>
-                <div style="display: {$Page1 ? 'block' : 'none'};">{user.phNo}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="nrcNo">NRC No:</label>
+                    <div>{user.nrcNo}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page1 ? 'block' : 'none'};" for="nrcNo">NRC No:</label>
-                <div style="display: {$Page1 ? 'block' : 'none'};">{user.nrcNo}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="religion">Religion:</label>
+                    <div>{user.religion}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page1 ? 'block' : 'none'};" for="religion">Religion:</label>
-                <div style="display: {$Page1 ? 'block' : 'none'};">{user.religion}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="agent">Agent:</label>
+                    <div>{user.agent}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page1 ? 'block' : 'none'};" for="agent">Agent:</label>
-                <div style="display: {$Page1 ? 'block' : 'none'};">{user.agent}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="gender">Gender:</label>
+                    <div>{user.gender}</div>    
+                </div>
 
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="passport">Passport:</label>
+                    <div>{user.passport}</div>    
+                </div>
 
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="dob">Date of Birth:</label>
+                    <div>{user.dobString}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page2 ? 'block' : 'none'};" for="gender">Gender:</label>
-                <div style="display: {$Page2 ? 'block' : 'none'};">{user.gender}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="weight">Weight (kg):</label>
+                    <div>{user.weight}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page2 ? 'block' : 'none'};" for="passport">Passport:</label>
-                <div style="display: {$Page2 ? 'block' : 'none'};">{user.passport}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="height">Height (cm):</label>
+                    <div>{user.height}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page2 ? 'block' : 'none'};" for="dob">Date of Birth:</label>
-                <div style="display: {$Page2 ? 'block' : 'none'};">{user.dobString}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="marital">Marital Status:</label>
+                    <div>{user.marital}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page2 ? 'block' : 'none'};" for="weight">Weight (kg):</label>
-                <div style="display: {$Page2 ? 'block' : 'none'};">{user.weight}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="education">Education:</label>
+                    <div>{user.education}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page2 ? 'block' : 'none'};" for="height">Height (cm):</label>
-                <div style="display: {$Page2 ? 'block' : 'none'};">{user.height}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="experience">Experience:</label>
+                    <div>{user.experience}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page2 ? 'block' : 'none'};" for="marital">Marital Status:</label>
-                <div style="display: {$Page2 ? 'block' : 'none'};">{user.marital}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="workedCountry">Worked Country:</label>
+                    <div>{user.workedCountry}</div>
+                </div>
 
-                <label class="mg" style="display: {$Page2 ? 'block' : 'none'};" for="education">Education:</label>
-                <div style="display: {$Page2 ? 'block' : 'none'};">{user.education}</div>
+                <div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="spokenLanguage">Spoken Language:</label>
+                    <div>{user.spokenLanguage}</div>
+                </div>
 
-
-                <label class="mg" style="display: {$Page3 ? 'block' : 'none'};" for="experience">Experience:</label>
-                <div style="display: {$Page3 ? 'block' : 'none'};">{user.experience}</div>
-
-                <label class="mg" style="display: {$Page3 ? 'block' : 'none'};" for="workedCountry">Worked Country:</label>
-                <div style="display: {$Page3 ? 'block' : 'none'};">{user.workedCountry}</div>
-
-                <label class="mg" style="display: {$Page3 ? 'block' : 'none'};" for="spokenLanguage">Spoken Language:</label>
-                <div style="display: {$Page3 ? 'block' : 'none'};">{user.spokenLanguage}</div>
-
-                <label class="mg" style="display: {$Page3 ? 'block' : 'none'};" for="passportScan">Passport Scan:</label>
-                <div style="display: {$Page3 ? 'block' : 'none'};">{user.passportScan}</div>
+                <div class="collect p-scan" style="display: {$Page1 ? 'flex' : 'none'};">
+                    <label for="passportScan">Passport Scan:</label>
+                    <div class="p-btns">
+                        <div>
+                            {user.passportScan.filename}
+                        </div>
+                        <div class="p-btn">
+                            <a href='data:{user.passportScan.contentType};base64,{user.passportScan.imageBase64}'>
+                                <img class="image-f" src='data:{user.passportScan.contentType};base64,{user.passportScan.imageBase64}' alt="...">
+                            </a>
+                            <a href='data:{user.passportScan.contentType};base64,{user.passportScan.imageBase64}' download="{user.passportScan.filename}">
+                                <div>Download</div>
+                            </a>
+                        </div>
+                    </div>  
+                </div>
 
                 <div class="addForm-bot">
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
                     <div class="cancel-btn" on:click={listToggle}>Cancel</div>
-                    {#if $Page3 === true}
-                        <button class="submit-btn" type="submit">Submit</button>
-                    {:else if $Page3 === false}
-                        <!-- svelte-ignore a11y-click-events-have-key-events -->
-                        <div class="next-btn" on:click={Next}>Next</div>
-                    {/if}
                 </div>
             </form>
         {:else}
@@ -118,6 +158,30 @@
 </div>
 
 <style>
+    .p-scan {
+        @apply flex flex-row;
+    }
+    .p-btns {
+        @apply flex flex-col;
+    }
+    .p-btn {
+        @apply flex flex-row justify-between items-center;
+    }
+    .image-f {
+        @apply w-[50px] h-[50px];
+    }
+    .addForm {
+        @apply flex flex-col gap-[16px];
+    }
+    .collect {
+        @apply flex pl-[30px] pr-[30px] w-[100%] justify-between text-[14px];
+    }
+    .collect label {
+        @apply w-[130px];
+    }
+    .collect > div {
+        @apply w-[160px];
+    }
     .close {
 		@apply cursor-pointer;
 	}
@@ -127,14 +191,6 @@
 	}
 	.cancel-btn {
 		@apply bg-white;
-	}
-	.submit-btn,
-	.next-btn {
-		@apply bg-[#4aa84d] text-white;
-	}
-	.submit-btn {
-		@apply flex justify-center items-center w-[100px] h-[33px] cursor-pointer;
-		border: none;
 	}
 	.addForm-heading {
 		@apply w-[100%] h-[66px] flex flex-row justify-between items-center text-[18px] font-[500] text-black;
@@ -154,8 +210,5 @@
 	}
 	.addForm {
 		@apply flex flex-col mt-[20px] mb-[95px];
-	}
-	.mg {
-		margin: 0 30px;
 	}
 </style>
