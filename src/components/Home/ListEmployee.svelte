@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { companyData, employeeView, employeeList, employeeList_id, HPage1, HPage2, HPage3 } from '../../stores/MainStores';
+	import { employeeData, employeeView, employeeList, employeeList_id, HPage1, HPage2, HPage3 } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 
 	const resetPage = () => {
@@ -35,105 +35,105 @@
 		</div>
 	</div>
 	<hr />
-	{#each $companyData as user, index}
-		{#if user._id === $employeeList_id}
+	{#each $employeeData as data, index}
+		{#if data._id === $employeeList_id}
 			<form class="addForm">
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="name">Name:</label>
-					<div>{user.name}</div>
+					<div>{data.name}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="fatherName">Father Name:</label>
-					<div>{user.fatherName}</div>
+					<div>{data.fatherName}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="address">Address:</label>
-					<div>{user.address}</div>
+					<div>{data.address}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="phNo">Phone Number:</label>
-					<div>{user.phNo}</div>
+					<div>{data.phNo}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="nrcNo">NRC No:</label>
-					<div>{user.nrcNo}</div>
+					<div>{data.nrcNo}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="religion">Religion:</label>
-					<div>{user.religion}</div>
+					<div>{data.religion}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="agent">Agent:</label>
-					<div>{user.agent}</div>
+					<div>{data.agent}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="gender">Gender:</label>
-					<div>{user.gender}</div>
+					<div>{data.gender}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="passport">Passport:</label>
-					<div>{user.passport}</div>
+					<div>{data.passport}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="dob">Date of Birth:</label>
-					<div>{user.dobString}</div>
+					<div>{data.dobString}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="weight">Weight (kg):</label>
-					<div>{user.weight}</div>
+					<div>{data.weight}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="height">Height (cm):</label>
-					<div>{user.height}</div>
+					<div>{data.height}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="marital">Marital Status:</label>
-					<div>{user.marital}</div>
+					<div>{data.marital}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="education">Education:</label>
-					<div>{user.education}</div>
+					<div>{data.education}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="experience">Experience:</label>
-					<div>{user.experience}</div>
+					<div>{data.experience}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="workedCountry">Worked Country:</label>
-					<div>{user.workedCountry}</div>
+					<div>{data.workedCountry}</div>
 				</div>
 
 				<div class="collect" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="spokenLanguage">Spoken Language:</label>
-					<div>{user.spokenLanguage}</div>
+					<div>{data.spokenLanguage}</div>
 				</div>
 
 				<div class="collect p-scan" style="display: {$HPage1 ? 'flex' : 'none'};">
 					<label for="passportScan">Passport Scan:</label>
 					<div class="p-btns">
 						<div>
-							{user.passportScan.filename}
+							{data.passportScan.filename}
 						</div>
 						<div class="p-btn">
-							<a href="data:{user.passportScan.contentType};base64,{user.passportScan.imageBase64}">
-								<img class="image-f" src="data:{user.passportScan.contentType};base64,{user.passportScan.imageBase64}" alt="..." />
+							<a href="data:{data.passportScan.contentType};base64,{data.passportScan.imageBase64}">
+								<img class="image-f" src="data:{data.passportScan.contentType};base64,{data.passportScan.imageBase64}" alt="..." />
 							</a>
-							<a href="data:{user.passportScan.contentType};base64,{user.passportScan.imageBase64}" download={user.passportScan.filename}>
+							<a href="data:{data.passportScan.contentType};base64,{data.passportScan.imageBase64}" download={data.passportScan.filename}>
 								<div>Download</div>
 							</a>
 						</div>

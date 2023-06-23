@@ -2,11 +2,6 @@
 	import { companyView, CPage1, CPage2, CPage3, companyAdd } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 
-	let gender = '';
-	let marital = '';
-	let workedCountry = '';
-	let spokenLanguage = '';
-
 	const resetPage = () => {
 		CPage1.update(() => true);
 		CPage2.update(() => false);
@@ -32,15 +27,36 @@
 
 <div class="add-form" style="display: {$companyAdd ? 'block' : 'none'};">
 	<div class="addForm-heading">
-		<div class="text">Add Employee</div>
+		<div class="text">Add Company</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="close" on:click={addToggle}>
 			<img src={close_icon} alt="" width="24px" height="24px" />
 		</div>
 	</div>
 	<hr />
-	<form class="addForm" action="/api/employeeUpload" enctype="multipart/form-data" method="POST">
-		
+	<form class="addForm" action="/api/companyUpload" enctype="multipart/form-data" method="POST">
+		<label class="mg" for="companyName">Company Name:</label>
+		<input class="add_input" name="companyName" id="companyName" required />
+
+		<label class="mg" for="companyAddress">Company Address:</label>
+		<input class="add_input" name="companyAddress" id="companyAddress" required />
+
+		<label class="mg" for="postCode">Post Code:</label>
+		<input class="add_input" name="postCode" id="postCode" required />
+
+		<label class="mg" for="demandMale">Demand Male:</label>
+		<input class="add_input" name="demandMale" id="demandMale" required />
+
+		<label class="mg" for="demandFemale">Demand Female:</label>
+		<input class="add_input" name="demandFemale" id="demandFemale" required />
+
+		<label class="mg" for="companyPhNo">Company Phone Number:</label>
+		<input class="add_input" name="companyPhNo" id="companyPhNo" required />
+
+		<label class="mg" for="demandLetterScan">Demand Letter Scan:</label>
+		<input type='file' class="form-control mg" name="images" id="formFile" multiple />
+
+		<button class="submit-btn" type="submit">Submit</button>
 	</form>
 </div>
 

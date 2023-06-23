@@ -1,16 +1,16 @@
 <script lang="ts">
 	import close_icon from '$lib/images/close.svg';
-	import { employeeView, employeeRemove, employeeRemove_id } from '../../stores/MainStores';
+	import { companyView, companyRemove, companyRemove_id } from '../../stores/MainStores';
 	import { goto } from '$app/navigation';
 
 	const deleteToggle = (value: any) => {
-		employeeRemove_id.update(() => value);
-		employeeView.update((currentValue) => !currentValue);
-		employeeRemove.update((currentValue) => !currentValue);
+		companyRemove_id.update(() => value);
+		companyView.update((currentValue) => !currentValue);
+		companyRemove.update((currentValue) => !currentValue);
 	};
 
 	const deleteRequest = async (value: any) => {
-		const response = await fetch('http://localhost:3000/api/employeeDelete', {
+		const response = await fetch('http://localhost:3000/api/companyDelete', {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json'
@@ -18,15 +18,15 @@
 			body: JSON.stringify({ idNo: value })
 		});
 		if (response.status === 200) {
-			goto('/');
+			goto('/company');
 			location.reload();
 		}
 	};
 </script>
 
-<div class="remove-form" style="display: {$employeeRemove ? 'block' : 'none'};">
+<div class="remove-form" style="display: {$companyRemove ? 'block' : 'none'};">
 	<div class="removeForm-heading">
-		<div class="text">Delete Employee</div>
+		<div class="text">Delete company</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events  -->
 		<div class="close" on:click={deleteToggle}>
 			<img src={close_icon} alt="" width="24px" height="24px" />
@@ -37,9 +37,9 @@
 		<div class="warning-text">Are you sure you want to delete these Records?</div>
 		<div class="another-text">This action cannot be undone.</div>
 	</div>
-	<form class="removeForm" on:submit|preventDefault={() => deleteRequest($employeeRemove_id)}>
+	<form class="removeForm" on:submit|preventDefault={() => deleteRequest($companyRemove_id)}>
 		<div class="removeForm-bot">
-			<input type="hidden" name="idNo" value={$employeeRemove_id} />
+			<input type="hidden" name="idNo" value={$companyRemove_id} />
 			<!-- svelte-ignore a11y-click-events-have-key-events  -->
 			<div class="remove_btn1" on:click={deleteToggle}>Cancel</div>
 			<button class="remove_btn2" type="submit">Delete</button>

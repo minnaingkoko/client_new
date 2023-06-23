@@ -1,7 +1,7 @@
 <script lang="ts">
 	import EmployeeData from '../components/Home/EmployeeData.svelte';
 	import { onMount } from 'svelte';
-	import { companyData, employeeModifyData, employeeView, employeeAdd, HPage1, HPage2, HPage3 } from '../stores/MainStores';
+	import { employeeData, employeeModifyData, employeeView, employeeAdd, HPage1, HPage2, HPage3 } from '../stores/MainStores';
 	import AddEmployee from '../components/Home/AddEmployee.svelte';
 	import ListEmployee from '../components/Home/ListEmployee.svelte';
 	import ModifyEmployee from '../components/Home/ModifyEmployee.svelte';
@@ -25,7 +25,7 @@
 		const data = await response.json();
 
 		// Update the store with the fetched data
-		companyData.set(data);
+		employeeData.set(data);
 	});
 </script>
 

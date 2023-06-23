@@ -2,7 +2,7 @@
 	import visibility_icon from '$lib/images/visibility.svg';
 	import edit_icon from '$lib/images/edit.svg';
 	import delete_icon from '$lib/images/delete.svg';
-	import { companyData, employeeView, employeeModify, employeeModifyData, employeeRemove, employeeRemove_id, employeeList, employeeList_id } from '../../stores/MainStores';
+	import { employeeData, employeeView, employeeModify, employeeModifyData, employeeRemove, employeeRemove_id, employeeList, employeeList_id } from '../../stores/MainStores';
 
 	const listToggle = (value: any) => {
 		employeeList_id.update(() => value);
@@ -56,34 +56,34 @@
 	</div>
 	<div class="hr" />
 	<ul>
-		{#each $companyData as user, index}
+		{#each $employeeData as data, index}
 			<div class={index % 2 === 0 ? 'row-alt' : 'row'}>
 				<div class="col1">
 					<input class="cb" type="checkbox" />
 				</div>
-				<div class="col2">{user.name}</div>
-				<div class="col3">{user.passport}</div>
-				<div class="col4">{user.nrcNo}</div>
-				<div class="col5">{user.gender}</div>
-				<div class="col6">{user.dobString}</div>
-				<div class="col7">{user.age}</div>
-				<div class="col8">{user.address}</div>
-				<div class="col9">{user.phNo}</div>
-				<!-- <div class="col10">{user.fatherName}</div> -->
-				<!-- <div class="col11">{user.religion}</div> -->
-				<div class="col12">{user.education}</div>
-				<!-- <div class="col13">{user.agent}</div>-->
+				<div class="col2">{data.name}</div>
+				<div class="col3">{data.passport}</div>
+				<div class="col4">{data.nrcNo}</div>
+				<div class="col5">{data.gender}</div>
+				<div class="col6">{data.dobString}</div>
+				<div class="col7">{data.age}</div>
+				<div class="col8">{data.address}</div>
+				<div class="col9">{data.phNo}</div>
+				<!-- <div class="col10">{data.fatherName}</div> -->
+				<!-- <div class="col11">{data.religion}</div> -->
+				<div class="col12">{data.education}</div>
+				<!-- <div class="col13">{data.agent}</div>-->
 				<div class="col14">
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<div on:click={() => listToggle(user._id)}>
+					<div on:click={() => listToggle(data._id)}>
 						<img class="visibility" src={visibility_icon} alt="" width="22px" height="22px" />
 					</div>
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<div on:click={() => modifyToggle(user._id)}>
+					<div on:click={() => modifyToggle(data._id)}>
 						<img class="edit" src={edit_icon} alt="" width="22px" height="22px" />
 					</div>
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<div on:click={() => deleteToggle(user._id)}>
+					<div on:click={() => deleteToggle(data._id)}>
 						<img class="delete" src={delete_icon} alt="" width="22px" height="22px" />
 					</div>
 				</div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { companyData, employeeView, employeeList, employeeList_id, CPage1, CPage2, CPage3 } from '../../stores/MainStores';
+	import { companyData, companyView, companyList, companyList_id, CPage1, CPage2, CPage3 } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 
 	const resetPage = () => {
@@ -10,9 +10,9 @@
 
 	const listToggle = (value: any) => {
 		resetPage();
-		employeeList_id.update(() => value);
-		employeeView.update((currentValue) => !currentValue);
-		employeeList.update((currentValue) => !currentValue);
+		companyList_id.update(() => value);
+		companyView.update((currentValue) => !currentValue);
+		companyList.update((currentValue) => !currentValue);
 	};
 
 	const Next = () => {
@@ -26,16 +26,52 @@
 	};
 </script>
 
-<div class="list-data" style="display: {$employeeList ? 'block' : 'none'};">
+<div class="list-data" style="display: {$companyList ? 'block' : 'none'};">
 	<div class="addForm-heading">
-		<div class="text">Employee's Data</div>
+		<div class="text">Company's Data</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="close" on:click={listToggle}>
 			<img src={close_icon} alt="" width="24px" height="24px" />
 		</div>
 	</div>
 	<hr />
+	{#each $companyData as data, index}
+		{#if data._id === $companyList_id}
+			<form class="addForm">
+				<div class="collect">
+					<label for="companyName">Company Name:</label>
+					<div>{data.companyName}</div>
+				</div>
 
+				<div class="collect">
+					<label for="companyAddress">Company Address:</label>
+					<div>{data.companyAddress}</div>
+				</div>
+
+				<div class="collect">
+					<label for="postCode">Post Code:</label>
+					<div>{data.postCode}</div>
+				</div>
+
+				<div class="collect">
+					<label for="demandTotal">Demand Total:</label>
+					<div>M-{data.demandTotal.male}/ F-{data.demandTotal.female}</div>
+				</div>
+
+				<div class="collect">
+					<label for="companyPhNo">Company Phone Number:</label>
+					<div>{data.companyPhNo}</div>
+				</div>
+
+				<div class="addForm-bot">
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div class="cancel-btn" on:click={listToggle}>Cancel</div>
+				</div>
+			</form>
+		{:else}
+			<div />
+		{/if}
+	{/each}
 </div>
 
 <style>

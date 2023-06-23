@@ -49,7 +49,33 @@
 	</div>
 	<div class="hr" />
 	<ul>
-		
+		{#each $companyData as data, index}
+			<div class={index % 2 === 0 ? 'row-alt' : 'row'}>
+				<div class="col1">
+					<input class="cb" type="checkbox" />
+				</div>
+				<div class="col2">{data.companyName}</div>
+				<div class="col3">{data.companyAddress}</div>
+				<div class="col4">{data.postCode}</div>
+				<div class="col5">M-{data.demandTotal.male}/ F-{data.demandTotal.female}</div>
+				<div class="col6">{data.companyPhNo}</div>
+				<div class="col14">
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div on:click={() => listToggle(data._id)}>
+						<img class="visibility" src={visibility_icon} alt="" width="22px" height="22px" />
+					</div>
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div on:click={() => modifyToggle(data._id)}>
+						<img class="edit" src={edit_icon} alt="" width="22px" height="22px" />
+					</div>
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div on:click={() => deleteToggle(data._id)}>
+						<img class="delete" src={delete_icon} alt="" width="22px" height="22px" />
+					</div>
+				</div>
+			</div>
+			<div class="hr" />
+		{/each}
 	</ul>
 </div>
 
@@ -101,16 +127,16 @@
 		min-width: 200px;
 	}
 	.col3 {
-		min-width: 120px;
+		min-width: 170px;
 	}
 	.col4 {
 		min-width: 180px;
 	}
 	.col5 {
-		min-width: 80px;
+		min-width: 150px;
 	}
 	.col6 {
-		min-width: 120px;
+		min-width: 200px;
 	}
 	.col7 {
 		min-width: 60px;

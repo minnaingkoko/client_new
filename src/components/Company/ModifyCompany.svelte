@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { employeeModifyData, employeeView, CPage1, CPage2, CPage3, employeeModify } from '../../stores/MainStores';
+	import { companyModifyData, companyView, CPage1, CPage2, CPage3, companyModify } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 	import { goto } from '$app/navigation';
 
@@ -11,8 +11,8 @@
 
 	const modifyToggle = () => {
 		resetPage();
-		employeeView.update((currentValue) => !currentValue);
-		employeeModify.update((currentValue) => !currentValue);
+		companyView.update((currentValue) => !currentValue);
+		companyModify.update((currentValue) => !currentValue);
 	};
 
 	const Next = () => {
@@ -25,15 +25,15 @@
 		}
 	};
 
-	$: employee = $employeeModifyData;
+	$: company = $companyModifyData;
 
 	const modifyRequest = async (value: any) => {
-		const response = await fetch('http://localhost:3000/api/employeeModifyRequest', {
+		const response = await fetch('http://localhost:3000/api/companyModifyRequest', {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(employee)
+			body: JSON.stringify(company)
 		});
 		if (response.status === 200) {
 			goto('/');
@@ -42,17 +42,17 @@
 	};
 </script>
 
-{#if employee}
-	<div class="add-form" style="display: {$employeeModify ? 'block' : 'none'};">
+{#if company}
+	<div class="add-form" style="display: {$companyModify ? 'block' : 'none'};">
 		<div class="addForm-heading">
-			<div class="text">Modify Employee</div>
+			<div class="text">Modify company</div>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="close" on:click={modifyToggle}>
 				<img src={close_icon} alt="" width="24px" height="24px" />
 			</div>
 		</div>
 		<hr />
-		<form class="addForm" action="/api/employeeModifyRequest" enctype="multipart/form-data" method="POST" on:submit|preventDefault={() => modifyRequest(employee._id)}>
+		<form class="addForm" action="/api/companyModifyRequest" enctype="multipart/form-data" method="POST" on:submit|preventDefault={() => modifyRequest(company._id)}>
 			
 		</form>
 	</div>
