@@ -1,11 +1,11 @@
 <script lang="ts">
-	import EmployeeData from '../components/Home/EmployeeData.svelte';
+	import CompanyData from '../../components/Company/CompanyData.svelte';
 	import { onMount } from 'svelte';
-	import { userData, modifyData, view, add } from '../stores/MainStores';
-	import AddEmployee from '../components/Home/AddEmployee.svelte';
-	import ListEmployee from '../components/Home/ListEmployee.svelte';
-	import ModifyEmployee from '../components/Home/ModifyEmployee.svelte';
-	import RemoveEmployee from '../components/Home/RemoveEmployee.svelte';
+	import { userData, modifyData, view, add } from '../../stores/MainStores';
+	import AddCompany from '../../components/Company/AddCompany.svelte';
+	import RemoveCompany from '../../components/Company/RemoveCompany.svelte';
+	import ListCompany from '../../components/Company/ListCompany.svelte';
+	import ModifyCompany from '../../components/Company/ModifyCompany.svelte';
 
 	let Page1 = true;
 	let Page2 = false;
@@ -25,7 +25,7 @@
 
 	onMount(async () => {
 		// Fetch data from MongoDB
-		const response = await fetch('http://localhost:3000/api/employeeInfo');
+		const response = await fetch('http://localhost:3000/api/companyInfo');
 		const data = await response.json();
 
 		// Update the store with the fetched data
@@ -34,30 +34,30 @@
 </script>
 
 <div class="overlay" style="display: {$view ? 'flex' : 'none'};">
-	<AddEmployee />
+	<AddCompany />
 
-	<RemoveEmployee />
+	<RemoveCompany />
 
 	{#if modifyData}
-		<ModifyEmployee />
+		<ModifyCompany />
 	{/if}
 
-	<ListEmployee />
+	<ListCompany />
 </div>
 
 <nav class="nav-bar">
 	<div class="heading">
-		Manage <b>Employees</b>
+		Manage <b>Companys</b>
 	</div>
 	<div class="nav-btns">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="add-btn" on:click={addToggle}>
 			<i class="material-icons">&#xE147;</i>
-			<span>Add New Employee</span>
+			<span>Add New Company</span>
 		</div>
 	</div>
 </nav>
-<EmployeeData />
+<CompanyData />
 <div class="bot-nav">
 	<div class="bot-left">
 		Showing <b>5</b> out of <b>25</b> entries

@@ -2,7 +2,7 @@
 	import visibility_icon from '$lib/images/visibility.svg';
 	import edit_icon from '$lib/images/edit.svg';
 	import delete_icon from '$lib/images/delete.svg';
-	import { userData, view, modify, modifyData, remove, remove_id, list, list_id } from '../stores/MainStores';
+	import { userData, view, modify, modifyData, remove, remove_id, list, list_id } from '../../stores/MainStores';
 
 	const listToggle = (value: any) => {
 		list_id.update(() => value);
@@ -11,7 +11,7 @@
 	};
 
 	const modifyPost = async (value: any) => {
-		const response = await fetch('http://localhost:3000/api/modify', {
+		const response = await fetch('http://localhost:3000/api/employeeModify', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

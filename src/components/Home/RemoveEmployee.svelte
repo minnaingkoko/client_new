@@ -1,6 +1,6 @@
 <script lang="ts">
 	import close_icon from '$lib/images/close.svg';
-	import { view, remove, remove_id } from '../stores/MainStores';
+	import { view, remove, remove_id } from '../../stores/MainStores';
 	import { goto } from '$app/navigation';
 
 	const deleteToggle = (value: any) => {
@@ -10,7 +10,7 @@
 	};
 
 	const deleteRequest = async (value: any) => {
-		const response = await fetch('http://localhost:3000/api/delete', {
+		const response = await fetch('http://localhost:3000/api/employeeDelete', {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json'

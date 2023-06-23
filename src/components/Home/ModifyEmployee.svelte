@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { modifyData, view, Page1, Page2, Page3, modify } from '../stores/MainStores';
+	import { modifyData, view, Page1, Page2, Page3, modify } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 	import { goto } from '$app/navigation';
 
@@ -28,7 +28,7 @@
 	$: employee = $modifyData;
 
 	const modifyRequest = async (value: any) => {
-		const response = await fetch('http://localhost:3000/api/modifyRequest', {
+		const response = await fetch('http://localhost:3000/api/employeeModifyRequest', {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
@@ -52,7 +52,7 @@
 			</div>
 		</div>
 		<hr />
-		<form class="addForm" action="/api/modifyRequest" enctype="multipart/form-data" method="POST" on:submit|preventDefault={() => modifyRequest(employee._id)}>
+		<form class="addForm" action="/api/employeeModifyRequest" enctype="multipart/form-data" method="POST" on:submit|preventDefault={() => modifyRequest(employee._id)}>
 			<label class="mg" style="display: {$Page1 ? 'block' : 'none'};" for="name">Name:</label>
 			{#if $Page1}
 				<input class="add_input" type="text" name="name" id="name" bind:value={employee.name} required />

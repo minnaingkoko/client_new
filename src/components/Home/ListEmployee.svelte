@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { userData, view, list, list_id, Page1, Page2, Page3 } from '../stores/MainStores';
+	import { userData, view, list, list_id, Page1, Page2, Page3 } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 
 	const resetPage = () => {
@@ -37,7 +37,7 @@
 	<hr />
 	{#each $userData as user, index}
 		{#if user._id === $list_id}
-			<form class="addForm" action="/api/uploadmultiple" enctype="multipart/form-data" method="POST">
+			<form class="addForm">
 				<div class="collect" style="display: {$Page1 ? 'flex' : 'none'};">
 					<label for="name">Name:</label>
 					<div>{user.name}</div>

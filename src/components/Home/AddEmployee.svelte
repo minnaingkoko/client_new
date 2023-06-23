@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { view, Page1, Page2, Page3, add } from '../stores/MainStores';
+	import { view, Page1, Page2, Page3, add } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 
 	let gender = '';
@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	<hr />
-	<form class="addForm" action="/api/uploadmultiple" enctype="multipart/form-data" method="POST">
+	<form class="addForm" action="/api/employeeUpload" enctype="multipart/form-data" method="POST">
 		<label class="mg" style="display: {$Page1 ? 'block' : 'none'};" for="name">Name:</label>
 		<input class="add_input" type={$Page1 ? 'text' : 'hidden'} name="name" id="name" required />
 
