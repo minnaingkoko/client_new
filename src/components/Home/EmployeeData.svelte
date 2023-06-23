@@ -2,12 +2,12 @@
 	import visibility_icon from '$lib/images/visibility.svg';
 	import edit_icon from '$lib/images/edit.svg';
 	import delete_icon from '$lib/images/delete.svg';
-	import { userData, view, modify, modifyData, remove, remove_id, list, list_id } from '../../stores/MainStores';
+	import { companyData, employeeView, employeeModify, employeeModifyData, employeeRemove, employeeRemove_id, employeeList, employeeList_id } from '../../stores/MainStores';
 
 	const listToggle = (value: any) => {
-		list_id.update(() => value);
-		view.update((currentValue) => !currentValue);
-		list.update((currentValue) => !currentValue);
+		employeeList_id.update(() => value);
+		employeeView.update((currentValue) => !currentValue);
+		employeeList.update((currentValue) => !currentValue);
 	};
 
 	const modifyPost = async (value: any) => {
@@ -21,19 +21,19 @@
 		const data = await response.json();
 
 		// Update the store with the fetched data
-		modifyData.set(data);
+		employeeModifyData.set(data);
 	};
 
 	const modifyToggle = (value: any) => {
 		modifyPost(value);
-		view.update((currentValue) => !currentValue);
-		modify.update((currentValue) => !currentValue);
+		employeeView.update((currentValue) => !currentValue);
+		employeeModify.update((currentValue) => !currentValue);
 	};
 
 	const deleteToggle = (value: any) => {
-		remove_id.update(() => value);
-		view.update((currentValue) => !currentValue);
-		remove.update((currentValue) => !currentValue);
+		employeeRemove_id.update(() => value);
+		employeeView.update((currentValue) => !currentValue);
+		employeeRemove.update((currentValue) => !currentValue);
 	};
 </script>
 
@@ -56,7 +56,7 @@
 	</div>
 	<div class="hr" />
 	<ul>
-		{#each $userData as user, index}
+		{#each $companyData as user, index}
 			<div class={index % 2 === 0 ? 'row-alt' : 'row'}>
 				<div class="col1">
 					<input class="cb" type="checkbox" />

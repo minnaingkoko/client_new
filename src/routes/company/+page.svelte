@@ -47,7 +47,7 @@
 
 <nav class="nav-bar">
 	<div class="heading">
-		Manage <b>Companys</b>
+		Manage <b>Companies</b>
 	</div>
 	<div class="nav-btns">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->

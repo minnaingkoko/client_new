@@ -1,12 +1,12 @@
 <script lang="ts">
 	import close_icon from '$lib/images/close.svg';
-	import { view, remove, remove_id } from '../../stores/MainStores';
+	import { employeeView, employeeRemove, employeeRemove_id } from '../../stores/MainStores';
 	import { goto } from '$app/navigation';
 
 	const deleteToggle = (value: any) => {
-		remove_id.update(() => value);
-		view.update((currentValue) => !currentValue);
-		remove.update((currentValue) => !currentValue);
+		employeeRemove_id.update(() => value);
+		employeeView.update((currentValue) => !currentValue);
+		employeeRemove.update((currentValue) => !currentValue);
 	};
 
 	const deleteRequest = async (value: any) => {
@@ -24,7 +24,7 @@
 	};
 </script>
 
-<div class="remove-form" style="display: {$remove ? 'block' : 'none'};">
+<div class="remove-form" style="display: {$employeeRemove ? 'block' : 'none'};">
 	<div class="removeForm-heading">
 		<div class="text">Delete Employee</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events  -->
@@ -37,9 +37,9 @@
 		<div class="warning-text">Are you sure you want to delete these Records?</div>
 		<div class="another-text">This action cannot be undone.</div>
 	</div>
-	<form class="removeForm" on:submit|preventDefault={() => deleteRequest($remove_id)}>
+	<form class="removeForm" on:submit|preventDefault={() => deleteRequest($employeeRemove_id)}>
 		<div class="removeForm-bot">
-			<input type="hidden" name="idNo" value={$remove_id} />
+			<input type="hidden" name="idNo" value={$employeeRemove_id} />
 			<!-- svelte-ignore a11y-click-events-have-key-events  -->
 			<div class="remove_btn1" on:click={deleteToggle}>Cancel</div>
 			<button class="remove_btn2" type="submit">Delete</button>

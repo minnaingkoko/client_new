@@ -1,19 +1,41 @@
 import { writable } from 'svelte/store';
 
-export const userData = writable<Array<any>>([]);
+//employee data
 
-export const add = writable(false);
-export const view = writable(false);
+export const employeeData = writable<Array<any>>([]);
 
-export const remove = writable(false);
-export const remove_id = writable<any>(null);
+export const employeeAdd = writable(false);
+export const employeeView = writable(false);
 
-export const modify = writable(false);
-export const modifyData = writable<any>(null);
+export const employeeRemove = writable(false);
+export const employeeRemove_id = writable<any>(null);
 
-export const list = writable(false);
-export const list_id = writable<any>(null);
+export const employeeModify = writable(false);
+export const employeeModifyData = writable<any>(null);
 
-export const Page1 = writable(true);
-export const Page2 = writable(false);
-export const Page3 = writable(false);
+export const employeeList = writable(false);
+export const employeeList_id = writable<any>(null);
+
+export const HPage1 = writable(true);
+export const HPage2 = writable(false);
+export const HPage3 = writable(false);
+
+//company data
+
+export const companyData = writable<Array<any>>([]);
+
+export const companyAdd = writable(false);
+export const companyView = writable(false);
+
+export const companyRemove = writable(false);
+export const companyRemove_id = writable<any>(null);
+
+export const companyModify = writable(false);
+export const companyModifyData = writable<any>(null);
+
+export const companyList = writable(false);
+export const companyList_id = writable<any>(null);
+
+export const CPage1 = writable(true);
+export const CPage2 = writable(false);
+export const CPage3 = writable(false);

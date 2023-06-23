@@ -1,26 +1,22 @@
 <script lang="ts">
 	import EmployeeData from '../components/Home/EmployeeData.svelte';
 	import { onMount } from 'svelte';
-	import { userData, modifyData, view, add } from '../stores/MainStores';
+	import { companyData, employeeModifyData, employeeView, employeeAdd, HPage1, HPage2, HPage3 } from '../stores/MainStores';
 	import AddEmployee from '../components/Home/AddEmployee.svelte';
 	import ListEmployee from '../components/Home/ListEmployee.svelte';
 	import ModifyEmployee from '../components/Home/ModifyEmployee.svelte';
 	import RemoveEmployee from '../components/Home/RemoveEmployee.svelte';
 
-	let Page1 = true;
-	let Page2 = false;
-	let Page3 = false;
-
 	const resetPage = () => {
-		Page1 = true;
-		Page2 = false;
-		Page3 = false;
+		HPage1.update(() => true);
+		HPage2.update(() => false);
+		HPage3.update(() => false);
 	};
 
 	const addToggle = () => {
 		resetPage();
-		view.update((currentValue) => !currentValue);
-		add.update((currentValue) => !currentValue);
+		employeeView.update((currentValue) => !currentValue);
+		employeeAdd.update((currentValue) => !currentValue);
 	};
 
 	onMount(async () => {
@@ -29,16 +25,16 @@
 		const data = await response.json();
 
 		// Update the store with the fetched data
-		userData.set(data);
+		companyData.set(data);
 	});
 </script>
 
-<div class="overlay" style="display: {$view ? 'flex' : 'none'};">
+<div class="overlay" style="display: {$employeeView ? 'flex' : 'none'};">
 	<AddEmployee />
 
 	<RemoveEmployee />
 
-	{#if modifyData}
+	{#if employeeModifyData}
 		<ModifyEmployee />
 	{/if}
 
