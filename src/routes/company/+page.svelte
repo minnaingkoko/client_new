@@ -1,26 +1,22 @@
 <script lang="ts">
 	import CompanyData from '../../components/Company/CompanyData.svelte';
 	import { onMount } from 'svelte';
-	import { userData, modifyData, view, add } from '../../stores/MainStores';
+	import { companyData, companyModifyData, companyView, companyAdd, CPage1, CPage2, CPage3 } from '../../stores/MainStores';
 	import AddCompany from '../../components/Company/AddCompany.svelte';
 	import RemoveCompany from '../../components/Company/RemoveCompany.svelte';
 	import ListCompany from '../../components/Company/ListCompany.svelte';
 	import ModifyCompany from '../../components/Company/ModifyCompany.svelte';
 
-	let Page1 = true;
-	let Page2 = false;
-	let Page3 = false;
-
 	const resetPage = () => {
-		Page1 = true;
-		Page2 = false;
-		Page3 = false;
+		CPage1.update(() => true);
+		CPage2.update(() => false);
+		CPage3.update(() => false);
 	};
 
 	const addToggle = () => {
 		resetPage();
-		view.update((currentValue) => !currentValue);
-		add.update((currentValue) => !currentValue);
+		companyView.update((currentValue) => !currentValue);
+		companyAdd.update((currentValue) => !currentValue);
 	};
 
 	onMount(async () => {
@@ -29,16 +25,16 @@
 		const data = await response.json();
 
 		// Update the store with the fetched data
-		userData.set(data);
+		companyData.set(data);
 	});
 </script>
 
-<div class="overlay" style="display: {$view ? 'flex' : 'none'};">
+<div class="overlay" style="display: {$companyView ? 'flex' : 'none'};">
 	<AddCompany />
 
 	<RemoveCompany />
 
-	{#if modifyData}
+	{#if companyModifyData}
 		<ModifyCompany />
 	{/if}
 

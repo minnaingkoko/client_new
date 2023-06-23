@@ -40,18 +40,11 @@
 <div class="employees_data">
 	<div class="e_heading">
 		<div class="col1">Select</div>
-		<div class="col2">Name</div>
-		<div class="col3">Passport No</div>
-		<div class="col4">NRC No</div>
-		<div class="col5">Gender</div>
-		<div class="col6">Birthday</div>
-		<div class="col7">Age</div>
-		<div class="col8">Address</div>
-		<div class="col9">Phone Number</div>
-		<!-- <div class="col10">Father Name</div> -->
-		<!-- <div class="col11">Religion</div> -->
-		<div class="col12">Education</div>
-		<!-- <div class="col13">Agent</div> -->
+		<div class="col2">Company Name</div>
+		<div class="col3">Company Address</div>
+		<div class="col4">Post Code</div>
+		<div class="col5">Demand Person</div>
+		<div class="col6">Company Phone Number</div>
 		<div class="col14">Actions</div>
 	</div>
 	<div class="hr" />

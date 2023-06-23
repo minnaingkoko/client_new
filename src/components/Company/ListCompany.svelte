@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { userData, employeeView, employeeList, employeeList_id, HPage1, HPage2, HPage3 } from '../../stores/MainStores';
+	import { companyData, employeeView, employeeList, employeeList_id, CPage1, CPage2, CPage3 } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 
 	const resetPage = () => {
-		HPage1.update(() => true);
-		HPage2.update(() => false);
-		HPage3.update(() => false);
+		CPage1.update(() => true);
+		CPage2.update(() => false);
+		CPage3.update(() => false);
 	};
 
 	const listToggle = (value: any) => {
@@ -16,12 +16,12 @@
 	};
 
 	const Next = () => {
-		if ($HPage1 === true && $HPage2 === false && $HPage3 === false) {
-			HPage1.update(() => false);
-			HPage2.update(() => true);
-		} else if ($HPage1 === false && $HPage2 === true && $HPage3 === false) {
-			HPage2.update(() => false);
-			HPage3.update(() => true);
+		if ($CPage1 === true && $CPage2 === false && $CPage3 === false) {
+			CPage1.update(() => false);
+			CPage2.update(() => true);
+		} else if ($CPage1 === false && $CPage2 === true && $CPage3 === false) {
+			CPage2.update(() => false);
+			CPage3.update(() => true);
 		}
 	};
 </script>
