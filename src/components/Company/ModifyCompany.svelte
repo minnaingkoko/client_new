@@ -53,36 +53,23 @@
 		</div>
 		<hr />
 		<form class="addForm" action="/api/companyModifyRequest" enctype="multipart/form-data" method="POST" on:submit|preventDefault={() => modifyRequest(company._id)}>
-			<div class="collect">
-				<label for="companyName">Company Name:</label>
-				<input class="add_input" name="companyName" id="companyName" bind:value={company.companyName} required />
-			</div>
+			<label class="mg" for="companyName">Company Name:</label>
+			<input class="mg add_input" name="companyName" id="companyName" bind:value={company.companyName} required />
 
-			<div class="collect">
-				<label for="companyAddress">Company Address:</label>
-				<input class="add_input" name="companyAddress" id="companyAddress" bind:value={company.companyAddress} required />
-			</div>
+			<label class="mg" for="companyAddress">Company Address:</label>
+			<input class="mg add_input" name="companyAddress" id="companyAddress" bind:value={company.companyAddress} required />
 
-			<div class="collect">
-				<label for="postCode">Post Code:</label>
-				<input class="add_input" name="postCode" id="postCode" bind:value={company.postCode} required />
-				<div>{company.postCode}</div>
-			</div>
+			<label class="mg" for="postCode">Post Code:</label>
+			<input class="mg add_input" name="postCode" id="postCode" bind:value={company.postCode} required />
 
-			<div class="collect">
-				<label for="demandTotal">Demand Male:</label>
-				<input class="add_input" name="demandMale" id="demandMale" bind:value={company.demandTotal.male} required />
-			</div>
+			<label class="mg" for="demandTotal">Demand Male:</label>
+			<input class="mg add_input" name="demandMale" id="demandMale" bind:value={company.demandTotal.male} required />
 
-			<div class="collect">
-				<label for="demandTotal">Demand Female:</label>
-				<input class="add_input" name="demandFemale" id="demandFemale" bind:value={company.demandTotal.female} required />
-			</div>
+			<label class="mg" for="demandTotal">Demand Female:</label>
+			<input class="mg add_input" name="demandFemale" id="demandFemale" bind:value={company.demandTotal.female} required />
 
-			<div class="collect">
-				<label for="companyPhNo">Company Phone Number:</label>
-				<input class="add_input" name="companyPhNo" id="companyPhNo" bind:value={company.companyPhNo} required />
-			</div>
+			<label class="mg" for="companyPhNo">Company Phone Number:</label>
+			<input class="mg add_input" name="companyPhNo" id="companyPhNo" bind:value={company.companyPhNo} required />
 
 			<button class="submit-btn" type="submit">Submit</button>
 		</form>
