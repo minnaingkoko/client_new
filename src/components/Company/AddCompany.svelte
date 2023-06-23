@@ -54,7 +54,7 @@
 		<input class="add_input" name="companyPhNo" id="companyPhNo" required />
 
 		<label class="mg" for="demandLetterScan">Demand Letter Scan:</label>
-		<input type='file' class="form-control mg" name="images" id="formFile" multiple />
+		<input type="file" class="form-control mg" name="images" id="formFile" multiple />
 
 		<button class="submit-btn" type="submit">Submit</button>
 	</form>
