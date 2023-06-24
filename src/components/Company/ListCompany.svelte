@@ -67,6 +67,23 @@
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div class="cancel-btn" on:click={listToggle}>Cancel</div>
 				</div>
+
+				<div class="collect p-scan" style="display: {$CPage1 ? 'flex' : 'none'};">
+					<label for="passportScan">Demand Letter Scan:</label>
+					<div class="p-btns">
+						<div>
+							{data.demandLetterScan.filename}
+						</div>
+						<div class="p-btn">
+							<a href="data:{data.demandLetterScan.contentType};base64,{data.demandLetterScan.imageBase64}">
+								<img class="image-f" src="data:{data.demandLetterScan.contentType};base64,{data.demandLetterScan.imageBase64}" alt="..." />
+							</a>
+							<a href="data:{data.demandLetterScan.contentType};base64,{data.demandLetterScan.imageBase64}" download={data.demandLetterScan.filename}>
+								<div>Download</div>
+							</a>
+						</div>
+					</div>
+				</div>
 			</form>
 		{:else}
 			<div />

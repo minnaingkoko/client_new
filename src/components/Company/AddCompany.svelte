@@ -54,7 +54,22 @@
 		<input class="add_input" name="companyPhNo" id="companyPhNo" required />
 
 		<label class="mg" for="demandLetterScan">Demand Letter Scan:</label>
-		<input type="file" class="form-control mg" name="images" id="formFile" multiple />
+		<input type="file" class="form-control mg" name="demandLetterScan" id="formFile" multiple />
+
+		<label class="mg" for="KSMScan">KSM Scan:</label>
+		<input type="file" class="form-control mg" name="KSMScan" id="formFile" multiple />
+
+		<label class="mg" for="companyProfileScan">Company Profile Scan:</label>
+		<input type="file" class="form-control mg" name="companyProfileScan" id="formFile" multiple />
+
+		<label class="mg" for="callingCopyScan">Calling Copy Scan:</label>
+		<input type="file" class="form-control mg" name="callingCopyScan" id="formFile" multiple />
+
+		<label class="mg" for="callingOrgScan">Calling Original Scan:</label>
+		<input type="file" class="form-control mg" name="callingOrgScan" id="formFile" multiple />
+
+		<label class="mg" for="notaryScan">Notary Scan:</label>
+		<input type="file" class="form-control mg" name="notaryScan" id="formFile" multiple />
 
 		<button class="submit-btn" type="submit">Submit</button>
 	</form>
