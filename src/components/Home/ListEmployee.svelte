@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { employeeData, employeeView, employeeList, employeeList_id, HPage1, HPage2, HPage3 } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
+	import List from './List.svelte';
 
 	const resetPage = () => {
 		HPage1.update(() => true);
