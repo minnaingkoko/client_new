@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { companyView, CPage1, CPage2, CPage3, companyAdd } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
+	import Input from './Input.svelte';
+	import FileInput from './FileInput.svelte';
 
 	const resetPage = () => {
 		CPage1.update(() => true);
@@ -35,41 +37,19 @@
 	</div>
 	<hr />
 	<form class="addForm" action="/api/companyUpload" enctype="multipart/form-data" method="POST">
-		<label class="mg" for="companyName">Company Name:</label>
-		<input class="add_input" name="companyName" id="companyName" required />
+		<Input label="Company Name" attr="companyName"/>
+		<Input label="Company Address" attr="companyAddress"/>
+		<Input label="Post Code" attr="postCode"/>
+		<Input label="Demand Male" attr="demandMale"/>
+		<Input label="Demand Female" attr="demandFemale"/>
+		<Input label="Company Phone Number" attr="companyPhNo"/>
+		<Input label="Demand Letter Scan" attr="demandLetterScan"/>
 
-		<label class="mg" for="companyAddress">Company Address:</label>
-		<input class="add_input" name="companyAddress" id="companyAddress" required />
-
-		<label class="mg" for="postCode">Post Code:</label>
-		<input class="add_input" name="postCode" id="postCode" required />
-
-		<label class="mg" for="demandMale">Demand Male:</label>
-		<input class="add_input" name="demandMale" id="demandMale" required />
-
-		<label class="mg" for="demandFemale">Demand Female:</label>
-		<input class="add_input" name="demandFemale" id="demandFemale" required />
-
-		<label class="mg" for="companyPhNo">Company Phone Number:</label>
-		<input class="add_input" name="companyPhNo" id="companyPhNo" required />
-
-		<label class="mg" for="demandLetterScan">Demand Letter Scan:</label>
-		<input type="file" class="form-control mg" name="demandLetterScan" id="formFile" multiple />
-
-		<label class="mg" for="KSMScan">KSM Scan:</label>
-		<input type="file" class="form-control mg" name="KSMScan" id="formFile" multiple />
-
-		<label class="mg" for="companyProfileScan">Company Profile Scan:</label>
-		<input type="file" class="form-control mg" name="companyProfileScan" id="formFile" multiple />
-
-		<label class="mg" for="callingCopyScan">Calling Copy Scan:</label>
-		<input type="file" class="form-control mg" name="callingCopyScan" id="formFile" multiple />
-
-		<label class="mg" for="callingOrgScan">Calling Original Scan:</label>
-		<input type="file" class="form-control mg" name="callingOrgScan" id="formFile" multiple />
-
-		<label class="mg" for="notaryScan">Notary Scan:</label>
-		<input type="file" class="form-control mg" name="notaryScan" id="formFile" multiple />
+		<FileInput label="KSM Scan" attr="KSMScan" />
+		<FileInput label="Company Profile Scan" attr="companyProfileScan" />
+		<FileInput label="Calling Copy Scan" attr="callingCopyScan" />
+		<FileInput label="Calling Original Scan" attr="callingOrgScan" />
+		<FileInput label="Notary Scan" attr="notaryScan" />
 
 		<button class="submit-btn" type="submit">Submit</button>
 	</form>
@@ -79,22 +59,11 @@
 	.close {
 		@apply cursor-pointer;
 	}
-	input,
-	select {
-		border: 1px solid gray;
-	}
-	.add_input {
-		@apply ml-[30px] mr-[30px] mb-[15px] h-[34px];
-	}
 	.add-form {
 		@apply absolute top-[30px] w-[400px] bg-white z-[12] rounded-[4px];
 		height: calc(100vh - 60px);
 	}
-	.cancel-btn {
-		@apply bg-white;
-	}
-	.submit-btn,
-	.next-btn {
+	.submit-btn {
 		@apply bg-[#4aa84d] text-white;
 	}
 	.submit-btn {
@@ -106,21 +75,7 @@
 		border-radius: 4px 4px 0 0;
 		padding: 0 30px;
 	}
-	.addForm-bot {
-		@apply flex justify-end items-center gap-[12px] rounded-[4px];
-		padding: 0 30px;
-	}
-	.addForm-bot div {
-		@apply flex justify-center items-center w-[100px] h-[33px] cursor-pointer;
-	}
-	.addForm-bot {
-		@apply absolute bottom-0 bg-[#e5e5e5] w-[100%] h-[75px];
-		border-radius: 0 0 4px 4px;
-	}
 	.addForm {
 		@apply flex flex-col mt-[20px] mb-[95px];
-	}
-	.mg {
-		margin: 0 30px;
 	}
 </style>

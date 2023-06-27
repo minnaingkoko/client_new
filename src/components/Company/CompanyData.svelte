@@ -138,27 +138,6 @@
 	.col6 {
 		min-width: 200px;
 	}
-	.col7 {
-		min-width: 60px;
-	}
-	.col8 {
-		min-width: 200px;
-	}
-	.col9 {
-		min-width: 140px;
-	}
-	.col10 {
-		min-width: 220px;
-	}
-	.col11 {
-		min-width: 100px;
-	}
-	.col12 {
-		min-width: 130px;
-	}
-	.col13 {
-		min-width: 100px;
-	}
 	.col14 {
 		border-right: 0 !important;
 		display: flex;
@@ -168,8 +147,7 @@
 	}
 	.visibility,
 	.edit,
-	.delete,
-	.close {
+	.delete {
 		cursor: pointer;
 		transition: 0.3s;
 	}

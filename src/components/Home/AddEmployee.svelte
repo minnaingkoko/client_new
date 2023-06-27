@@ -2,7 +2,6 @@
 	import { employeeView, HPage1, HPage2, HPage3, HPage4, employeeAdd } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 	import { goto } from '$app/navigation';
-	import { readable } from 'svelte/store';
 
 	interface Scan {
 		name: string;
@@ -167,7 +166,7 @@
 		}
 	};
 
-	const handleFileChange1 = (event: any) => {
+	const handleFileChange = (event: any, value: any) => {
 		const files = event.target.files;
 		if (files && files.length > 0) {
 			const file = files[0];
@@ -176,169 +175,9 @@
 
 				reader.onloadend = () => {
 					const base64String = reader.result;
-					employeeData.passportScan.filename = file.name;
-					employeeData.passportScan.contentType = file.type;
-					employeeData.passportScan.imageBase64 = base64String;
-					// Use the base64String as needed (e.g., send it in a request)
-				};
-
-				reader.readAsDataURL(file);
-			}
-		}
-	};
-
-	const handleFileChange2 = (event: any) => {
-		const files = event.target.files;
-		if (files && files.length > 0) {
-			const file = files[0];
-			if (file) {
-				const reader = new FileReader();
-
-				reader.onloadend = () => {
-					const base64String = reader.result;
-					employeeData.nrcScan.filename = file.name;
-					employeeData.nrcScan.contentType = file.type;
-					employeeData.nrcScan.imageBase64 = base64String;
-					// Use the base64String as needed (e.g., send it in a request)
-				};
-
-				reader.readAsDataURL(file);
-			}
-		}
-	};
-
-	const handleFileChange3 = (event: any) => {
-		const files = event.target.files;
-		if (files && files.length > 0) {
-			const file = files[0];
-			if (file) {
-				const reader = new FileReader();
-
-				reader.onloadend = () => {
-					const base64String = reader.result;
-					employeeData.vaccineNotaryScan.filename = file.name;
-					employeeData.vaccineNotaryScan.contentType = file.type;
-					employeeData.vaccineNotaryScan.imageBase64 = base64String;
-					// Use the base64String as needed (e.g., send it in a request)
-				};
-
-				reader.readAsDataURL(file);
-			}
-		}
-	};
-
-	const handleFileChange4 = (event: any) => {
-		const files = event.target.files;
-		if (files && files.length > 0) {
-			const file = files[0];
-			if (file) {
-				const reader = new FileReader();
-
-				reader.onloadend = () => {
-					const base64String = reader.result;
-					employeeData.medicalOnlineScan.filename = file.name;
-					employeeData.medicalOnlineScan.contentType = file.type;
-					employeeData.medicalOnlineScan.imageBase64 = base64String;
-					// Use the base64String as needed (e.g., send it in a request)
-				};
-
-				reader.readAsDataURL(file);
-			}
-		}
-	};
-
-	const handleFileChange5 = (event: any) => {
-		const files = event.target.files;
-		if (files && files.length > 0) {
-			const file = files[0];
-			if (file) {
-				const reader = new FileReader();
-
-				reader.onloadend = () => {
-					const base64String = reader.result;
-					employeeData.trainingScan.filename = file.name;
-					employeeData.trainingScan.contentType = file.type;
-					employeeData.trainingScan.imageBase64 = base64String;
-					// Use the base64String as needed (e.g., send it in a request)
-				};
-
-				reader.readAsDataURL(file);
-			}
-		}
-	};
-
-	const handleFileChange6 = (event: any) => {
-		const files = event.target.files;
-		if (files && files.length > 0) {
-			const file = files[0];
-			if (file) {
-				const reader = new FileReader();
-
-				reader.onloadend = () => {
-					const base64String = reader.result;
-					employeeData.airTicketScan.filename = file.name;
-					employeeData.airTicketScan.contentType = file.type;
-					employeeData.airTicketScan.imageBase64 = base64String;
-					// Use the base64String as needed (e.g., send it in a request)
-				};
-
-				reader.readAsDataURL(file);
-			}
-		}
-	};
-
-	const handleFileChange7 = (event: any) => {
-		const files = event.target.files;
-		if (files && files.length > 0) {
-			const file = files[0];
-			if (file) {
-				const reader = new FileReader();
-
-				reader.onloadend = () => {
-					const base64String = reader.result;
-					employeeData.visaScan.filename = file.name;
-					employeeData.visaScan.contentType = file.type;
-					employeeData.visaScan.imageBase64 = base64String;
-					// Use the base64String as needed (e.g., send it in a request)
-				};
-
-				reader.readAsDataURL(file);
-			}
-		}
-	};
-
-	const handleFileChange8 = (event: any) => {
-		const files = event.target.files;
-		if (files && files.length > 0) {
-			const file = files[0];
-			if (file) {
-				const reader = new FileReader();
-
-				reader.onloadend = () => {
-					const base64String = reader.result;
-					employeeData.smartCardScan.filename = file.name;
-					employeeData.smartCardScan.contentType = file.type;
-					employeeData.smartCardScan.imageBase64 = base64String;
-					// Use the base64String as needed (e.g., send it in a request)
-				};
-
-				reader.readAsDataURL(file);
-			}
-		}
-	};
-
-	const handleFileChange9 = (event: any) => {
-		const files = event.target.files;
-		if (files && files.length > 0) {
-			const file = files[0];
-			if (file) {
-				const reader = new FileReader();
-
-				reader.onloadend = () => {
-					const base64String = reader.result;
-					employeeData.familyDataScan.filename = file.name;
-					employeeData.familyDataScan.contentType = file.type;
-					employeeData.familyDataScan.imageBase64 = base64String;
+					value.filename = file.name;
+					value.contentType = file.type;
+					value.imageBase64 = base64String;
 					// Use the base64String as needed (e.g., send it in a request)
 				};
 
@@ -503,47 +342,47 @@
 
 		{#if $HPage2}
 			<label class="mg" for="passportScan">Passport Scan:</label>
-			<input type="file" class="form-control mg" id="formFile" on:change={handleFileChange1} multiple />
+			<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.passportScan)} multiple />
 		{/if}
 
 		{#if $HPage2}
 			<label class="mg" for="nrcScan">NRC Scan:</label>
-			<input type="file" class="form-control mg" id="formFile" on:change={handleFileChange2} multiple />
+			<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.nrcScan)} multiple />
 		{/if}
 
 		{#if $HPage3}
 			<label class="mg" for="vaccineNotaryScan">Vaccine Notary Scan:</label>
-			<input type="file" class="form-control mg" id="formFile" on:change={handleFileChange3} multiple />
+			<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.vaccineNotaryScan)} multiple />
 		{/if}
 
 		{#if $HPage3}
 			<label class="mg" for="medicalOnlineScan">Medical Online Scan:</label>
-			<input type="file" class="form-control mg" id="formFile" on:change={handleFileChange4} multiple />
+			<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.medicalOnlineScan)} multiple />
 		{/if}
 
 		{#if $HPage3}
 			<label class="mg" for="trainingScan">Training Scan:</label>
-			<input type="file" class="form-control mg" id="formFile" on:change={handleFileChange5} multiple />
+			<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.trainingScan)} multiple />
 		{/if}
 
 		{#if $HPage3}
 			<label class="mg" for="airTicketScan">Air Ticket Scan:</label>
-			<input type="file" class="form-control mg" id="formFile" on:change={handleFileChange6} multiple />
+			<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.airTicketScan)} multiple />
 		{/if}
 
 		{#if $HPage3}
 			<label class="mg" for="visaScan">Visa Scan:</label>
-			<input type="file" class="form-control mg" id="formFile" on:change={handleFileChange7} multiple />
+			<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.visaScan)} multiple />
 		{/if}
 
 		{#if $HPage3}
 			<label class="mg" for="smartCardScan">Smart Card Scan:</label>
-			<input type="file" class="form-control mg" id="formFile" on:change={handleFileChange8} multiple />
+			<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.smartCardScan)} multiple />
 		{/if}
 
 		{#if $HPage3}
 			<label class="mg" for="familyDataScan">Family Data Scan:</label>
-			<input type="file" class="form-control mg" id="formFile" on:change={handleFileChange9} multiple />
+			<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.familyDataScan)} multiple />
 		{/if}
 
 		{#if $HPage3}

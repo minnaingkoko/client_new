@@ -80,8 +80,7 @@
 	.close {
 		@apply cursor-pointer;
 	}
-	input,
-	select {
+	input {
 		border: 1px solid gray;
 	}
 	.add_input {
@@ -91,11 +90,7 @@
 		@apply absolute top-[30px] w-[400px] bg-white z-[12] rounded-[4px];
 		height: calc(100vh - 60px);
 	}
-	.cancel-btn {
-		@apply bg-white;
-	}
-	.submit-btn,
-	.next-btn {
+	.submit-btn {
 		@apply bg-[#4aa84d] text-white;
 	}
 	.submit-btn {
@@ -106,17 +101,6 @@
 		@apply w-[100%] h-[66px] flex flex-row justify-between items-center text-[18px] font-[500] text-black;
 		border-radius: 4px 4px 0 0;
 		padding: 0 30px;
-	}
-	.addForm-bot {
-		@apply flex justify-end items-center gap-[12px] rounded-[4px];
-		padding: 0 30px;
-	}
-	.addForm-bot div {
-		@apply flex justify-center items-center w-[100px] h-[33px] cursor-pointer;
-	}
-	.addForm-bot {
-		@apply absolute bottom-0 bg-[#e5e5e5] w-[100%] h-[75px];
-		border-radius: 0 0 4px 4px;
 	}
 	.addForm {
 		@apply flex flex-col mt-[20px] mb-[95px];
