@@ -52,7 +52,7 @@
 			</div>
 		</div>
 		<hr />
-		<form class="addForm" action="/api/employeeModifyRequest" enctype="multipart/form-data" method="POST" on:submit|preventDefault={() => modifyRequest(employee._id)}>
+		<form class="addForm" on:submit|preventDefault={() => modifyRequest(employee._id)}>
 			<label class="mg" style="display: {$HPage1 ? 'block' : 'none'};" for="name">Name:</label>
 			{#if $HPage1}
 				<input class="add_input" type="text" name="name" id="name" bind:value={employee.name} required />

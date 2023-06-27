@@ -131,9 +131,9 @@
 						</div>
 						<div class="p-btn">
 							<a href="data:{data.passportScan.contentType};base64,{data.passportScan.imageBase64}">
-								<img class="image-f" src="data:{data.passportScan.contentType};base64,{data.passportScan.imageBase64}" alt="..." />
+								<img class="image-f" src="{data.passportScan.imageBase64}" alt="..." />
 							</a>
-							<a href="data:{data.passportScan.contentType};base64,{data.passportScan.imageBase64}" download={data.passportScan.filename}>
+							<a href="{data.passportScan.imageBase64}" download={data.passportScan.filename}>
 								<div>Download</div>
 							</a>
 						</div>

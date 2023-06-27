@@ -19,6 +19,7 @@ export const employeeList_id = writable<any>(null);
 export const HPage1 = writable(true);
 export const HPage2 = writable(false);
 export const HPage3 = writable(false);
+export const HPage4 = writable(false);
 
 //company data
 
