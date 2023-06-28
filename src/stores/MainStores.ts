@@ -42,3 +42,5 @@ export const CPage2 = writable(false);
 export const CPage3 = writable(false);
 
 export const assign = writable(false);
+
+export const assignData = writable<any[]>([]);

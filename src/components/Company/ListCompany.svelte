@@ -75,10 +75,10 @@
 							{data.demandLetterScan.filename}
 						</div>
 						<div class="p-btn">
-							<a href="data:{data.demandLetterScan.contentType};base64,{data.demandLetterScan.imageBase64}">
-								<img class="image-f" src="data:{data.demandLetterScan.contentType};base64,{data.demandLetterScan.imageBase64}" alt="..." />
+							<a href="{data.demandLetterScan.imageBase64}">
+								<img class="image-f" src="{data.demandLetterScan.imageBase64}" alt="..." />
 							</a>
-							<a href="data:{data.demandLetterScan.contentType};base64,{data.demandLetterScan.imageBase64}" download={data.demandLetterScan.filename}>
+							<a href="{data.demandLetterScan.imageBase64}" download={data.demandLetterScan.filename}>
 								<div>Download</div>
 							</a>
 						</div>

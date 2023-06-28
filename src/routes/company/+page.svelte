@@ -11,6 +11,8 @@
 
 	const assignEmployee = async () => {
 		assign.update((assign) => !assign);
+		companyView.update((currentValue) => true);
+		companyAdd.update((currentValue) => true); 
 	};
 
 	const resetPage = () => {

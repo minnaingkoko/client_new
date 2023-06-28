@@ -1,11 +1,19 @@
 <script lang="ts">
 	import visibility_icon from '$lib/images/visibility.svg';
-	import { employeeData, employeeView, employeeList, employeeList_id } from '../../stores/MainStores';
+	import done_icon from '$lib/images/done.svg';
+	import { employeeData, employeeView, employeeList, employeeList_id, assignData } from '../../stores/MainStores';
 
 	const listToggle = (value: any) => {
 		employeeList_id.update(() => value);
 		employeeView.update((currentValue) => !currentValue);
 		employeeList.update((currentValue) => !currentValue);
+	};
+
+	const assignToggle = (value: any) => {
+		if ($assignData.includes(value)) {
+			return;
+  		}
+		$assignData = [...$assignData, value];
 	};
 </script>
 
@@ -49,6 +57,10 @@
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div on:click={() => listToggle(data._id)}>
 						<img class="visibility" src={visibility_icon} alt="" width="22px" height="22px" />
+					</div>
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div on:click={() => assignToggle(data._id)}>
+						<img class="visibility" src={done_icon} alt="" width="22px" height="22px" />
 					</div>
 				</div>
 			</div>
