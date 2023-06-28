@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { companyView, CPage1, CPage2, CPage3, companyAdd } from '../../stores/MainStores';
+	import { companyView, CPage1, CPage2, CPage3, companyAdd, assign } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 	import Input from './Input.svelte';
 	import FileInput from './FileInput.svelte';
@@ -8,6 +8,10 @@
 		CPage1.update(() => true);
 		CPage2.update(() => false);
 		CPage3.update(() => false);
+	};
+
+	const assignEmployee = () => {
+		assign.update((assign) => !assign);
 	};
 
 	const addToggle = () => {
@@ -37,13 +41,15 @@
 	</div>
 	<hr />
 	<form class="addForm" action="/api/companyUpload" enctype="multipart/form-data" method="POST">
-		<Input label="Company Name" attr="companyName"/>
-		<Input label="Company Address" attr="companyAddress"/>
-		<Input label="Post Code" attr="postCode"/>
-		<Input label="Demand Male" attr="demandMale"/>
-		<Input label="Demand Female" attr="demandFemale"/>
-		<Input label="Company Phone Number" attr="companyPhNo"/>
-		<Input label="Demand Letter Scan" attr="demandLetterScan"/>
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="add-employee" on:click={assignEmployee}>Add Employee</div>
+		<Input label="Company Name" attr="companyName" />
+		<Input label="Company Address" attr="companyAddress" />
+		<Input label="Post Code" attr="postCode" />
+		<Input label="Demand Male" attr="demandMale" />
+		<Input label="Demand Female" attr="demandFemale" />
+		<Input label="Company Phone Number" attr="companyPhNo" />
+		<Input label="Demand Letter Scan" attr="demandLetterScan" />
 
 		<FileInput label="KSM Scan" attr="KSMScan" />
 		<FileInput label="Company Profile Scan" attr="companyProfileScan" />

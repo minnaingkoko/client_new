@@ -1,11 +1,16 @@
 <script lang="ts">
 	import CompanyData from '../../components/Company/CompanyData.svelte';
 	import { onMount } from 'svelte';
-	import { companyData, companyModifyData, companyView, companyAdd, CPage1, CPage2, CPage3 } from '../../stores/MainStores';
+	import { employeeData, companyData, companyModifyData, companyView, companyAdd, CPage1, CPage2, CPage3, assign } from '../../stores/MainStores';
 	import AddCompany from '../../components/Company/AddCompany.svelte';
 	import RemoveCompany from '../../components/Company/RemoveCompany.svelte';
 	import ListCompany from '../../components/Company/ListCompany.svelte';
 	import ModifyCompany from '../../components/Company/ModifyCompany.svelte';
+	import AssignEmployee from '../../components/Company/AssignEmployee.svelte';
+
+	const assignEmployee = async () => {
+		assign.update((assign) => !assign);
+	};
 
 	const resetPage = () => {
 		CPage1.update(() => true);
@@ -21,39 +26,64 @@
 
 	onMount(async () => {
 		// Fetch data from MongoDB
-		const response = await fetch('http://localhost:3000/api/companyInfo');
-		const data = await response.json();
+		const response1 = await fetch('http://localhost:3000/api/companyInfo');
+		const data1 = await response1.json();
+		companyData.set(data1);
 
-		// Update the store with the fetched data
-		companyData.set(data);
+		const response = await fetch('http://localhost:3000/api/employeeInfo');
+		const data = await response.json();
+		employeeData.set(data);
+		
 	});
 </script>
 
+{#if $assign}
+<div></div>
+{:else}
 <div class="overlay" style="display: {$companyView ? 'flex' : 'none'};">
 	<AddCompany />
 
 	<RemoveCompany />
 
-	{#if companyModifyData}
+	{#if $companyModifyData}
 		<ModifyCompany />
 	{/if}
 
 	<ListCompany />
 </div>
+{/if}
+
+
 
 <nav class="nav-bar">
 	<div class="heading">
+		{#if $assign}
+		Assign <b>Employees</b>
+		{:else}
 		Manage <b>Companies</b>
+		{/if}
 	</div>
 	<div class="nav-btns">
+		{#if $assign}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="add-btn" on:click={assignEmployee}>
+			<i class="material-icons">&#xE147;</i>
+			<span>Finish Assign</span>
+		</div>
+		{:else}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="add-btn" on:click={addToggle}>
 			<i class="material-icons">&#xE147;</i>
 			<span>Add New Company</span>
 		</div>
+		{/if}	
 	</div>
 </nav>
+{#if $assign}
+<AssignEmployee />
+{:else}
 <CompanyData />
+{/if}
 <div class="bot-nav">
 	<div class="bot-left">
 		Showing <b>5</b> out of <b>25</b> entries
@@ -68,6 +98,8 @@
 		<div class="bn7">Next</div>
 	</div>
 </div>
+
+
 
 <style>
 	.overlay {

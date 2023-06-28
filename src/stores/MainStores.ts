@@ -40,3 +40,5 @@ export const companyList_id = writable<any>(null);
 export const CPage1 = writable(true);
 export const CPage2 = writable(false);
 export const CPage3 = writable(false);
+
+export const assign = writable(false);
