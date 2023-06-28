@@ -12,6 +12,9 @@
 
 	const assignEmployee = () => {
 		assign.update((assign) => !assign);
+		resetPage();
+		companyView.update((currentValue) => !currentValue);
+		companyAdd.update((currentValue) => !currentValue);
 	};
 
 	const addToggle = () => {

@@ -1,12 +1,13 @@
 <script lang="ts">
 	import CompanyData from '../../components/Company/CompanyData.svelte';
 	import { onMount } from 'svelte';
-	import { employeeData, companyData, companyModifyData, companyView, companyAdd, CPage1, CPage2, CPage3, assign } from '../../stores/MainStores';
+	import { employeeData, companyData, companyModifyData, companyView, employeeView, companyAdd, CPage1, CPage2, CPage3, assign } from '../../stores/MainStores';
 	import AddCompany from '../../components/Company/AddCompany.svelte';
 	import RemoveCompany from '../../components/Company/RemoveCompany.svelte';
 	import ListCompany from '../../components/Company/ListCompany.svelte';
 	import ModifyCompany from '../../components/Company/ModifyCompany.svelte';
 	import AssignEmployee from '../../components/Company/AssignEmployee.svelte';
+	import ListEmployee from '../../components/Home/ListEmployee.svelte';
 
 	const assignEmployee = async () => {
 		assign.update((assign) => !assign);
@@ -37,9 +38,6 @@
 	});
 </script>
 
-{#if $assign}
-<div></div>
-{:else}
 <div class="overlay" style="display: {$companyView ? 'flex' : 'none'};">
 	<AddCompany />
 
@@ -51,8 +49,10 @@
 
 	<ListCompany />
 </div>
-{/if}
 
+<div class="overlay" style="display: {$employeeView ? 'flex' : 'none'};">
+	<ListEmployee />
+</div>
 
 
 <nav class="nav-bar">
