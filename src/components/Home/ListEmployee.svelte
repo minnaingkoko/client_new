@@ -127,13 +127,13 @@
 					<label for="passportScan">Passport Scan:</label>
 					<div class="p-btns">
 						<div>
-							{data.passportScan.filename}
+							{data.passportScanData.filename}
 						</div>
 						<div class="p-btn">
-							<a href="{data.passportScan.imageBase64}">
-								<img class="image-f" src="{data.passportScan.imageBase64}" alt="..." />
+							<a href="{data.passportScanData.s3URL}">
+								<img class="image-f" src="{data.passportScanData.s3URL}" alt="..." />
 							</a>
-							<a href="{data.passportScan.imageBase64}" download={data.passportScan.filename}>
+							<a href="{data.passportScanData.s3URL}" download={data.passportScanData.filename}>
 								<div>Download</div>
 							</a>
 						</div>
