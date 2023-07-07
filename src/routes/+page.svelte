@@ -1,11 +1,18 @@
 <script lang="ts">
 	import EmployeeData from '../components/Home/EmployeeData.svelte';
 	import { onMount } from 'svelte';
+	import close_icon from '$lib/images/close.svg';
+	import download_icon from '$lib/images/download.svg';
 	import { employeeData, employeeModifyData, employeeView, employeeAdd, HPage1, HPage2, HPage3, fullImg, fullImgUrl } from '../stores/MainStores';
 	import AddEmployee from '../components/Home/AddEmployee.svelte';
 	import ListEmployee from '../components/Home/ListEmployee.svelte';
 	import ModifyEmployee from '../components/Home/ModifyEmployee.svelte';
 	import RemoveEmployee from '../components/Home/RemoveEmployee.svelte';
+
+	const toggleImg = () => {
+		fullImg.update(() => false);
+		fullImgUrl.update(() => '')
+	}
 
 	const resetPage = () => {
 		HPage1.update(() => true);
@@ -31,7 +38,16 @@
 </script>
 
 {#if image === true}
-	<img style="width: 100vw; height: 100vh;" src={$fullImgUrl} alt="">
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div class="toggle-img" on:click={toggleImg}>
+		<img src={close_icon} alt="" width="24px" height="24px" />
+		<img src={download_icon} alt="" width="24px" height="24px" />
+	</div>
+	<div class="overlay-img">
+	</div>
+	<div class="mid-align">
+		<img class="fullImg" src={$fullImgUrl} alt="">
+	</div>
 {:else if image === false}
 	<div class="overlay" style="display: {$employeeView ? 'flex' : 'none'};">
 		<AddEmployee />
@@ -75,6 +91,46 @@
 {/if}
 
 <style>
+	.mid-align {
+		margin-top: 8px;
+		margin-bottom: 32px;
+		height: auto;
+		width: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.toggle-img {
+		position: sticky;
+		top: 32px;
+		max-width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		margin-top: 32px;
+		margin-left: 32px;
+		margin-right: 32px;
+		cursor: pointer;
+		z-index: 15;
+	}
+	.overlay-img {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 10;
+		background: rgba(0, 0, 0, 0.3);
+		transition: 0.3s;
+	}
+	.fullImg {
+		width: 50vw; 
+		height: 110vh;
+		z-index: 15;
+	}
 	.overlay {
 		position: fixed;
 		display: none;
