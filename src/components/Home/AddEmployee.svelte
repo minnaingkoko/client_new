@@ -211,6 +211,19 @@
 			HPage4.update(() => true);
 		}
 	};
+
+	const Previous = () => {
+		if ($HPage4 === true && $HPage1 === false && $HPage2 === false && $HPage3 === false) {
+			HPage4.update(() => false);
+			HPage3.update(() => true);
+		} else if ($HPage3 === true && $HPage1 === false && $HPage2 === false && $HPage4 === false) {
+			HPage3.update(() => false);
+			HPage2.update(() => true);
+		} else if ($HPage2 === true && $HPage1 === false && $HPage3 === false && $HPage4 === false) {
+			HPage2.update(() => false);
+			HPage1.update(() => true);
+		}
+	}
 </script>
 
 <div class="add-form" style="display: {$employeeAdd ? 'block' : 'none'};">
@@ -230,42 +243,42 @@
 
 		{#if $HPage1}
 			<label class="mg" for="motherName">Mother Name:</label>
-			<input class="add_input" type="text" bind:value={employeeData.motherName} name="motherName" id="motherName" required />
+			<input class="add_input" type="text" bind:value={employeeData.motherName} name="motherName" id="motherName" />
 		{/if}
 
 		{#if $HPage1}
 			<label class="mg" for="fatherName">Father Name:</label>
-			<input class="add_input" type="text" bind:value={employeeData.fatherName} name="fatherName" id="fatherName" required />
+			<input class="add_input" type="text" bind:value={employeeData.fatherName} name="fatherName" id="fatherName" />
 		{/if}
 
 		{#if $HPage1}
 			<label class="mg" for="address">Address:</label>
-			<input class="add_input" type="text" bind:value={employeeData.address} name="address" id="address" required />
+			<input class="add_input" type="text" bind:value={employeeData.address} name="address" id="address" />
 		{/if}
 
 		{#if $HPage1}
 			<label class="mg" for="phNo">Phone Number:</label>
-			<input class="add_input" type="text" bind:value={employeeData.phNo} name="phNo" id="phNo" required />
+			<input class="add_input" type="text" bind:value={employeeData.phNo} name="phNo" id="phNo" />
 		{/if}
 
 		{#if $HPage1}
 			<label class="mg" for="nrcNo">NRC No:</label>
-			<input class="add_input" type="text" bind:value={employeeData.nrcNo} name="nrcNo" id="nrcNo" required />
+			<input class="add_input" type="text" bind:value={employeeData.nrcNo} name="nrcNo" id="nrcNo" />
 		{/if}
 
 		{#if $HPage1}
 			<label class="mg" for="religion">Religion:</label>
-			<input class="add_input" type="text" bind:value={employeeData.religion} name="religion" id="religion" required />
+			<input class="add_input" type="text" bind:value={employeeData.religion} name="religion" id="religion" />
 		{/if}
 
 		{#if $HPage1}
 			<label class="mg" for="agent">Agent:</label>
-			<input class="add_input" type="text" bind:value={employeeData.agent} name="agent" id="agent" required />
+			<input class="add_input" type="text" bind:value={employeeData.agent} name="agent" id="agent" />
 		{/if}
 
 		{#if $HPage1}
 			<label class="mg" for="gender">Gender:</label>
-			<select class="add_input" bind:value={employeeData.gender} required>
+			<select class="add_input" bind:value={employeeData.gender}>
 				<option value="">Select gender</option>
 				<option value="male">Male</option>
 				<option value="female">Female</option>
@@ -274,12 +287,12 @@
 
 		{#if $HPage1}
 			<label class="mg" for="passport">Passport:</label>
-			<input class="add_input" type="text" bind:value={employeeData.passport} name="passport" id="passport" required />
+			<input class="add_input" type="text" bind:value={employeeData.passport} name="passport" id="passport" />
 		{/if}
 
 		{#if $HPage2}
 			<label class="mg" for="dob">Date of Birth:</label>
-			<input class="add_input" type="date" bind:value={employeeData.dob} name="dob" id="dob" required />
+			<input class="add_input" type="date" bind:value={employeeData.dob} name="dob" id="dob" />
 		{/if}
 
 		{#if $HPage2}
@@ -294,7 +307,7 @@
 
 		{#if $HPage2}
 			<label class="mg" for="marital">Marital Status:</label>
-			<select class="add_input" bind:value={employeeData.marital} required>
+			<select class="add_input" bind:value={employeeData.marital}>
 				<option value="">Select marital status</option>
 				<option value="single">Single</option>
 				<option value="married">Married</option>
@@ -305,17 +318,17 @@
 
 		{#if $HPage2}
 			<label class="mg" for="education">Education:</label>
-			<input class="add_input" type="text" bind:value={employeeData.education} name="education" id="education" required />
+			<input class="add_input" type="text" bind:value={employeeData.education} name="education" id="education" />
 		{/if}
 
 		{#if $HPage2}
 			<label class="mg" for="experience">Experience:</label>
-			<input class="add_input" type="text" bind:value={employeeData.experience} name="experience" id="experience" required />
+			<input class="add_input" type="text" bind:value={employeeData.experience} name="experience" id="experience" />
 		{/if}
 
 		{#if $HPage2}
 			<label class="mg" for="workedCountry">Worked Country:</label>
-			<select class="add_input" bind:value={employeeData.workedCountry} required>
+			<select class="add_input" bind:value={employeeData.workedCountry}>
 				<option value="myanmar" selected>Myanmar</option>
 				<option value="malaysia">Malaysia</option>
 				<option value="custom">Custom</option>
@@ -333,7 +346,7 @@
 
 		{#if $HPage2}
 			<label class="mg" for="spokenLanguage">Spoken Language:</label>
-			<select class="add_input" bind:value={employeeData.spokenLanguage} required>
+			<select class="add_input" bind:value={employeeData.spokenLanguage}>
 				<option value="basic" selected>English (Basic)</option>
 				<option value="intermediate">English (Intermediate)</option>
 				<option value="advanced">English (Advanced)</option>
@@ -387,50 +400,54 @@
 
 		{#if $HPage3}
 			<label class="mg" for="deposit">Deposit:</label>
-			<input class="add_input" type="text" bind:value={employeeData.deposit} name="deposit" id="deposit" required />
+			<input class="add_input" type="text" bind:value={employeeData.deposit} name="deposit" id="deposit" />
 		{/if}
 
 		{#if $HPage3}
 			<label class="mg" for="applyDate">Apply Date:</label>
-			<input class="add_input" type="text" bind:value={employeeData.applyDate} name="applyDate" id="applyDate" required />
+			<input class="add_input" type="text" bind:value={employeeData.applyDate} name="applyDate" id="applyDate" />
 		{/if}
 
 		{#if $HPage3}
 			<label class="mg" for="passportExpireDate">Passport Expire Date:</label>
-			<input class="add_input" type="text" bind:value={employeeData.passportExpireDate} name="passportExpireDate" id="passportExpireDate" required />
+			<input class="add_input" type="text" bind:value={employeeData.passportExpireDate} name="passportExpireDate" id="passportExpireDate" />
 		{/if}
 
 		{#if $HPage4}
 			<label class="mg" for="passportType">Passport Type:</label>
-			<input class="add_input" type="text" bind:value={employeeData.passportType} name="passportType" id="passportType" required />
+			<input class="add_input" type="text" bind:value={employeeData.passportType} name="passportType" id="passportType" />
 		{/if}
 
 		{#if $HPage4}
 			<label class="mg" for="medicalOnlineExpire">Medical Online Expire:</label>
-			<input class="add_input" type="text" bind:value={employeeData.medicalOnlineExpire} name="medicalOnlineExpire" id="medicalOnlineExpire" required />
+			<input class="add_input" type="text" bind:value={employeeData.medicalOnlineExpire} name="medicalOnlineExpire" id="medicalOnlineExpire" />
 		{/if}
 
 		{#if $HPage4}
 			<label class="mg" for="smartCardNo">Smart Card No:</label>
-			<input class="add_input" type="text" bind:value={employeeData.smartCardNo} name="smartCardNo" id="smartCardNo" required />
+			<input class="add_input" type="text" bind:value={employeeData.smartCardNo} name="smartCardNo" id="smartCardNo" />
 		{/if}
 
 		<!-- <label class="mg" for="vaccineData">Vaccine Data:</label>
-		<input class="add_input" type='text'  name="vaccineData" id="vaccineData" required /> -->
+		<input class="add_input" type='text'  name="vaccineData" id="vaccineData" /> -->
 
 		{#if $HPage4}
 			<label class="mg" for="airPlaneNo">Air Plane No:</label>
-			<input class="add_input" type="text" bind:value={employeeData.airPlaneNo} name="airPlaneNo" id="airPlaneNo" required />
+			<input class="add_input" type="text" bind:value={employeeData.airPlaneNo} name="airPlaneNo" id="airPlaneNo" />
 		{/if}
 
 		{#if $HPage4}
 			<label class="mg" for="departureDate">Departure Date:</label>
-			<input class="add_input" type="text" bind:value={employeeData.departureDate} name="departureDate" id="departureDate" required />
+			<input class="add_input" type="text" bind:value={employeeData.departureDate} name="departureDate" id="departureDate" />
 		{/if}
 
 		<div class="addForm-bot">
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div class="cancel-btn" on:click={addToggle}>Cancel</div>
+			{#if $HPage1 === true}
+				<div></div>
+			{:else if $HPage1 === false}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div class="next-btn" on:click={Previous}>Previous</div>
+			{/if}
 			{#if $HPage4 === true}
 				<button class="submit-btn" type="submit">Submit</button>
 			{:else if $HPage4 === false}

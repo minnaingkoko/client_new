@@ -1,5 +1,8 @@
 import { writable } from 'svelte/store';
 
+export const fullImg = writable(false);
+export const fullImgUrl = writable('');
+
 //employee data
 
 export const employeeData = writable<Array<any>>([]);

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import EmployeeData from '../components/Home/EmployeeData.svelte';
 	import { onMount } from 'svelte';
-	import { employeeData, employeeModifyData, employeeView, employeeAdd, HPage1, HPage2, HPage3 } from '../stores/MainStores';
+	import { employeeData, employeeModifyData, employeeView, employeeAdd, HPage1, HPage2, HPage3, fullImg, fullImgUrl } from '../stores/MainStores';
 	import AddEmployee from '../components/Home/AddEmployee.svelte';
 	import ListEmployee from '../components/Home/ListEmployee.svelte';
 	import ModifyEmployee from '../components/Home/ModifyEmployee.svelte';
@@ -27,47 +27,52 @@
 		// Update the store with the fetched data
 		employeeData.set(data);
 	});
+	$: image = $fullImg;
 </script>
 
-<div class="overlay" style="display: {$employeeView ? 'flex' : 'none'};">
-	<AddEmployee />
+{#if image === true}
+	<img style="width: 100vw; height: 100vh;" src={$fullImgUrl} alt="">
+{:else if image === false}
+	<div class="overlay" style="display: {$employeeView ? 'flex' : 'none'};">
+		<AddEmployee />
 
-	<RemoveEmployee />
+		<RemoveEmployee />
 
-	{#if employeeModifyData}
-		<ModifyEmployee />
-	{/if}
+		{#if employeeModifyData}
+			<ModifyEmployee />
+		{/if}
 
-	<ListEmployee />
-</div>
-
-<nav class="nav-bar">
-	<div class="heading">
-		Manage <b>Employees</b>
+		<ListEmployee />
 	</div>
-	<div class="nav-btns">
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="add-btn" on:click={addToggle}>
-			<i class="material-icons">&#xE147;</i>
-			<span>Add New Employee</span>
+
+	<nav class="nav-bar">
+		<div class="heading">
+			Manage <b>Employees</b>
+		</div>
+		<div class="nav-btns">
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="add-btn" on:click={addToggle}>
+				<i class="material-icons">&#xE147;</i>
+				<span>Add New Employee</span>
+			</div>
+		</div>
+	</nav>
+	<EmployeeData />
+	<div class="bot-nav">
+		<div class="bot-left">
+			Showing <b>5</b> out of <b>25</b> entries
+		</div>
+		<div class="bot-right">
+			<div class="bn1">Previous</div>
+			<div class="bn2">1</div>
+			<div class="bn3">2</div>
+			<div class="bn4">3</div>
+			<div class="bn5">4</div>
+			<div class="bn6">5</div>
+			<div class="bn7">Next</div>
 		</div>
 	</div>
-</nav>
-<EmployeeData />
-<div class="bot-nav">
-	<div class="bot-left">
-		Showing <b>5</b> out of <b>25</b> entries
-	</div>
-	<div class="bot-right">
-		<div class="bn1">Previous</div>
-		<div class="bn2">1</div>
-		<div class="bn3">2</div>
-		<div class="bn4">3</div>
-		<div class="bn5">4</div>
-		<div class="bn6">5</div>
-		<div class="bn7">Next</div>
-	</div>
-</div>
+{/if}
 
 <style>
 	.overlay {
