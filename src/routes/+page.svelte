@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import close_icon from '$lib/images/close.svg';
 	import download_icon from '$lib/images/download.svg';
-	import { employeeData, employeeModifyData, employeeView, employeeAdd, HPage1, HPage2, HPage3, fullImg, fullImgUrl } from '../stores/MainStores';
+	import { employeeData, employeeModifyData, employeeView, employeeAdd, HPage1, HPage2, HPage3, fullImg, fullImgUrl, fullImgName } from '../stores/MainStores';
 	import AddEmployee from '../components/Home/AddEmployee.svelte';
 	import ListEmployee from '../components/Home/ListEmployee.svelte';
 	import ModifyEmployee from '../components/Home/ModifyEmployee.svelte';
@@ -41,7 +41,9 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div class="toggle-img" on:click={toggleImg}>
 		<img src={close_icon} alt="" width="24px" height="24px" />
-		<img src={download_icon} alt="" width="24px" height="24px" />
+		<a href={$fullImgUrl} download={fullImgName}>
+			<img src={download_icon} alt="" width="24px" height="24px" />
+		</a>
 	</div>
 	<div class="overlay-img">
 	</div>
@@ -128,7 +130,7 @@
 	}
 	.fullImg {
 		width: 50vw; 
-		height: 110vh;
+		object-fit: cover;
 		z-index: 15;
 	}
 	.overlay {

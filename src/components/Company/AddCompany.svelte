@@ -42,7 +42,6 @@
 			imageBase64: string | ArrayBuffer | null;
 		};
 	}
-	
 
 	let companyData: Scan = {
 		companyName: '',
@@ -55,33 +54,33 @@
 		demandLetterScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: '',
+			imageBase64: ''
 		},
 		KSMScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: '',
+			imageBase64: ''
 		},
 		companyProfileScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: '',
+			imageBase64: ''
 		},
 		callingCopyScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: '',
+			imageBase64: ''
 		},
 		callingOrgScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: '',
+			imageBase64: ''
 		},
 		notaryScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: '',
-		},
+			imageBase64: ''
+		}
 	};
 
 	const addRequest = async () => {
@@ -148,6 +147,13 @@
 			CPage3.update(() => true);
 		}
 	};
+
+	const Previous = () => {
+		if ($CPage1 === false && $CPage2 === true) {
+			CPage1.update(() => true);
+			CPage2.update(() => false);
+		}
+	};
 </script>
 
 <div class="add-form" style="display: {$companyAdd ? 'block' : 'none'};">
@@ -160,59 +166,83 @@
 	</div>
 	<hr />
 	<form class="addForm" action="/api/companyUpload" on:submit|preventDefault={() => addRequest()}>
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="add-employee" on:click={assignEmployee}>Add Employee</div>
-		<label class="mg" for="companyName">Company Name:</label>
-		<input class="add_input" bind:value={companyData.companyName} name="companyName" id="companyName" required />
+		{#if $CPage1}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="add-employee" on:click={assignEmployee}>Add Employee</div>
+			<label class="mg" for="companyName">Company Name:</label>
+			<input class="add_input" bind:value={companyData.companyName} name="companyName" id="companyName" required />
 
-		<label class="mg" for="companyAddress">Company Address:</label>
-		<input class="add_input" bind:value={companyData.companyAddress} name="companyAddress" id="companyAddress" required />
+			<label class="mg" for="companyAddress">Company Address:</label>
+			<input class="add_input" bind:value={companyData.companyAddress} name="companyAddress" id="companyAddress" required />
 
-		<label class="mg" for="postCode">Post Code:</label>
-		<input class="add_input" bind:value={companyData.postCode} name="postCode" id="postCode" required />
+			<label class="mg" for="postCode">Post Code:</label>
+			<input class="add_input" bind:value={companyData.postCode} name="postCode" id="postCode" required />
 
-		<label class="mg" for="demandMale">Demand Male:</label>
-		<input class="add_input" bind:value={companyData.demandMale} name="demandMale" id="demandMale" required />
+			<label class="mg" for="demandMale">Demand Male:</label>
+			<input class="add_input" bind:value={companyData.demandMale} name="demandMale" id="demandMale" required />
 
-		<label class="mg" for="demandFemale">Demand Female:</label>
-		<input class="add_input" bind:value={companyData.demandFemale} name="demandFemale" id="demandFemale" required />
+			<label class="mg" for="demandFemale">Demand Female:</label>
+			<input class="add_input" bind:value={companyData.demandFemale} name="demandFemale" id="demandFemale" required />
 
-		<label class="mg" for="companyPhNo">Company Phone Number:</label>
-		<input class="add_input" bind:value={companyData.companyPhNo} name="companyPhNo" id="companyPhNo" required />
+			<label class="mg" for="companyPhNo">Company Phone Number:</label>
+			<input class="add_input" bind:value={companyData.companyPhNo} name="companyPhNo" id="companyPhNo" required />
 
-		<label class="mg" for="demandLetterScan">Demand Letter Scan:</label>
-		<input type="file" on:change={(event) => handleFileChange(event, companyData.demandLetterScan)} class="form-control mg" name="demandLetterScan" id="demandLetterScan" required />
+			<label class="mg" for="demandLetterScan">Demand Letter Scan:</label>
+			<input type="file" on:change={(event) => handleFileChange(event, companyData.demandLetterScan)} class="form-control mg" name="demandLetterScan" id="demandLetterScan" required />
 
-		<label class="mg" for="KSMScan">KSM Scan:</label>
-		<input type="file" on:change={(event) => handleFileChange(event, companyData.KSMScan)} class="form-control mg" name="KSMScan" id="formFile" multiple />
+			<label class="mg" for="KSMScan">KSM Scan:</label>
+			<input type="file" on:change={(event) => handleFileChange(event, companyData.KSMScan)} class="form-control mg" name="KSMScan" id="formFile" multiple />
 
-		<label class="mg" for="companyProfileScan">Company Profile Scan:</label>
-		<input type="file" on:change={(event) => handleFileChange(event, companyData.companyProfileScan)} class="form-control mg" name="companyProfileScan" id="formFile" multiple />
+			<label class="mg" for="companyProfileScan">Company Profile Scan:</label>
+			<input type="file" on:change={(event) => handleFileChange(event, companyData.companyProfileScan)} class="form-control mg" name="companyProfileScan" id="formFile" multiple />
+		{/if}
 
-		<label class="mg" for="callingCopyScan">Calling Copy Scan:</label>
-		<input type="file" on:change={(event) => handleFileChange(event, companyData.callingCopyScan)} class="form-control mg" name="callingCopyScan" id="formFile" multiple />
+		{#if $CPage2}
+			<label class="mg" for="callingCopyScan">Calling Copy Scan:</label>
+			<input type="file" on:change={(event) => handleFileChange(event, companyData.callingCopyScan)} class="form-control mg" name="callingCopyScan" id="formFile" multiple />
 
-		<label class="mg" for="callingOrgScan">Calling Original Scan:</label>
-		<input type="file" on:change={(event) => handleFileChange(event, companyData.callingOrgScan)} class="form-control mg" name="callingOrgScan" id="formFile" multiple />
+			<label class="mg" for="callingOrgScan">Calling Original Scan:</label>
+			<input type="file" on:change={(event) => handleFileChange(event, companyData.callingOrgScan)} class="form-control mg" name="callingOrgScan" id="formFile" multiple />
 
-		<label class="mg" for="notaryScan">Notary Scan:</label>
-		<input type="file" on:change={(event) => handleFileChange(event, companyData.notaryScan)} class="form-control mg" name="notaryScan" id="formFile" multiple />
+			<label class="mg" for="notaryScan">Notary Scan:</label>
+			<input type="file" on:change={(event) => handleFileChange(event, companyData.notaryScan)} class="form-control mg" name="notaryScan" id="formFile" multiple />
+		{/if}
 
-		<button class="submit-btn" type="submit">Submit</button>
+		<div class="addForm-bot">
+			{#if $CPage1 === true}
+				<div />
+			{:else if $CPage1 === false}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div class="next-btn" on:click={Previous}>Previous</div>
+			{/if}
+			{#if $CPage2 === true}
+				<button class="submit-btn" type="submit">Submit</button>
+			{:else if $CPage2 === false}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div class="next-btn" on:click={Next}>Next</div>
+			{/if}
+		</div>
 	</form>
 </div>
 
 <style>
-    input {
+	.addForm-bot {
+		@apply flex justify-end items-center gap-[12px] rounded-[4px];
+		padding: 0 30px;
+	}
+	.addForm-bot div {
+		@apply flex justify-center items-center w-[100px] h-[33px] cursor-pointer;
+	}
+	input {
 		border: 1px solid gray;
 	}
 	.mg {
 		margin: 0 30px;
 	}
-    .add_input {
+	.add_input {
 		@apply ml-[30px] mr-[30px] mb-[15px] h-[34px];
 	}
-    input {
+	input {
 		border: 1px solid gray;
 	}
 	.close {
@@ -222,7 +252,8 @@
 		@apply absolute top-[30px] w-[400px] bg-white z-[12] rounded-[4px];
 		height: calc(100vh - 60px);
 	}
-	.submit-btn {
+	.submit-btn,
+	.next-btn {
 		@apply bg-[#4aa84d] text-white;
 	}
 	.submit-btn {

@@ -2,9 +2,30 @@
 	import visibility_icon from '$lib/images/visibility.svg';
 	import edit_icon from '$lib/images/edit.svg';
 	import delete_icon from '$lib/images/delete.svg';
-	import { companyData, companyView, companyModify, companyModifyData, companyRemove, companyRemove_id, companyList, companyList_id } from '../../stores/MainStores';
+	import { companyData, companyView, companyModify, companyModifyData, companyRemove, companyRemove_id, companyList, companyList_id, assignSingle } from '../../stores/MainStores';
 
-	const listToggle = (value: any) => {
+	const listToggle = async (value: any) => {
+		const response = await fetch('http://localhost:3000/api/companySingleInfo', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ idNo: value })
+		});
+
+		const data = await response.json();
+		
+		const responseNew = await fetch('http://localhost:3000/api/employeeSingleInfo', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ idNo: data.employees[0] })
+		});
+
+		const dataNew = await responseNew.json();
+
+		assignSingle.set(dataNew);
 		companyList_id.update(() => value);
 		companyView.update((currentValue) => !currentValue);
 		companyList.update((currentValue) => !currentValue);

@@ -1,7 +1,9 @@
 <script lang="ts">
 	import CompanyData from '../../components/Company/CompanyData.svelte';
 	import { onMount } from 'svelte';
-	import { employeeData, companyData, companyModifyData, companyView, employeeView, companyAdd, CPage1, CPage2, CPage3, assign } from '../../stores/MainStores';
+	import { employeeData, companyData, companyModifyData, companyView, employeeView, companyAdd, CPage1, CPage2, CPage3, assign, fullImg, fullImgUrl, fullImgName } from '../../stores/MainStores';
+	import close_icon from '$lib/images/close.svg';
+	import download_icon from '$lib/images/download.svg';
 	import AddCompany from '../../components/Company/AddCompany.svelte';
 	import RemoveCompany from '../../components/Company/RemoveCompany.svelte';
 	import ListCompany from '../../components/Company/ListCompany.svelte';
@@ -9,10 +11,15 @@
 	import AssignEmployee from '../../components/Company/AssignEmployee.svelte';
 	import ListEmployee from '../../components/Home/ListEmployee.svelte';
 
+	const toggleImg = () => {
+		fullImg.update(() => false);
+		fullImgUrl.update(() => '');
+	};
+
 	const assignEmployee = async () => {
 		assign.update((assign) => !assign);
-		companyView.update((currentValue) => true);
-		companyAdd.update((currentValue) => true); 
+		companyView.update(() => true);
+		companyAdd.update(() => true);
 	};
 
 	const resetPage = () => {
@@ -36,74 +43,125 @@
 		const response = await fetch('http://localhost:3000/api/employeeInfo');
 		const data = await response.json();
 		employeeData.set(data);
-		
 	});
+	$: image = $fullImg;
 </script>
 
-<div class="overlay" style="display: {$companyView ? 'flex' : 'none'};">
-	<AddCompany />
+{#if image === true}
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div class="toggle-img" on:click={toggleImg}>
+		<img src={close_icon} alt="" width="24px" height="24px" />
+		<a href={$fullImgUrl} download={fullImgName}>
+			<img src={download_icon} alt="" width="24px" height="24px" />
+		</a>
+	</div>
+	<div class="overlay-img" />
+	<div class="mid-align">
+		<img class="fullImg" src={$fullImgUrl} alt="" />
+	</div>
+{:else if image === false}
+	<div class="overlay" style="display: {$companyView ? 'flex' : 'none'};">
+		<AddCompany />
 
-	<RemoveCompany />
+		<RemoveCompany />
 
-	{#if $companyModifyData}
-		<ModifyCompany />
-	{/if}
-
-	<ListCompany />
-</div>
-
-<div class="overlay" style="display: {$employeeView ? 'flex' : 'none'};">
-	<ListEmployee />
-</div>
-
-
-<nav class="nav-bar">
-	<div class="heading">
-		{#if $assign}
-		Assign <b>Employees</b>
-		{:else}
-		Manage <b>Companies</b>
+		{#if $companyModifyData}
+			<ModifyCompany />
 		{/if}
+
+		<ListCompany />
 	</div>
-	<div class="nav-btns">
-		{#if $assign}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="add-btn" on:click={assignEmployee}>
-			<i class="material-icons">&#xE147;</i>
-			<span>Finish Assign</span>
-		</div>
-		{:else}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="add-btn" on:click={addToggle}>
-			<i class="material-icons">&#xE147;</i>
-			<span>Add New Company</span>
-		</div>
-		{/if}	
+
+	<div class="overlay" style="display: {$employeeView ? 'flex' : 'none'};">
+		<ListEmployee />
 	</div>
-</nav>
-{#if $assign}
-<AssignEmployee />
-{:else}
-<CompanyData />
+
+	<nav class="nav-bar">
+		<div class="heading">
+			{#if $assign}
+				Assign <b>Employees</b>
+			{:else}
+				Manage <b>Companies</b>
+			{/if}
+		</div>
+		<div class="nav-btns">
+			{#if $assign}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div class="add-btn" on:click={assignEmployee}>
+					<i class="material-icons">&#xE147;</i>
+					<span>Finish Assign</span>
+				</div>
+			{:else}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div class="add-btn" on:click={addToggle}>
+					<i class="material-icons">&#xE147;</i>
+					<span>Add New Company</span>
+				</div>
+			{/if}
+		</div>
+	</nav>
+	{#if $assign}
+		<AssignEmployee />
+	{:else}
+		<CompanyData />
+	{/if}
+	<div class="bot-nav">
+		<div class="bot-left">
+			Showing <b>5</b> out of <b>25</b> entries
+		</div>
+		<div class="bot-right">
+			<div class="bn1">Previous</div>
+			<div class="bn2">1</div>
+			<div class="bn3">2</div>
+			<div class="bn4">3</div>
+			<div class="bn5">4</div>
+			<div class="bn6">5</div>
+			<div class="bn7">Next</div>
+		</div>
+	</div>
 {/if}
-<div class="bot-nav">
-	<div class="bot-left">
-		Showing <b>5</b> out of <b>25</b> entries
-	</div>
-	<div class="bot-right">
-		<div class="bn1">Previous</div>
-		<div class="bn2">1</div>
-		<div class="bn3">2</div>
-		<div class="bn4">3</div>
-		<div class="bn5">4</div>
-		<div class="bn6">5</div>
-		<div class="bn7">Next</div>
-	</div>
-</div>
-
-
 
 <style>
+	.mid-align {
+		margin-top: 8px;
+		margin-bottom: 32px;
+		height: auto;
+		width: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.toggle-img {
+		position: sticky;
+		top: 32px;
+		max-width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		margin-top: 32px;
+		margin-left: 32px;
+		margin-right: 32px;
+		cursor: pointer;
+		z-index: 15;
+	}
+	.overlay-img {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 10;
+		background: rgba(0, 0, 0, 0.3);
+		transition: 0.3s;
+	}
+	.fullImg {
+		width: 50vw; 
+		object-fit: cover;
+		z-index: 15;
+	}
 	.overlay {
 		position: fixed;
 		display: none;

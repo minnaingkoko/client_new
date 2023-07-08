@@ -2,6 +2,7 @@ import { writable } from 'svelte/store';
 
 export const fullImg = writable(false);
 export const fullImgUrl = writable('');
+export const fullImgName = writable('');
 
 //employee data
 
@@ -47,3 +48,5 @@ export const CPage3 = writable(false);
 export const assign = writable(false);
 
 export const assignData = writable<any[]>([]);
+
+export const assignSingle = writable<any>(null);

@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { employeeData, employeeView, employeeList, employeeList_id, HPage1, HPage2, HPage3, HPage4, fullImg, fullImgUrl } from '../../stores/MainStores';
+	import { employeeData, employeeView, employeeList, employeeList_id, HPage1, HPage2, HPage3, HPage4, fullImg, fullImgUrl, fullImgName } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
+	import download_icon from '$lib/images/download.svg';
 	import visibility_icon from '$lib/images/visibility.svg';
 
 	const resetPage = () => {
@@ -16,9 +17,10 @@
 		employeeList.update((currentValue) => !currentValue);
 	};
 
-	const fullImage = (value: any) => {
+	const fullImage = (url: any, name: any) => {
 		fullImg.update((currentValue) => !currentValue);
-		fullImgUrl.update(() => value)
+		fullImgUrl.update(() => url)
+		fullImgName.update(() => name)
 	}
 
 	const Next = () => {
@@ -190,11 +192,13 @@
 				<div class="collect p-scan">
 					<label for="passportScan">Passport Scan:</label>
 					<div class="p-btns">
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.passportScanData.s3URL)} >
+						<div class="p-btn">
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.passportScanData.s3URL,data.passportScanData.filename)} >
+						</div>
 						<div class="p-btn">
 							<a href={data.passportScanData.s3URL} download={data.passportScanData.filename}>
-								<div>Download</div>
+								<img src={download_icon} alt="" width="24px" height="24px" />
 							</a>
 						</div>
 					</div>
@@ -205,11 +209,13 @@
 				<div class="collect p-scan">
 					<label for="passportScan">NRC Scan:</label>
 					<div class="p-btns">
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.nrcScanData.s3URL)}>
+						<div class="p-btn">
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.nrcScanData.s3URL,data.nrcScanData.filename)}>
+						</div>
 						<div class="p-btn">
 							<a href={data.nrcScanData.s3URL} download={data.nrcScanData.filename}>
-								<div>Download</div>
+								<img src={download_icon} alt="" width="24px" height="24px" />
 							</a>
 						</div>
 					</div>
@@ -220,11 +226,13 @@
 				<div class="collect p-scan">
 					<label for="passportScan">Vaccine Notary Scan:</label>
 					<div class="p-btns">
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.vaccineNotaryScanData.s3URL)}>
+						<div class="p-btn">
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.vaccineNotaryScanData.s3URL,data.vaccineNotaryScanData.filename)}>
+						</div>
 						<div class="p-btn">
 							<a href={data.vaccineNotaryScanData.s3URL} download={data.vaccineNotaryScanData.filename}>
-								<div>Download</div>
+								<img src={download_icon} alt="" width="24px" height="24px" />
 							</a>
 						</div>
 					</div>
@@ -235,11 +243,13 @@
 				<div class="collect p-scan">
 					<label for="passportScan">Medical Online Scan:</label>
 					<div class="p-btns">
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.medicalOnlineScanData.s3URL)}>
+						<div class="p-btn">
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.medicalOnlineScanData.s3URL,data.medicalOnlineScanData.filename)}>
+						</div>
 						<div class="p-btn">
 							<a href={data.medicalOnlineScanData.s3URL} download={data.medicalOnlineScanData.filename}>
-								<div>Download</div>
+								<img src={download_icon} alt="" width="24px" height="24px" />
 							</a>
 						</div>
 					</div>
@@ -250,11 +260,13 @@
 				<div class="collect p-scan">
 					<label for="passportScan">Training Scan:</label>
 					<div class="p-btns">
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.trainingScanData.s3URL)}>
+						<div class="p-btn">
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.trainingScanData.s3URL,data.trainingScanData.filename)}>
+						</div>
 						<div class="p-btn">
 							<a href={data.trainingScanData.s3URL} download={data.trainingScanData.filename}>
-								<div>Download</div>
+								<img src={download_icon} alt="" width="24px" height="24px" />
 							</a>
 						</div>
 					</div>
@@ -265,11 +277,13 @@
 				<div class="collect p-scan">
 					<label for="passportScan">AirTicket Scan:</label>
 					<div class="p-btns">
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.airTicketScanData.s3URL)}>
+						<div class="p-btn">
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.airTicketScanData.s3URL,data.airTicketScanData.filename)}>
+						</div>
 						<div class="p-btn">
 							<a href={data.airTicketScanData.s3URL} download={data.airTicketScanData.filename}>
-								<div>Download</div>
+								<img src={download_icon} alt="" width="24px" height="24px" />
 							</a>
 						</div>
 					</div>
@@ -280,11 +294,13 @@
 				<div class="collect p-scan">
 					<label for="passportScan">Visa Scan:</label>
 					<div class="p-btns">
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.visaScanData.s3URL)}>
+						<div class="p-btn">
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.visaScanData.s3URL,data.visaScanData.filename)}>
+						</div>
 						<div class="p-btn">
 							<a href={data.visaScanData.s3URL} download={data.visaScanData.filename}>
-								<div>Download</div>
+								<img src={download_icon} alt="" width="24px" height="24px" />
 							</a>
 						</div>
 					</div>
@@ -295,11 +311,13 @@
 				<div class="collect p-scan">
 					<label for="passportScan">Smart Card Scan:</label>
 					<div class="p-btns">
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.smartCardScanData.s3URL)}>
+						<div class="p-btn">
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.smartCardScanData.s3URL,data.smartCardScanData.filename)}>
+						</div>
 						<div class="p-btn">
 							<a href={data.smartCardScanData.s3URL} download={data.smartCardScanData.filename}>
-								<div>Download</div>
+								<img src={download_icon} alt="" width="24px" height="24px" />
 							</a>
 						</div>
 					</div>
@@ -310,11 +328,13 @@
 				<div class="collect p-scan">
 					<label for="passportScan">Family Data Scan:</label>
 					<div class="p-btns">
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.familyDataScanData.s3URL)}>
+						<div class="p-btn">
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.familyDataScanData.s3URL,data.familyDataScanData.filename)}>
+						</div>
 						<div class="p-btn">
 							<a href={data.familyDataScanData.s3URL} download={data.familyDataScanData.filename}>
-								<div>Download</div>
+								<img src={download_icon} alt="" width="24px" height="24px" />
 							</a>
 						</div>
 					</div>
@@ -408,7 +428,7 @@
 		@apply flex flex-row;
 	}
 	.p-btns {
-		@apply flex flex-col;
+		@apply flex flex-row gap-[16px];
 	}
 	.p-btn {
 		@apply flex flex-row justify-between items-center;
