@@ -33,47 +33,47 @@
 		passportScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		nrcScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		vaccineNotaryScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		medicalOnlineScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		trainingScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		airTicketScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		visaScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		smartCardScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		familyDataScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 	}
 
@@ -107,47 +107,47 @@
 		passportScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		nrcScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		vaccineNotaryScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		medicalOnlineScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		trainingScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		airTicketScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		visaScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		smartCardScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		familyDataScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		}
 	};
 
@@ -172,12 +172,11 @@
 			const file = files[0];
 			if (file) {
 				const reader = new FileReader();
-
 				reader.onloadend = () => {
 					const base64String = reader.result;
 					value.filename = file.name;
 					value.contentType = file.type;
-					value.imageBase64 = base64String;
+					value.data = base64String;
 					// Use the base64String as needed (e.g., send it in a request)
 				};
 
@@ -223,7 +222,7 @@
 			HPage2.update(() => false);
 			HPage1.update(() => true);
 		}
-	}
+	};
 </script>
 
 <div class="add-form" style="display: {$employeeAdd ? 'block' : 'none'};">
@@ -443,7 +442,7 @@
 
 		<div class="addForm-bot">
 			{#if $HPage1 === true}
-				<div></div>
+				<div />
 			{:else if $HPage1 === false}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div class="next-btn" on:click={Previous}>Previous</div>

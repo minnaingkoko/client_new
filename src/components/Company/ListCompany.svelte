@@ -6,8 +6,6 @@
 
 	$: assign = $assignSingle;
 
-	$: console.log(assign);
-
 	const resetPage = () => {
 		CPage1.update(() => true);
 		CPage2.update(() => false);
@@ -180,19 +178,8 @@
 				</div>
 
 				<div class="addForm-bot">
-					{#if $CPage1 === true}
-						<div />
-					{:else if $CPage1 === false}
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<div class="next-btn" on:click={Previous}>Previous</div>
-					{/if}
-					{#if $CPage2 === true}
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<div class="cancel-btn" on:click={listToggle}>Cancel</div>
-					{:else if $CPage2 === false}
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<div class="next-btn" on:click={Next}>Next</div>
-					{/if}
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div class="cancel-btn" on:click={listToggle}>Cancel</div>
 				</div>
 				{/if}
 			</form>

@@ -2,6 +2,7 @@
 	import { companyView, CPage1, CPage2, CPage3, companyAdd, assign, assignData } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 	import { goto } from '$app/navigation';
+	let isImage = false;
 
 	interface Scan {
 		companyName: string;
@@ -14,32 +15,32 @@
 		demandLetterScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		KSMScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		companyProfileScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		callingCopyScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		callingOrgScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 		notaryScan: {
 			filename: string;
 			contentType: string;
-			imageBase64: string | ArrayBuffer | null;
+			data: string | ArrayBuffer | null;
 		};
 	}
 
@@ -54,32 +55,32 @@
 		demandLetterScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		KSMScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		companyProfileScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		callingCopyScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		callingOrgScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		},
 		notaryScan: {
 			filename: '',
 			contentType: '',
-			imageBase64: ''
+			data: ''
 		}
 	};
 
@@ -105,12 +106,11 @@
 			const file = files[0];
 			if (file) {
 				const reader = new FileReader();
-
 				reader.onloadend = () => {
 					const base64String = reader.result;
 					value.filename = file.name;
 					value.contentType = file.type;
-					value.imageBase64 = base64String;
+					value.data = base64String;
 					// Use the base64String as needed (e.g., send it in a request)
 				};
 
