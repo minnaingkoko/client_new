@@ -174,8 +174,6 @@
 				const reader = new FileReader();
 				reader.onloadend = () => {
 					const base64String = reader.result;
-					console.log(file.type);
-					console.log(base64String);
 					value.filename = file.name;
 					value.contentType = file.type;
 					value.data = base64String;
