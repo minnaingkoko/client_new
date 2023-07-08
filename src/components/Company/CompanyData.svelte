@@ -5,6 +5,7 @@
 	import { companyData, companyView, companyModify, companyModifyData, companyRemove, companyRemove_id, companyList, companyList_id, assignSingle } from '../../stores/MainStores';
 
 	const listToggle = async (value: any) => {
+		console.log(value);
 		const response = await fetch('http://localhost:3000/api/companySingleInfo', {
 			method: 'POST',
 			headers: {
@@ -24,6 +25,7 @@
 		});
 
 		const dataNew = await responseNew.json();
+		console.log(data);
 
 		assignSingle.set(dataNew);
 		companyList_id.update(() => value);
