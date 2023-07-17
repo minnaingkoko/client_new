@@ -3,6 +3,7 @@ import { writable } from 'svelte/store';
 export const fullImg = writable(false);
 export const fullImgUrl = writable('');
 export const fullImgName = writable('');
+export const fullImgType = writable('');
 
 //employee data
 

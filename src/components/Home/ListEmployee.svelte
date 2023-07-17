@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { employeeData, employeeView, employeeList, employeeList_id, HPage1, HPage2, HPage3, HPage4, fullImg, fullImgUrl, fullImgName } from '../../stores/MainStores';
+	import { employeeData, employeeView, employeeList, employeeList_id, HPage1, HPage2, HPage3, HPage4, fullImg, fullImgUrl, fullImgName, fullImgType } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 	import download_icon from '$lib/images/download.svg';
 	import visibility_icon from '$lib/images/visibility.svg';
@@ -17,10 +17,11 @@
 		employeeList.update((currentValue) => !currentValue);
 	};
 
-	const fullImage = (url: any, name: any) => {
+	const fullImage = (url: any, name: any, typ:any) => {
 		fullImg.update((currentValue) => !currentValue);
 		fullImgUrl.update(() => url)
 		fullImgName.update(() => name)
+		fullImgType.update(() => typ)
 	}
 
 	const Next = () => {
@@ -67,100 +68,72 @@
 					<label for="name">Name:</label>
 					<div>{data.name}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="motherName">Mother Name:</label>
 					<div>{data.motherName}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="fatherName">Father Name:</label>
 					<div>{data.fatherName}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="address">Address:</label>
 					<div>{data.address}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="phNo">Phone Number:</label>
 					<div>{data.phNo}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="nrcNo">NRC No:</label>
 					<div>{data.nrcNo}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="religion">Religion:</label>
 					<div>{data.religion}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="agent">Agent:</label>
 					<div>{data.agent}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="gender">Gender:</label>
 					<div>{data.gender}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="passport">Passport:</label>
 					<div>{data.passport}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="dob">Date of Birth:</label>
 					<div>{data.dobString}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="weight">Weight (kg):</label>
 					<div>{data.weight}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="height">Height (cm):</label>
 					<div>{data.height}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="marital">Marital Status:</label>
 					<div>{data.marital}</div>
 				</div>
-				{/if}
 
-				{#if $HPage1}
 				<div class="collect">
 					<label for="education">Education:</label>
 					<div>{data.education}</div>
@@ -172,29 +145,23 @@
 					<label for="experience">Experience:</label>
 					<div>{data.experience}</div>
 				</div>
-				{/if}
 
-				{#if $HPage2}
 				<div class="collect">
 					<label for="workedCountry">Worked Country:</label>
 					<div>{data.workedCountry}</div>
 				</div>
-				{/if}	
 
-				{#if $HPage2}
 				<div class="collect">
 					<label for="spokenLanguage">Spoken Language:</label>
 					<div>{data.spokenLanguage}</div>
 				</div>
-				{/if}
 
-				{#if $HPage2}
 				<div class="collect p-scan">
 					<label for="passportScan">Passport Scan:</label>
 					<div class="p-btns">
 						<div class="p-btn">
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.passportScanData.s3URL,data.passportScanData.filename)} >
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.passportScanData.s3URL,data.passportScanData.filename,data.passportScanData.contentType)} >
 						</div>
 						<div class="p-btn">
 							<a href={data.passportScanData.s3URL} download={data.passportScanData.filename}>
@@ -203,15 +170,13 @@
 						</div>
 					</div>
 				</div>
-				{/if}
-				
-				{#if $HPage2}
+
 				<div class="collect p-scan">
 					<label for="passportScan">NRC Scan:</label>
 					<div class="p-btns">
 						<div class="p-btn">
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.nrcScanData.s3URL,data.nrcScanData.filename)}>
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.nrcScanData.s3URL,data.nrcScanData.filename,data.nrcScanData.contentType)}>
 						</div>
 						<div class="p-btn">
 							<a href={data.nrcScanData.s3URL} download={data.nrcScanData.filename}>
@@ -220,15 +185,13 @@
 						</div>
 					</div>
 				</div>
-				{/if}
 
-				{#if $HPage2}
 				<div class="collect p-scan">
 					<label for="passportScan">Vaccine Notary Scan:</label>
 					<div class="p-btns">
 						<div class="p-btn">
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.vaccineNotaryScanData.s3URL,data.vaccineNotaryScanData.filename)}>
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.vaccineNotaryScanData.s3URL,data.vaccineNotaryScanData.filename,data.vaccineNotaryScanData.contentType)}>
 						</div>
 						<div class="p-btn">
 							<a href={data.vaccineNotaryScanData.s3URL} download={data.vaccineNotaryScanData.filename}>
@@ -237,15 +200,13 @@
 						</div>
 					</div>
 				</div>
-				{/if}
 
-				{#if $HPage2}
 				<div class="collect p-scan">
 					<label for="passportScan">Medical Online Scan:</label>
 					<div class="p-btns">
 						<div class="p-btn">
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.medicalOnlineScanData.s3URL,data.medicalOnlineScanData.filename)}>
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.medicalOnlineScanData.s3URL,data.medicalOnlineScanData.filename,data.medicalOnlineScanData.contentType)}>
 						</div>
 						<div class="p-btn">
 							<a href={data.medicalOnlineScanData.s3URL} download={data.medicalOnlineScanData.filename}>
@@ -254,15 +215,13 @@
 						</div>
 					</div>
 				</div>
-				{/if}
 
-				{#if $HPage2}
 				<div class="collect p-scan">
 					<label for="passportScan">Training Scan:</label>
 					<div class="p-btns">
 						<div class="p-btn">
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.trainingScanData.s3URL,data.trainingScanData.filename)}>
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.trainingScanData.s3URL,data.trainingScanData.filename,data.trainingScanData.contentType)}>
 						</div>
 						<div class="p-btn">
 							<a href={data.trainingScanData.s3URL} download={data.trainingScanData.filename}>
@@ -271,15 +230,13 @@
 						</div>
 					</div>
 				</div>
-				{/if}
 
-				{#if $HPage2}
 				<div class="collect p-scan">
 					<label for="passportScan">AirTicket Scan:</label>
 					<div class="p-btns">
 						<div class="p-btn">
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.airTicketScanData.s3URL,data.airTicketScanData.filename)}>
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.airTicketScanData.s3URL,data.airTicketScanData.filename,data.airTicketScanData.contentType)}>
 						</div>
 						<div class="p-btn">
 							<a href={data.airTicketScanData.s3URL} download={data.airTicketScanData.filename}>
@@ -288,15 +245,13 @@
 						</div>
 					</div>
 				</div>
-				{/if}
 
-				{#if $HPage2}
 				<div class="collect p-scan">
 					<label for="passportScan">Visa Scan:</label>
 					<div class="p-btns">
 						<div class="p-btn">
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.visaScanData.s3URL,data.visaScanData.filename)}>
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.visaScanData.s3URL,data.visaScanData.filename,data.visaScanData.contentType)}>
 						</div>
 						<div class="p-btn">
 							<a href={data.visaScanData.s3URL} download={data.visaScanData.filename}>
@@ -305,15 +260,13 @@
 						</div>
 					</div>
 				</div>
-				{/if}
 
-				{#if $HPage2}
 				<div class="collect p-scan">
 					<label for="passportScan">Smart Card Scan:</label>
 					<div class="p-btns">
 						<div class="p-btn">
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.smartCardScanData.s3URL,data.smartCardScanData.filename)}>
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.smartCardScanData.s3URL,data.smartCardScanData.filename,data.smartCardScanData.contentType)}>
 						</div>
 						<div class="p-btn">
 							<a href={data.smartCardScanData.s3URL} download={data.smartCardScanData.filename}>
@@ -322,15 +275,13 @@
 						</div>
 					</div>
 				</div>
-				{/if}
 
-				{#if $HPage2}
 				<div class="collect p-scan">
 					<label for="passportScan">Family Data Scan:</label>
 					<div class="p-btns">
 						<div class="p-btn">
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.familyDataScanData.s3URL,data.familyDataScanData.filename)}>
+							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.familyDataScanData.s3URL,data.familyDataScanData.filename,data.familyDataScanData.contentType)}>
 						</div>
 						<div class="p-btn">
 							<a href={data.familyDataScanData.s3URL} download={data.familyDataScanData.filename}>
@@ -339,23 +290,17 @@
 						</div>
 					</div>
 				</div>
-				{/if}
 
-				{#if $HPage2}
 				<div class="collect">
 					<label for="deposit">Deposit:</label>
 					<div>{data.deposit}</div>
 				</div>
-				{/if}
 
-				{#if $HPage2}
 				<div class="collect">
 					<label for="applyDate">Apply Date:</label>
 					<div>{data.applyDate}</div>
 				</div>
-				{/if}
 
-				{#if $HPage2}
 				<div class="collect">
 					<label for="passportExpireDate">Passport Expire Date:</label>
 					<div>{data.passportExpireDate}</div>
@@ -367,30 +312,22 @@
 					<label for="passportType">Passport Type:</label>
 					<div>{data.passportType}</div>
 				</div>
-				{/if}
 
-				{#if $HPage3}
 				<div class="collect">
 					<label for="medicalOnlineExpire">Medical Online Expire:</label>
 					<div>{data.medicalOnlineExpire}</div>
 				</div>
-				{/if}
 
-				{#if $HPage3}
 				<div class="collect">
 					<label for="smartCardNo">Smart Card No:</label>
 					<div>{data.smartCardNo}</div>
 				</div>
-				{/if}
 
-				{#if $HPage3}
 				<div class="collect">
 					<label for="airPlaneNo">AirPlane No:</label>
 					<div>{data.airPlaneNo}</div>
 				</div>
-				{/if}
 
-				{#if $HPage3}
 				<div class="collect">
 					<label for="departureDate">Departure Date:</label>
 					<div>{data.departureDate}</div>

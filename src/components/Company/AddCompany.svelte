@@ -227,6 +227,10 @@
 
 <style>
 	.addForm-bot {
+		@apply absolute bottom-0 bg-[#e5e5e5] w-[100%] h-[75px];
+		border-radius: 0 0 4px 4px;
+	}
+	.addForm-bot {
 		@apply flex justify-end items-center gap-[12px] rounded-[4px];
 		padding: 0 30px;
 	}

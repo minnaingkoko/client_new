@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import close_icon from '$lib/images/close.svg';
 	import download_icon from '$lib/images/download.svg';
-	import { employeeData, employeeModifyData, employeeView, employeeAdd, HPage1, HPage2, HPage3, fullImg, fullImgUrl, fullImgName } from '../stores/MainStores';
+	import { employeeData, employeeModifyData, employeeView, employeeAdd, HPage1, HPage2, HPage3, fullImg, fullImgUrl, fullImgName, fullImgType } from '../stores/MainStores';
 	import AddEmployee from '../components/Home/AddEmployee.svelte';
 	import ListEmployee from '../components/Home/ListEmployee.svelte';
 	import ModifyEmployee from '../components/Home/ModifyEmployee.svelte';
@@ -35,6 +35,7 @@
 		employeeData.set(data);
 	});
 	$: image = $fullImg;
+
 </script>
 
 {#if image === true}
@@ -48,7 +49,13 @@
 	<div class="overlay-img">
 	</div>
 	<div class="mid-align">
-		<img class="fullImg" src={$fullImgUrl} alt="">
+		{#if $fullImgType == 'image/jpeg' || $fullImgType == 'image/jpg' || $fullImgType == 'image/png'}
+			<img  class="fullImg" src={$fullImgUrl} alt="">
+		{:else}
+			<!-- svelte-ignore a11y-missing-attribute -->
+			<iframe src="https://docs.google.com/gview?url={$fullImgUrl}&embedded=true" frameborder="0"></iframe>
+		{/if}
+		
 	</div>
 {:else if image === false}
 	<div class="overlay" style="display: {$employeeView ? 'flex' : 'none'};">
@@ -94,6 +101,7 @@
 
 <style>
 	.mid-align {
+		z-index: 15;
 		margin-top: 8px;
 		margin-bottom: 32px;
 		height: auto;
@@ -129,8 +137,7 @@
 		transition: 0.3s;
 	}
 	.fullImg {
-		width: 50vw; 
-		object-fit: cover;
+		display: block;
 		z-index: 15;
 	}
 	.overlay {

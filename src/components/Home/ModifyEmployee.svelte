@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { employeeModifyData, employeeView, HPage1, HPage2, HPage3, employeeModify } from '../../stores/MainStores';
+	import { employeeModifyData, employeeView, HPage1, HPage2, HPage3, HPage4, employeeModify } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 	import { goto } from '$app/navigation';
 
@@ -7,6 +7,7 @@
 		HPage1.update(() => true);
 		HPage2.update(() => false);
 		HPage3.update(() => false);
+		HPage4.update(() => false);
 	};
 
 	const modifyToggle = () => {
@@ -16,12 +17,28 @@
 	};
 
 	const Next = () => {
-		if ($HPage1 === true && $HPage2 === false && $HPage3 === false) {
+		if ($HPage1 === true && $HPage2 === false && $HPage3 === false && $HPage4 === false) {
 			HPage1.update(() => false);
 			HPage2.update(() => true);
-		} else if ($HPage1 === false && $HPage2 === true && $HPage3 === false) {
+		} else if ($HPage1 === false && $HPage2 === true && $HPage3 === false && $HPage4 == false) {
 			HPage2.update(() => false);
 			HPage3.update(() => true);
+		} else if ($HPage1 === false && $HPage2 === false && $HPage3 === true && $HPage4 == false) {
+			HPage3.update(() => false);
+			HPage4.update(() => true);
+		}
+	};
+
+	const Previous = () => {
+		if ($HPage4 === true && $HPage1 === false && $HPage2 === false && $HPage3 === false) {
+			HPage4.update(() => false);
+			HPage3.update(() => true);
+		} else if ($HPage3 === true && $HPage1 === false && $HPage2 === false && $HPage4 === false) {
+			HPage3.update(() => false);
+			HPage2.update(() => true);
+		} else if ($HPage2 === true && $HPage1 === false && $HPage3 === false && $HPage4 === false) {
+			HPage2.update(() => false);
+			HPage1.update(() => true);
 		}
 	};
 
@@ -53,169 +70,136 @@
 		</div>
 		<hr />
 		<form class="addForm" on:submit|preventDefault={() => modifyRequest(employee._id)}>
-			<label class="mg" style="display: {$HPage1 ? 'block' : 'none'};" for="name">Name:</label>
 			{#if $HPage1}
-				<input class="add_input" type="text" name="name" id="name" bind:value={employee.name} required />
-			{:else}
-				<input class="add_input" type="hidden" name="name" id="name" bind:value={employee.name} required />
+				<label class="mg" for="name">Name:</label>
+				<input class="add_input" type="text" bind:value={employee.name} name="name" id="name" required />
+
+				<label class="mg" for="motherName">Mother Name:</label>
+				<input class="add_input" type="text" bind:value={employee.motherName} name="motherName" id="motherName" />
+
+				<label class="mg" for="fatherName">Father Name:</label>
+				<input class="add_input" type="text" bind:value={employee.fatherName} name="fatherName" id="fatherName" />
+
+				<label class="mg" for="address">Address:</label>
+				<input class="add_input" type="text" bind:value={employee.address} name="address" id="address" />
+
+				<label class="mg" for="phNo">Phone Number:</label>
+				<input class="add_input" type="text" bind:value={employee.phNo} name="phNo" id="phNo" />
+
+				<label class="mg" for="nrcNo">NRC No:</label>
+				<input class="add_input" type="text" bind:value={employee.nrcNo} name="nrcNo" id="nrcNo" />
+
+				<label class="mg" for="religion">Religion:</label>
+				<input class="add_input" type="text" bind:value={employee.religion} name="religion" id="religion" />
+
+				<label class="mg" for="agent">Agent:</label>
+				<input class="add_input" type="text" bind:value={employee.agent} name="agent" id="agent" />
+
+				<label class="mg" for="gender">Gender:</label>
+				<select class="add_input" bind:value={employee.gender}>
+					<option value="">Select gender</option>
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+				</select>
+
+				<label class="mg" for="passport">Passport:</label>
+				<input class="add_input" type="text" bind:value={employee.passport} name="passport" id="passport" />
 			{/if}
 
-			<label class="mg" style="display: {$HPage1 ? 'block' : 'none'};" for="fatherName">Father Name:</label>
-			{#if $HPage1}
-				<input class="add_input" type="text" name="fatherName" id="fatherName" bind:value={employee.fatherName} required />
-			{:else}
-				<input class="add_input" type="hidden" name="fatherName" id="fatherName" bind:value={employee.fatherName} required />
-			{/if}
-
-			<label class="mg" style="display: {$HPage1 ? 'block' : 'none'};" for="address">Address:</label>
-			{#if $HPage1}
-				<input class="add_input" type="text" name="address" id="address" bind:value={employee.address} required />
-			{:else}
-				<input class="add_input" type="hidden" name="address" id="address" bind:value={employee.address} required />
-			{/if}
-
-			<label class="mg" style="display: {$HPage1 ? 'block' : 'none'};" for="phNo">Phone Number:</label>
-			{#if $HPage1}
-				<input class="add_input" type="text" name="phNo" id="phNo" bind:value={employee.phNo} required />
-			{:else}
-				<input class="add_input" type="hidden" name="phNo" id="phNo" bind:value={employee.phNo} required />
-			{/if}
-
-			<label class="mg" style="display: {$HPage1 ? 'block' : 'none'};" for="nrcNo">NRC No:</label>
-			{#if $HPage1}
-				<input class="add_input" type="text" name="nrcNo" id="nrcNo" bind:value={employee.nrcNo} required />
-			{:else}
-				<input class="add_input" type="hidden" name="nrcNo" id="nrcNo" bind:value={employee.nrcNo} required />
-			{/if}
-
-			<label class="mg" style="display: {$HPage1 ? 'block' : 'none'};" for="religion">Religion:</label>
-			{#if $HPage1}
-				<input class="add_input" type="text" name="religion" id="religion" bind:value={employee.religion} required />
-			{:else}
-				<input class="add_input" type="hidden" name="religion" id="religion" bind:value={employee.religion} required />
-			{/if}
-
-			<label class="mg" style="display: {$HPage1 ? 'block' : 'none'};" for="agent">Agent:</label>
-			{#if $HPage1}
-				<input class="add_input" type="text" name="agent" id="agent" bind:value={employee.agent} required />
-			{:else}
-				<input class="add_input" type="hidden" name="agent" id="agent" bind:value={employee.agent} required />
-			{/if}
-
-			<label class="mg" style="display: {$HPage2 ? 'block' : 'none'};" for="gender">Gender:</label>
-			<select class="add_input" style="display: {$HPage2 ? 'block' : 'none'};" bind:value={employee.gender} required>
-				<option value="">Select gender</option>
-				<option value="male">Male</option>
-				<option value="female">Female</option>
-			</select>
-			<!-- <input type="hidden" name="gender" value={gender} /> -->
-
-			<label class="mg" style="display: {$HPage2 ? 'block' : 'none'};" for="passport">Passport:</label>
 			{#if $HPage2}
-				<input class="add_input" type="text" name="passport" id="passport" bind:value={employee.passport} required />
-			{:else}
-				<input class="add_input" type="hidden" name="passport" id="passport" bind:value={employee.passport} required />
+				<label class="mg" for="dob">Date of Birth:</label>
+				<!-- <input class="add_input" type="date" bind:value={dateValue} name="dob" id="dob" /> -->
+
+				<label class="mg" for="weight">Weight (kg):</label>
+				<input class="add_input" type="number" bind:value={employee.weight} name="weight" id="weight" step="0.1" placeholder="Optional" />
+
+				<label class="mg" for="height">Height (cm):</label>
+				<input class="add_input" type="number" bind:value={employee.height} name="height" id="height" step="0.1" placeholder="Optional" />
+
+				<label class="mg" for="marital">Marital Status:</label>
+				<select class="add_input" bind:value={employee.marital}>
+					<option value="">Select marital status</option>
+					<option value="single">Single</option>
+					<option value="married">Married</option>
+					<option value="divorced">Divorced</option>
+					<option value="widowed">Widowed</option>
+				</select>
+
+				<label class="mg" for="education">Education:</label>
+				<input class="add_input" type="text" bind:value={employee.education} name="education" id="education" />
+
+				<label class="mg" for="experience">Experience:</label>
+				<input class="add_input" type="text" bind:value={employee.experience} name="experience" id="experience" />
+
+				<label class="mg" for="workedCountry">Worked Country:</label>
+				<select class="add_input" bind:value={employee.workedCountry}>
+					<option value="myanmar" selected>Myanmar</option>
+					<option value="malaysia">Malaysia</option>
+					<option value="custom">Custom</option>
+				</select>
+
+				<label class="mg" for="spokenLanguage">Spoken Language:</label>
+				<select class="add_input" bind:value={employee.spokenLanguage}>
+					<option value="basic" selected>English (Basic)</option>
+					<option value="intermediate">English (Intermediate)</option>
+					<option value="advanced">English (Advanced)</option>
+				</select>
+
+				<!-- <label class="mg" for="passportScan">Passport Scan:</label>
+				<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.passportScan)} multiple />
+
+				<label class="mg" for="nrcScan">NRC Scan:</label>
+				<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.nrcScan)} multiple /> -->
 			{/if}
 
-			<label class="mg" style="display: {$HPage2 ? 'block' : 'none'};" for="dob">Date of Birth:</label>
-			{#if $HPage2}
-				<input class="add_input" type="text" name="dob" id="dob" bind:value={employee.dob} required />
-			{:else}
-				<input class="add_input" type="hidden" name="dob" id="dob" bind:value={employee.dob} required />
-			{/if}
-
-			<label class="mg" style="display: {$HPage2 ? 'block' : 'none'};" for="weight">Weight (kg):</label>
-			{#if $HPage2}
-				<input class="add_input" type="text" name="weight" id="weight" bind:value={employee.weight} required />
-			{:else}
-				<input class="add_input" type="hidden" name="weight" id="weight" bind:value={employee.weight} required />
-			{/if}
-
-			<label class="mg" style="display: {$HPage2 ? 'block' : 'none'};" for="height">Height (cm):</label>
-			{#if $HPage2}
-				<input class="add_input" type="text" name="height" id="height" bind:value={employee.height} required />
-			{:else}
-				<input class="add_input" type="hidden" name="height" id="height" bind:value={employee.height} required />
-			{/if}
-
-			<label class="mg" style="display: {$HPage2 ? 'block' : 'none'};" for="marital">Marital Status:</label>
-			<select class="add_input" style="display: {$HPage2 ? 'block' : 'none'};" bind:value={employee.marital} required>
-				<option value="">Select marital status</option>
-				<option value="single">Single</option>
-				<option value="married">Married</option>
-				<option value="divorced">Divorced</option>
-				<option value="widowed">Widowed</option>
-			</select>
-			<!-- <input type="hidden" name="marital" value={marital} /> -->
-
-			<label class="mg" style="display: {$HPage2 ? 'block' : 'none'};" for="education">Education:</label>
-			{#if $HPage2}
-				<input class="add_input" type="text" name="education" id="education" bind:value={employee.education} required />
-			{:else}
-				<input class="add_input" type="hidden" name="education" id="education" bind:value={employee.education} required />
-			{/if}
-
-			<label class="mg" style="display: {$HPage3 ? 'block' : 'none'};" for="experience">Experience:</label>
 			{#if $HPage3}
-				<input class="add_input" type="text" name="experience" id="experience" bind:value={employee.experience} required />
-			{:else}
-				<input class="add_input" type="hidden" name="experience" id="experience" bind:value={employee.experience} required />
+				<!-- <label class="mg" for="vaccineNotaryScan">Vaccine Notary Scan:</label>
+				<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.vaccineNotaryScan)} multiple />
+
+				<label class="mg" for="medicalOnlineScan">Medical Online Scan:</label>
+				<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.medicalOnlineScan)} multiple />
+	
+				<label class="mg" for="trainingScan">Training Scan:</label>
+				<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.trainingScan)} multiple />
+
+				<label class="mg" for="airTicketScan">Air Ticket Scan:</label>
+				<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.airTicketScan)} multiple />
+
+				<label class="mg" for="visaScan">Visa Scan:</label>
+				<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.visaScan)} multiple />
+
+				<label class="mg" for="smartCardScan">Smart Card Scan:</label>
+				<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.smartCardScan)} multiple />
+
+				<label class="mg" for="familyDataScan">Family Data Scan:</label>
+				<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.familyDataScan)} multiple /> -->
+
+				<label class="mg" for="deposit">Deposit:</label>
+				<input class="add_input" type="text" bind:value={employee.deposit} name="deposit" id="deposit" />
+
+				<label class="mg" for="applyDate">Apply Date:</label>
+				<input class="add_input" type="text" bind:value={employee.applyDate} name="applyDate" id="applyDate" />
+
+				<label class="mg" for="passportExpireDate">Passport Expire Date:</label>
+				<input class="add_input" type="text" bind:value={employee.passportExpireDate} name="passportExpireDate" id="passportExpireDate" />
 			{/if}
 
-			<label class="mg" style="display: {$HPage3 ? 'block' : 'none'};" for="workedCountry">Worked Country:</label>
-			<select class="add_input" style="display: {$HPage3 ? 'block' : 'none'};" bind:value={employee.workedCountry} required>
-				<option value="myanmar" selected>Myanmar</option>
-				<option value="malaysia">Malaysia</option>
-				<option value="custom">Custom</option>
-			</select>
-			<!-- <input type="hidden" name="workedCountry" value={workedCountry} /> -->
+			{#if $HPage4}
+				<label class="mg" for="passportType">Passport Type:</label>
+				<input class="add_input" type="text" bind:value={employee.passportType} name="passportType" id="passportType" />
 
-			<!-- <input
-                class="mg"
-                type="text"
-                name="customCountry"
-                id="customCountry"
-                placeholder="Enter your country"
-                style="display: none"
-            /> -->
+				<label class="mg" for="medicalOnlineExpire">Medical Online Expire:</label>
+				<input class="add_input" type="text" bind:value={employee.medicalOnlineExpire} name="medicalOnlineExpire" id="medicalOnlineExpire" />
 
-			<label class="mg" style="display: {$HPage3 ? 'block' : 'none'};" for="spokenLanguage">Spoken Language:</label>
-			<select class="add_input" style="display: {$HPage3 ? 'block' : 'none'};" bind:value={employee.spokenLanguage} required>
-				<option value="basic" selected>English (Basic)</option>
-				<option value="intermediate">English (Intermediate)</option>
-				<option value="advanced">English (Advanced)</option>
-			</select>
-			<!-- <input type="hidden" name="spokenLanguage" value={spokenLanguage} /> -->
+				<label class="mg" for="smartCardNo">Smart Card No:</label>
+				<input class="add_input" type="text" bind:value={employee.smartCardNo} name="smartCardNo" id="smartCardNo" />
 
-			<!-- <label class="mg" style="display: {$HPage3 ? 'block' : 'none'};" for="passportScan"
-				>Passport Scan:</label
-			>
-			<input
-				type={$HPage3 ? 'file' : 'hidden'}
-				class="form-control mg"
-				name="images"
-				id="formFile"
-				multiple
-			/>
-			{#if $HPage3}
-				<input
-					class="form-control mg"
-					type="file"
-					name="images"
-				id="formFile"
-					bind:value={employee.images}
-					required
-				/>
-			{:else}
-				<input
-					class="add_input"
-					type="hidden"
-					name="images"
-				id="formFile"
-					bind:value={employee.images}
-					required
-				/>
-			{/if} -->
+				<label class="mg" for="airPlaneNo">Air Plane No:</label>
+				<input class="add_input" type="text" bind:value={employee.airPlaneNo} name="airPlaneNo" id="airPlaneNo" />
+
+				<label class="mg" for="departureDate">Departure Date:</label>
+				<input class="add_input" type="text" bind:value={employee.departureDate} name="departureDate" id="departureDate" />
+			{/if}
 
 			<div class="addForm-bot">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->

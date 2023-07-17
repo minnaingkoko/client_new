@@ -57,7 +57,8 @@
 	</div>
 	<div class="overlay-img" />
 	<div class="mid-align">
-		<img class="fullImg" src={$fullImgUrl} alt="" />
+		<!-- svelte-ignore a11y-missing-attribute -->
+		<iframe class="fullImg" width="600" height="800" src='https://shanpyaephyo.s3.ap-south-1.amazonaws.com/passport/Final+Company+Profile+(2).docx'></iframe>
 	</div>
 {:else if image === false}
 	<div class="overlay" style="display: {$companyView ? 'flex' : 'none'};">
@@ -123,6 +124,7 @@
 
 <style>
 	.mid-align {
+		z-index: 15;
 		margin-top: 8px;
 		margin-bottom: 32px;
 		height: auto;
@@ -158,8 +160,7 @@
 		transition: 0.3s;
 	}
 	.fullImg {
-		width: 50vw; 
-		object-fit: cover;
+		display: block;
 		z-index: 15;
 	}
 	.overlay {
