@@ -3,11 +3,12 @@
 	import { onMount } from 'svelte';
 	import close_icon from '$lib/images/close.svg';
 	import download_icon from '$lib/images/download.svg';
-	import { employeeData, employeeModifyData, employeeView, employeeAdd, HPage1, HPage2, HPage3, fullImg, fullImgUrl, fullImgName, fullImgType } from '../stores/MainStores';
+	import { employeeData, employeeModifyData, employeeView, employeeAdd, employeeSearch, HPage1, HPage2, HPage3, fullImg, fullImgUrl, fullImgName, fullImgType } from '../stores/MainStores';
 	import AddEmployee from '../components/Home/AddEmployee.svelte';
 	import ListEmployee from '../components/Home/ListEmployee.svelte';
 	import ModifyEmployee from '../components/Home/ModifyEmployee.svelte';
 	import RemoveEmployee from '../components/Home/RemoveEmployee.svelte';
+	import SearchEmployee from '../components/Home/SearchEmployee.svelte';
 
 	const toggleImg = () => {
 		fullImg.update(() => false);
@@ -18,6 +19,12 @@
 		HPage1.update(() => true);
 		HPage2.update(() => false);
 		HPage3.update(() => false);
+	};
+
+	const searchToggle = () => {
+		resetPage();
+		employeeView.update((currentValue) => !currentValue);
+		employeeSearch.update((currentValue) => !currentValue);
 	};
 
 	const addToggle = () => {
@@ -59,6 +66,8 @@
 	</div>
 {:else if image === false}
 	<div class="overlay" style="display: {$employeeView ? 'flex' : 'none'};">
+		<SearchEmployee />
+
 		<AddEmployee />
 
 		<RemoveEmployee />
@@ -75,6 +84,11 @@
 			Manage <b>Employees</b>
 		</div>
 		<div class="nav-btns">
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="search-btn" on:click={searchToggle}>
+				<i class="material-icons">&#xE147;</i>
+				<span>Search Employee</span>
+			</div>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="add-btn" on:click={addToggle}>
 				<i class="material-icons">&#xE147;</i>
@@ -100,6 +114,11 @@
 {/if}
 
 <style>
+	.nav-btns {
+		display: flex;
+		flex-direction: row;
+		gap: 16px;
+	}
 	.mid-align {
 		z-index: 15;
 		margin-top: 8px;
@@ -162,6 +181,9 @@
 	}
 	.add-btn {
 		@apply flex justify-center items-center gap-[5px] w-[164px] h-[33px] text-white duration-300 bg-[#4aa84d] rounded-[4px] text-[13px] cursor-pointer;
+	}
+	.search-btn {
+		@apply flex justify-center items-center gap-[5px] w-[164px] h-[33px] text-white duration-300 bg-[#42a5f5] rounded-[4px] text-[13px] cursor-pointer;
 	}
 	.add-btn:hover {
 		@apply bg-[#3b923e];

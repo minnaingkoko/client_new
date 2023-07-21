@@ -9,6 +9,7 @@ export const fullImgType = writable('');
 
 export const employeeData = writable<Array<any>>([]);
 
+export const employeeSearch = writable(false);
 export const employeeAdd = writable(false);
 export const employeeView = writable(false);
 
@@ -30,6 +31,7 @@ export const HPage4 = writable(false);
 
 export const companyData = writable<Array<any>>([]);
 
+export const companySearch = writable(false);
 export const companyAdd = writable(false);
 export const companyView = writable(false);
 

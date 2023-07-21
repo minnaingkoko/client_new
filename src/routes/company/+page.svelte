@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CompanyData from '../../components/Company/CompanyData.svelte';
 	import { onMount } from 'svelte';
-	import { employeeData, companyData, companyModifyData, companyView, employeeView, companyAdd, CPage1, CPage2, CPage3, assign, fullImg, fullImgUrl, fullImgName } from '../../stores/MainStores';
+	import { employeeData, companyData, companyModifyData, companyView, employeeView, companyAdd, companySearch, CPage1, CPage2, CPage3, assign, fullImg, fullImgUrl, fullImgName } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 	import download_icon from '$lib/images/download.svg';
 	import AddCompany from '../../components/Company/AddCompany.svelte';
@@ -26,6 +26,12 @@
 		CPage1.update(() => true);
 		CPage2.update(() => false);
 		CPage3.update(() => false);
+	};
+
+	const searchToggle = () => {
+		resetPage();
+		companyView.update((currentValue) => !currentValue);
+		companySearch.update((currentValue) => !currentValue);
 	};
 
 	const addToggle = () => {
@@ -86,6 +92,11 @@
 			{/if}
 		</div>
 		<div class="nav-btns">
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="search-btn" on:click={searchToggle}>
+				<i class="material-icons">&#xE147;</i>
+				<span>Search Company</span>
+			</div>
 			{#if $assign}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div class="add-btn" on:click={assignEmployee}>
@@ -123,6 +134,14 @@
 {/if}
 
 <style>
+	.nav-btns {
+		display: flex;
+		flex-direction: row;
+		gap: 16px;
+	}
+	.search-btn {
+		@apply flex justify-center items-center gap-[5px] w-[164px] h-[33px] text-white duration-300 bg-[#42a5f5] rounded-[4px] text-[13px] cursor-pointer;
+	}
 	.mid-align {
 		z-index: 15;
 		margin-top: 8px;
