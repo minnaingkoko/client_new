@@ -42,11 +42,11 @@
 
 	onMount(async () => {
 		// Fetch data from MongoDB
-		const response1 = await fetch('http://localhost:3000/api/companyInfo');
+		const response1 = await fetch('https://shan-pyae-phyo.onrender.com/api/companyInfo');
 		const data1 = await response1.json();
 		companyData.set(data1);
 
-		const response = await fetch('http://localhost:3000/api/employeeInfo');
+		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/employeeInfo');
 		const data = await response.json();
 		employeeData.set(data);
 	});

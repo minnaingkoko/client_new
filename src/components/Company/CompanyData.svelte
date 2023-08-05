@@ -5,7 +5,7 @@
 	import { companyData, companyView, companyModify, companyModifyData, companyRemove, companyRemove_id, companyList, companyList_id, assignSingle } from '../../stores/MainStores';
 
 	const listToggle = async (value: any) => {
-		const response = await fetch('http://localhost:3000/api/companySingleInfo', {
+		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companySingleInfo', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -24,7 +24,7 @@
 	};
 
 	const modifyPost = async (value: any) => {
-		const response = await fetch('http://localhost:3000/api/companyModify', {
+		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companyModify', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

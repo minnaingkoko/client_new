@@ -87,7 +87,7 @@
 	const addRequest = async () => {
 		companyData.employees = $assignData;
 		console.log(companyData.employees);
-		const response = await fetch('http://localhost:3000/api/companyUpload', {
+		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companyUpload', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

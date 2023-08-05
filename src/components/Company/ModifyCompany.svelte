@@ -35,7 +35,7 @@
 	$: company = $companyModifyData;
 
 	const modifyRequest = async (value: any) => {
-		const response = await fetch('http://localhost:3000/api/companyModifyRequest', {
+		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companyModifyRequest', {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
