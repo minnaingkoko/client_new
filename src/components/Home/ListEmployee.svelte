@@ -3,26 +3,7 @@
 	import close_icon from '$lib/images/close.svg';
 	import EmployeeTextData from './EmployeeTextData.svelte';
 	import EmployeeScanData from './EmployeeScanData.svelte';
-
-	const resetPage = () => {
-		HPage1.update(() => true);
-		HPage2.update(() => false);
-		HPage3.update(() => false);
-	};
-
-	const listToggle = (value: any) => {
-		resetPage();
-		employeeList_id.update(() => value);
-		employeeView.update((currentValue) => !currentValue);
-		employeeList.update((currentValue) => !currentValue);
-	};
-
-	const fullImage = (url: any, name: any, typ:any) => {
-		fullImg.update((currentValue) => !currentValue);
-		fullImgUrl.update(() => url)
-		fullImgName.update(() => name)
-		fullImgType.update(() => typ)
-	}
+	import { listToggle, fullImage } from '../Shared/EmployeeFunction.svelte';
 
 	const Next = () => {
 		if ($HPage1 === true && $HPage2 === false && $HPage3 === false && $HPage4 === false) {

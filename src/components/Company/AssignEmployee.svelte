@@ -34,7 +34,7 @@
 		<!-- <div class="col13">Agent</div> -->
 		<div class="col14">Actions</div>
 	</div>
-	<div class="hr" />
+	<div class="w-[100%] h-[2px] bg-[#e9e9e9]" />
 	<ul>
 		{#each $employeeData as data, index}
 			<div class={index % 2 === 0 ? 'row-alt' : 'row'}>
@@ -64,7 +64,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="hr" />
+			<div class="w-[100%] h-[2px] bg-[#e9e9e9]" />
 		{/each}
 	</ul>
 </div>
@@ -72,11 +72,6 @@
 <style>
 	.employees_data {
 		color: black;
-	}
-	.hr {
-		width: 100%;
-		height: 2px;
-		background-color: #e9e9e9;
 	}
 	.cb {
 		margin: 0;

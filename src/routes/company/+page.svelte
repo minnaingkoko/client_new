@@ -1,6 +1,7 @@
 <script lang="ts">
 	import CompanyData from '../../components/Company/CompanyData.svelte';
 	import { onMount } from 'svelte';
+	import { toggleImg, assignEmployee, searchToggle, addToggle } from '../../components/Shared/CompanyFunction.svelte';
 	import { employeeData, companyData, companyModifyData, companyView, employeeView, companyAdd, companySearch, CPage1, CPage2, CPage3, assign, fullImg, fullImgUrl, fullImgName } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 	import download_icon from '$lib/images/download.svg';
@@ -10,35 +11,6 @@
 	import ModifyCompany from '../../components/Company/ModifyCompany.svelte';
 	import AssignEmployee from '../../components/Company/AssignEmployee.svelte';
 	import ListEmployee from '../../components/Home/ListEmployee.svelte';
-
-	const toggleImg = () => {
-		fullImg.update(() => false);
-		fullImgUrl.update(() => '');
-	};
-
-	const assignEmployee = async () => {
-		assign.update((assign) => !assign);
-		companyView.update(() => true);
-		companyAdd.update(() => true);
-	};
-
-	const resetPage = () => {
-		CPage1.update(() => true);
-		CPage2.update(() => false);
-		CPage3.update(() => false);
-	};
-
-	const searchToggle = () => {
-		resetPage();
-		companyView.update((currentValue) => !currentValue);
-		companySearch.update((currentValue) => !currentValue);
-	};
-
-	const addToggle = () => {
-		resetPage();
-		companyView.update((currentValue) => !currentValue);
-		companyAdd.update((currentValue) => !currentValue);
-	};
 
 	onMount(async () => {
 		// Fetch data from MongoDB
