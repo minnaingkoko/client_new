@@ -5,7 +5,6 @@
 	import { companyData, companyView, companyModify, companyModifyData, companyRemove, companyRemove_id, companyList, companyList_id, assignSingle } from '../../stores/MainStores';
 
 	const listToggle = async (value: any) => {
-		console.log(value);
 		const response = await fetch('http://localhost:3000/api/companySingleInfo', {
 			method: 'POST',
 			headers: {
@@ -15,19 +14,10 @@
 		});
 
 		const data = await response.json();
-		
-		const responseNew = await fetch('http://localhost:3000/api/employeeSingleInfo', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ idNo: data.employees[0] })
-		});
 
-		const dataNew = await responseNew.json();
 		console.log(data);
 
-		assignSingle.set(dataNew);
+		assignSingle.set(data);
 		companyList_id.update(() => value);
 		companyView.update((currentValue) => !currentValue);
 		companyList.update((currentValue) => !currentValue);

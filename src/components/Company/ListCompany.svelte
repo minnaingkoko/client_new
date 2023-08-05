@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { companyData, companyView, companyList, companyList_id, CPage1, CPage2, CPage3, fullImg, fullImgUrl, fullImgName, assignSingle } from '../../stores/MainStores';
+	import { companyData, companyView, companyList, companyList_id, CPage1, CPage2, CPage3, assignSingle } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
-	import download_icon from '$lib/images/download.svg';
-	import visibility_icon from '$lib/images/visibility.svg';
+	import CompanyScanData from './CompanyScanData.svelte';
+	import CompanyTextData from './CompanyTextData.svelte';
 
 	$: assign = $assignSingle;
 
@@ -18,29 +18,6 @@
 		companyView.update((currentValue) => !currentValue);
 		companyList.update((currentValue) => !currentValue);
 	};
-
-	const Next = () => {
-		if ($CPage1 === true && $CPage2 === false && $CPage3 === false) {
-			CPage1.update(() => false);
-			CPage2.update(() => true);
-		} else if ($CPage1 === false && $CPage2 === true && $CPage3 === false) {
-			CPage2.update(() => false);
-			CPage3.update(() => true);
-		}
-	};
-
-	const Previous = () => {
-		if ($CPage1 === false && $CPage2 === true) {
-			CPage1.update(() => true);
-			CPage2.update(() => false);
-		}
-	};
-
-	const fullImage = (url: any, name: any) => {
-		fullImg.update((currentValue) => !currentValue);
-		fullImgUrl.update(() => url)
-		fullImgName.update(() => name)
-	}
 </script>
 
 {#if assign}
@@ -48,138 +25,43 @@
 	<div class="addForm-heading">
 		<div class="text">Company's Data</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="close" on:click={listToggle}>
+		<div class="cursor-pointer" on:click={listToggle}>
 			<img src={close_icon} alt="" width="24px" height="24px" />
 		</div>
 	</div>
 	<hr />
 	{#each $companyData as data, index}
 		{#if data._id === $companyList_id}
-			<form class="addForm">
+			<form class="flex flex-col gap-[16px] mt-[20px] mb-[95px]">
 				{#if $CPage1}
-				<div class="collect">
-					<label for="companyName">Company Name:</label>
-					<div>{data.companyName}</div>
+				<CompanyTextData text="Company Name:" value={data.companyName} />
+
+				<CompanyTextData text="Post Code:" value={data.postCode} />
+
+				<div class="flex pl-[30px] pr-[30px] w-[100%] justify-between text-[14px]">
+					<label class="w-[130px]" for="demandTotal">Demand Total:</label>
+					<div class="w-[160px]">M-{data.demandTotal.male}/ F-{data.demandTotal.female}</div>
 				</div>
 
-				<div class="collect">
-					<label for="companyAddress">Company Address:</label>
-					<div>{data.companyAddress}</div>
-				</div>
+				<CompanyTextData text="Company Phone Number:" value={data.companyPhNo} />
 
-				<div class="collect">
-					<label for="postCode">Post Code:</label>
-					<div>{data.postCode}</div>
-				</div>
+				<CompanyTextData text="Employees:" value={assign.companyName} />
 
-				<div class="collect">
-					<label for="demandTotal">Demand Total:</label>
-					<div>M-{data.demandTotal.male}/ F-{data.demandTotal.female}</div>
-				</div>
+				<CompanyScanData text="Passport Scan:" s3URL={data.demandLetterScanData.s3URL} filename={data.demandLetterScanData.filename} />
 
-				<div class="collect">
-					<label for="companyPhNo">Company Phone Number:</label>
-					<div>{data.companyPhNo}</div>
-				</div>
+				<CompanyScanData text="KSM Scan:" s3URL={data.KSMScanData.s3URL} filename={data.KSMScanData.filename} />
 
-				<div class="collect">
-					<label for="employees">Employees:</label>
-					<div>{assign.name}</div>
-				</div>
+				<CompanyScanData text="Company Profile Scan:" s3URL={data.companyProfileScanData.s3URL} filename={data.companyProfileScanData.filename} />
 
-				<div class="collect p-scan">
-					<label for="passportScan">Passport Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.demandLetterScanData.s3URL,data.demandLetterScanData.filename)} >
-						</div>
-						<div class="p-btn">
-							<a href={data.demandLetterScanData.s3URL} download={data.demandLetterScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
+				<CompanyScanData text="Calling Copy Scan:" s3URL={data.callingCopyScanData.s3URL} filename={data.callingCopyScanData.filename} />
 
-				<div class="collect p-scan">
-					<label for="passportScan">KSM Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.KSMScanData.s3URL,data.KSMScanData.filename)} >
-						</div>
-						<div class="p-btn">
-							<a href={data.KSMScanData.s3URL} download={data.KSMScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
+				<CompanyScanData text="Calling Original Scan:" s3URL={data.callingOrgScanData.s3URL} filename={data.callingOrgScanData.filename} />
 
-				<div class="collect p-scan">
-					<label for="passportScan">Company Profile Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.companyProfileScanData.s3URL,data.companyProfileScanData.filename)} >
-						</div>
-						<div class="p-btn">
-							<a href={data.companyProfileScanData.s3URL} download={data.companyProfileScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
+				<CompanyScanData text="Notary Scan:" s3URL={data.notaryScanData.s3URL} filename={data.notaryScanData.filename} />
 
-				<div class="collect p-scan">
-					<label for="passportScan">Calling Copy Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.callingCopyScanData.s3URL,data.callingCopyScanData.filename)} >
-						</div>
-						<div class="p-btn">
-							<a href={data.callingCopyScanData.s3URL} download={data.callingCopyScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="collect p-scan">
-					<label for="passportScan">Calling Original Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.callingOrgScanData.s3URL,data.callingOrgScanData.filename)} >
-						</div>
-						<div class="p-btn">
-							<a href={data.callingOrgScanData.s3URL} download={data.callingOrgScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="collect p-scan">
-					<label for="passportScan">Notary Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.notaryScanData.s3URL,data.notaryScanData.filename)} >
-						</div>
-						<div class="p-btn">
-							<a href={data.notaryScanData.s3URL} download={data.notaryScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="addForm-bot">
+				<div class="addForm-bot absolute bottom-0 bg-[#e5e5e5] w-[100%] h-[75px] flex justify-end items-center gap-[12px] rounded-[4px]">
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<div class="cancel-btn" on:click={listToggle}>Cancel</div>
+					<div class="bg-white flex justify-center items-center w-[100px] h-[33px] cursor-pointer" on:click={listToggle}>Cancel</div>
 				</div>
 				{/if}
 			</form>
@@ -191,45 +73,9 @@
 {/if}
 
 <style>
-	.cancel-btn {
-		@apply bg-white;
-	}
-	.next-btn {
-		@apply bg-[#4aa84d] text-white;
-	}
-	.p-scan {
-		@apply flex flex-row;
-	}
-	.p-btns {
-		@apply flex flex-row gap-[16px];
-	}
-	.p-btn {
-		@apply flex flex-row justify-between items-center cursor-pointer;
-	}
-	.image-f {
-		@apply w-[50px] h-[50px];
-	}
-	.addForm {
-		@apply flex flex-col gap-[16px];
-	}
-	.collect {
-		@apply flex pl-[30px] pr-[30px] w-[100%] justify-between text-[14px];
-	}
-	.collect label {
-		@apply w-[130px];
-	}
-	.collect > div {
-		@apply w-[160px];
-	}
-	.close {
-		@apply cursor-pointer;
-	}
 	.list-data {
 		@apply absolute top-[30px] w-[400px] bg-white z-[12] rounded-[4px];
 		height: calc(100vh - 60px);
-	}
-	.cancel-btn {
-		@apply bg-white;
 	}
 	.addForm-heading {
 		@apply w-[100%] h-[66px] flex flex-row justify-between items-center text-[18px] font-[500] text-black;
@@ -237,17 +83,7 @@
 		padding: 0 30px;
 	}
 	.addForm-bot {
-		@apply flex justify-end items-center gap-[12px] rounded-[4px];
-		padding: 0 30px;
-	}
-	.addForm-bot div {
-		@apply flex justify-center items-center w-[100px] h-[33px] cursor-pointer;
-	}
-	.addForm-bot {
-		@apply absolute bottom-0 bg-[#e5e5e5] w-[100%] h-[75px];
 		border-radius: 0 0 4px 4px;
-	}
-	.addForm {
-		@apply flex flex-col mt-[20px] mb-[95px];
+		padding: 0 30px;
 	}
 </style>
