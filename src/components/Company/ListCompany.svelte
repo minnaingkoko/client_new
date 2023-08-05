@@ -47,17 +47,17 @@
 
 				<CompanyTextData text="Employees:" value={assign.companyName} />
 
-				<CompanyScanData text="Passport Scan:" s3URL={data.demandLetterScanData.s3URL} filename={data.demandLetterScanData.filename} />
+				<CompanyScanData text="Demand Letter Scan:" value={data.demandLetterScanData}/>
 
-				<CompanyScanData text="KSM Scan:" s3URL={data.KSMScanData.s3URL} filename={data.KSMScanData.filename} />
+				<CompanyScanData text="KSM Scan:" value={data.KSMScanData} />
 
-				<CompanyScanData text="Company Profile Scan:" s3URL={data.companyProfileScanData.s3URL} filename={data.companyProfileScanData.filename} />
+				<CompanyScanData text="Company Profile Scan:" value={data.companyProfileScanData} />
 
-				<CompanyScanData text="Calling Copy Scan:" s3URL={data.callingCopyScanData.s3URL} filename={data.callingCopyScanData.filename} />
+				<CompanyScanData text="Calling Copy Scan:" value={data.callingCopyScanData} />
 
-				<CompanyScanData text="Calling Original Scan:" s3URL={data.callingOrgScanData.s3URL} filename={data.callingOrgScanData.filename} />
+				<CompanyScanData text="Calling Original Scan:" value={data.callingOrgScanData} />
 
-				<CompanyScanData text="Notary Scan:" s3URL={data.notaryScanData.s3URL} filename={data.notaryScanData.filename} />
+				<CompanyScanData text="Notary Scan:" value={data.notaryScanData} />
 
 				<div class="addForm-bot absolute bottom-0 bg-[#e5e5e5] w-[100%] h-[75px] flex justify-end items-center gap-[12px] rounded-[4px]">
 					<!-- svelte-ignore a11y-click-events-have-key-events -->

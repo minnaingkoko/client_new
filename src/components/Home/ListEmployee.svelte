@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { employeeData, employeeView, employeeList, employeeList_id, HPage1, HPage2, HPage3, HPage4, fullImg, fullImgUrl, fullImgName, fullImgType } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
-	import download_icon from '$lib/images/download.svg';
-	import visibility_icon from '$lib/images/visibility.svg';
+	import EmployeeTextData from './EmployeeTextData.svelte';
+	import EmployeeScanData from './EmployeeScanData.svelte';
 
 	const resetPage = () => {
 		HPage1.update(() => true);
@@ -51,303 +51,76 @@
 	};
 </script>
 
-<div class="list-data" style="display: {$employeeList ? 'block' : 'none'};">
-	<div class="addForm-heading">
+<div class="list-data absolute top-[30px] w-[400px] bg-white z-[12] rounded-[4px]" style="display: {$employeeList ? 'block' : 'none'};">
+	<div class="addForm-heading w-[100%] h-[66px] flex flex-row justify-between items-center text-[18px] font-[500] text-black">
 		<div class="text">Employee's Data</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="close" on:click={listToggle}>
+		<div class="cursor-pointer" on:click={listToggle}>
 			<img src={close_icon} alt="" width="24px" height="24px" />
 		</div>
 	</div>
 	<hr />
 	{#each $employeeData as data, index}
 		{#if data._id === $employeeList_id}
-			<form class="addForm">
+			<form class="flex flex-col gap-[16px] mt-[20px] mb-[95px]">
 				{#if $HPage1}
-				<div class="collect">
-					<label for="name">Name:</label>
-					<div>{data.name}</div>
-				</div>
-
-				<div class="collect">
-					<label for="motherName">Mother Name:</label>
-					<div>{data.motherName}</div>
-				</div>
-
-				<div class="collect">
-					<label for="fatherName">Father Name:</label>
-					<div>{data.fatherName}</div>
-				</div>
-
-				<div class="collect">
-					<label for="address">Address:</label>
-					<div>{data.address}</div>
-				</div>
-
-				<div class="collect">
-					<label for="phNo">Phone Number:</label>
-					<div>{data.phNo}</div>
-				</div>
-
-				<div class="collect">
-					<label for="nrcNo">NRC No:</label>
-					<div>{data.nrcNo}</div>
-				</div>
-
-				<div class="collect">
-					<label for="religion">Religion:</label>
-					<div>{data.religion}</div>
-				</div>
-
-				<div class="collect">
-					<label for="agent">Agent:</label>
-					<div>{data.agent}</div>
-				</div>
-
-				<div class="collect">
-					<label for="gender">Gender:</label>
-					<div>{data.gender}</div>
-				</div>
-
-				<div class="collect">
-					<label for="passport">Passport:</label>
-					<div>{data.passport}</div>
-				</div>
-
-				<div class="collect">
-					<label for="dob">Date of Birth:</label>
-					<div>{data.dobString}</div>
-				</div>
-
-				<div class="collect">
-					<label for="weight">Weight (kg):</label>
-					<div>{data.weight}</div>
-				</div>
-
-				<div class="collect">
-					<label for="height">Height (cm):</label>
-					<div>{data.height}</div>
-				</div>
-
-				<div class="collect">
-					<label for="marital">Marital Status:</label>
-					<div>{data.marital}</div>
-				</div>
-
-				<div class="collect">
-					<label for="education">Education:</label>
-					<div>{data.education}</div>
-				</div>
+				<EmployeeTextData text="Name:" value={data.name} />
+				<EmployeeTextData text="Mother Name:" value={data.motherName} />
+				<EmployeeTextData text="Father Name:" value={data.fatherName} />
+				<EmployeeTextData text="Address:" value={data.address} />
+				<EmployeeTextData text="Phone Number:" value={data.phNo} />
+				<EmployeeTextData text="NRC No:" value={data.nrcNo} />
+				<EmployeeTextData text="Religion:" value={data.religion} />
+				<EmployeeTextData text="Agent:" value={data.agent} />
+				<EmployeeTextData text="Gender:" value={data.gender} />
+				<EmployeeTextData text="Passport:" value={data.passport} />
+				<EmployeeTextData text="Date of Birth:" value={data.dobString} />
+				<EmployeeTextData text="Weight (kg):" value={data.weight} />
+				<EmployeeTextData text="Height (cm):" value={data.height} />
+				<EmployeeTextData text="Marital Status:" value={data.marital} />
+				<EmployeeTextData text="Education:" value={data.education} />
 				{/if}
 
 				{#if $HPage2}
-				<div class="collect">
-					<label for="experience">Experience:</label>
-					<div>{data.experience}</div>
-				</div>
-
-				<div class="collect">
-					<label for="workedCountry">Worked Country:</label>
-					<div>{data.workedCountry}</div>
-				</div>
-
-				<div class="collect">
-					<label for="spokenLanguage">Spoken Language:</label>
-					<div>{data.spokenLanguage}</div>
-				</div>
-
-				<div class="collect p-scan">
-					<label for="passportScan">Passport Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.passportScanData.s3URL,data.passportScanData.filename,data.passportScanData.contentType)} >
-						</div>
-						<div class="p-btn">
-							<a href={data.passportScanData.s3URL} download={data.passportScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="collect p-scan">
-					<label for="passportScan">NRC Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.nrcScanData.s3URL,data.nrcScanData.filename,data.nrcScanData.contentType)}>
-						</div>
-						<div class="p-btn">
-							<a href={data.nrcScanData.s3URL} download={data.nrcScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="collect p-scan">
-					<label for="passportScan">Vaccine Notary Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.vaccineNotaryScanData.s3URL,data.vaccineNotaryScanData.filename,data.vaccineNotaryScanData.contentType)}>
-						</div>
-						<div class="p-btn">
-							<a href={data.vaccineNotaryScanData.s3URL} download={data.vaccineNotaryScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="collect p-scan">
-					<label for="passportScan">Medical Online Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.medicalOnlineScanData.s3URL,data.medicalOnlineScanData.filename,data.medicalOnlineScanData.contentType)}>
-						</div>
-						<div class="p-btn">
-							<a href={data.medicalOnlineScanData.s3URL} download={data.medicalOnlineScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="collect p-scan">
-					<label for="passportScan">Training Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.trainingScanData.s3URL,data.trainingScanData.filename,data.trainingScanData.contentType)}>
-						</div>
-						<div class="p-btn">
-							<a href={data.trainingScanData.s3URL} download={data.trainingScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="collect p-scan">
-					<label for="passportScan">AirTicket Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.airTicketScanData.s3URL,data.airTicketScanData.filename,data.airTicketScanData.contentType)}>
-						</div>
-						<div class="p-btn">
-							<a href={data.airTicketScanData.s3URL} download={data.airTicketScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="collect p-scan">
-					<label for="passportScan">Visa Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.visaScanData.s3URL,data.visaScanData.filename,data.visaScanData.contentType)}>
-						</div>
-						<div class="p-btn">
-							<a href={data.visaScanData.s3URL} download={data.visaScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="collect p-scan">
-					<label for="passportScan">Smart Card Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.smartCardScanData.s3URL,data.smartCardScanData.filename,data.smartCardScanData.contentType)}>
-						</div>
-						<div class="p-btn">
-							<a href={data.smartCardScanData.s3URL} download={data.smartCardScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="collect p-scan">
-					<label for="passportScan">Family Data Scan:</label>
-					<div class="p-btns">
-						<div class="p-btn">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<img src={visibility_icon} alt="" width="22px" height="22px" on:click={() => fullImage(data.familyDataScanData.s3URL,data.familyDataScanData.filename,data.familyDataScanData.contentType)}>
-						</div>
-						<div class="p-btn">
-							<a href={data.familyDataScanData.s3URL} download={data.familyDataScanData.filename}>
-								<img src={download_icon} alt="" width="24px" height="24px" />
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="collect">
-					<label for="deposit">Deposit:</label>
-					<div>{data.deposit}</div>
-				</div>
-
-				<div class="collect">
-					<label for="applyDate">Apply Date:</label>
-					<div>{data.applyDate}</div>
-				</div>
-
-				<div class="collect">
-					<label for="passportExpireDate">Passport Expire Date:</label>
-					<div>{data.passportExpireDate}</div>
-				</div>
+				<EmployeeTextData text="Experience:" value={data.experience} />
+				<EmployeeTextData text="Worked Country:" value={data.workedCountry} />
+				<EmployeeTextData text="Spoken Language:" value={data.spokenLanguage} />
+				<EmployeeScanData text="Passport Scan:" value={data.passportScanData} />
+				<EmployeeScanData text="NRC Scan:" value={data.nrcScanData} />
+				<EmployeeScanData text="Vaccine Notary Scan:" value={data.vaccineNotaryScanData} />
+				<EmployeeScanData text="Medical Online Scan:" value={data.medicalOnlineScanData} />
+				<EmployeeScanData text="Training Scan:" value={data.trainingScanData} />
+				<EmployeeScanData text="AirTicket Scan:" value={data.airTicketScanData} />
+				<EmployeeScanData text="Visa Scan:" value={data.visaScanData} />
+				<EmployeeScanData text="Smart Card Scan:" value={data.smartCardScanData} />
+				<EmployeeScanData text="Family Data Scan:" value={data.familyDataScanData} />
+				<EmployeeTextData text="Deposit:" value={data.deposit} />
+				<EmployeeTextData text="Apply Date:" value={data.applyDate} />
+				<EmployeeTextData text="Passport Expire Date:" value={data.passportExpireDate} />
 				{/if}
 
 				{#if $HPage3}
-				<div class="collect">
-					<label for="passportType">Passport Type:</label>
-					<div>{data.passportType}</div>
-				</div>
-
-				<div class="collect">
-					<label for="medicalOnlineExpire">Medical Online Expire:</label>
-					<div>{data.medicalOnlineExpire}</div>
-				</div>
-
-				<div class="collect">
-					<label for="smartCardNo">Smart Card No:</label>
-					<div>{data.smartCardNo}</div>
-				</div>
-
-				<div class="collect">
-					<label for="airPlaneNo">AirPlane No:</label>
-					<div>{data.airPlaneNo}</div>
-				</div>
-
-				<div class="collect">
-					<label for="departureDate">Departure Date:</label>
-					<div>{data.departureDate}</div>
-				</div>
+				<EmployeeTextData text="Passport Type:" value={data.passportType} />
+				<EmployeeTextData text="Medical Online Expire:" value={data.medicalOnlineExpire} />
+				<EmployeeTextData text="Smart Card No:" value={data.smartCardNo} />
+				<EmployeeTextData text="AirPlane No:" value={data.airPlaneNo} />
+				<EmployeeTextData text="Departure Date:" value={data.departureDate} />
 				{/if}
 
-				<div class="addForm-bot">
+				<div class="addForm-bot flex justify-end items-center gap-[12px] rounded-[4px] absolute bottom-0 bg-[#e5e5e5] w-[100%] h-[75px]">
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					{#if $HPage1 === true}
 						<div />
 					{:else if $HPage1 === false}
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<div class="next-btn" on:click={Previous}>Previous</div>
+						<div class="bg-[#4aa84d] text-white flex justify-center items-center w-[100px] h-[33px] cursor-pointer" on:click={Previous}>Previous</div>
 					{/if}
 					{#if $HPage3 === true}
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<div class="cancel-btn" on:click={listToggle}>Cancel</div>
+						<div class="bg-white flex justify-center items-center w-[100px] h-[33px] cursor-pointer" on:click={listToggle}>Cancel</div>
 					{:else if $HPage3 === false}
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<div class="next-btn" on:click={Next}>Next</div>
+						<div class="bg-[#4aa84d] text-white flex justify-center items-center w-[100px] h-[33px] cursor-pointer" on:click={Next}>Next</div>
 					{/if}
 				</div>
 			</form>
@@ -358,60 +131,15 @@
 </div>
 
 <style>
-	.next-btn {
-		@apply bg-[#4aa84d] text-white;
-	}
-	.p-scan {
-		@apply flex flex-row;
-	}
-	.p-btns {
-		@apply flex flex-row gap-[16px];
-	}
-	.p-btn {
-		@apply flex flex-row justify-between items-center;
-	}
-	.image-f {
-		@apply w-[50px] h-[50px];
-	}
-	.addForm {
-		@apply flex flex-col gap-[16px];
-	}
-	.collect {
-		@apply flex pl-[30px] pr-[30px] w-[100%] justify-between text-[14px];
-	}
-	.collect label {
-		@apply w-[130px];
-	}
-	.collect > div {
-		@apply w-[160px];
-	}
-	.close {
-		@apply cursor-pointer;
-	}
 	.list-data {
-		@apply absolute top-[30px] w-[400px] bg-white z-[12] rounded-[4px];
 		height: calc(100vh - 60px);
 	}
-	.cancel-btn {
-		@apply bg-white;
-	}
 	.addForm-heading {
-		@apply w-[100%] h-[66px] flex flex-row justify-between items-center text-[18px] font-[500] text-black;
 		border-radius: 4px 4px 0 0;
 		padding: 0 30px;
 	}
 	.addForm-bot {
-		@apply flex justify-end items-center gap-[12px] rounded-[4px];
 		padding: 0 30px;
-	}
-	.addForm-bot div {
-		@apply flex justify-center items-center w-[100px] h-[33px] cursor-pointer;
-	}
-	.addForm-bot {
-		@apply absolute bottom-0 bg-[#e5e5e5] w-[100%] h-[75px];
 		border-radius: 0 0 4px 4px;
-	}
-	.addForm {
-		@apply flex flex-col mt-[20px] mb-[95px];
 	}
 </style>
