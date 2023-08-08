@@ -1,8 +1,20 @@
 <script lang="ts">
 	import visibility_icon from '$lib/images/visibility.svg';
 	import done_icon from '$lib/images/done.svg';
-	import { employeeData } from '../../stores/MainStores';
-	import { listToggle, assignToggle } from '../Shared/CompanyFunction.svelte';
+	import { employeeData, employeeView, employeeList, employeeList_id, assignData } from '../../stores/MainStores';
+
+	const listToggle = (value: any) => {
+		employeeList_id.update(() => value);
+		employeeView.update((currentValue) => !currentValue);
+		employeeList.update((currentValue) => !currentValue);
+	};
+
+	const assignToggle = (value: any) => {
+		if ($assignData.includes(value)) {
+			return;
+  		}
+		$assignData = [...$assignData, value];
+	};
 </script>
 
 <div class="employees_data">
