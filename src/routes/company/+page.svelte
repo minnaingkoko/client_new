@@ -15,7 +15,6 @@
 
 	const manageEmployees = () => {
 		goto('/');
-		location.reload();
 	}
 
 	onMount(async () => {

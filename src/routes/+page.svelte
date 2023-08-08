@@ -14,7 +14,6 @@
 
 	const manageCompanies = () => {
 		goto('/company');
-		location.reload();
 	}
 
 	onMount(async () => {
