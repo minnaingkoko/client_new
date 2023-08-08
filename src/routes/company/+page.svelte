@@ -12,6 +12,9 @@
 	import ModifyCompany from '../../components/Company/ModifyCompany.svelte';
 	import AssignEmployee from '../../components/Company/AssignEmployee.svelte';
 	import ListEmployee from '../../components/Home/ListEmployee.svelte';
+	import add_icon from '$lib/images/add_circle.svg';
+	import search_icon from '$lib/images/search.svg';
+	import edit_icon from '$lib/images/edit_alt.svg';
 
 	const manageEmployees = () => {
 		goto('/');
@@ -72,25 +75,25 @@
 			{#if !$assign}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="flex justify-center items-center gap-[5px] w-[164px] h-[33px] text-white duration-300 bg-[#F9A826] rounded-[4px] text-[13px] cursor-pointer" on:click={manageEmployees}>
-				<i class="material-icons">&#xE147;</i>
+				<img class="edit" src={edit_icon} alt="" width="20px" height="20px" />
 				<span>Manage Employees</span>
 			</div>
 			{/if}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="search-btn" on:click={searchToggle}>
-				<i class="material-icons">&#xE147;</i>
+				<img class="edit" src={search_icon} alt="" width="20px" height="20px" />
 				<span>Search Company</span>
 			</div>
 			{#if $assign}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div class="add-btn" on:click={assignEmployee}>
-					<i class="material-icons">&#xE147;</i>
+					<img class="edit" src={add_icon} alt="" width="20px" height="20px" />
 					<span>Finish Assign</span>
 				</div>
 			{:else}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div class="add-btn" on:click={addToggle}>
-					<i class="material-icons">&#xE147;</i>
+					<img class="edit" src={add_icon} alt="" width="20px" height="20px" />
 					<span>Add New Company</span>
 				</div>
 			{/if}

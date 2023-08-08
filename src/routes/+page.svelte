@@ -11,6 +11,9 @@
 	import ModifyEmployee from '../components/Home/ModifyEmployee.svelte';
 	import RemoveEmployee from '../components/Home/RemoveEmployee.svelte';
 	import SearchEmployee from '../components/Home/SearchEmployee.svelte';
+	import add_icon from '$lib/images/add_circle.svg';
+	import search_icon from '$lib/images/search.svg';
+	import edit_icon from '$lib/images/edit_alt.svg';
 
 	const manageCompanies = () => {
 		goto('/company');
@@ -69,17 +72,17 @@
 		<div class="flex flex-row gap-[16px]">
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="flex justify-center items-center gap-[5px] w-[164px] h-[33px] text-white duration-300 bg-[#F9A826] rounded-[4px] text-[13px] cursor-pointer" on:click={manageCompanies}>
-				<i class="material-icons">&#xE147;</i>
+				<img class="edit" src={edit_icon} alt="" width="20px" height="20px" />
 				<span>Manage Companies</span>
 			</div>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="flex justify-center items-center gap-[5px] w-[164px] h-[33px] text-white duration-300 bg-[#42a5f5] rounded-[4px] text-[13px] cursor-pointer" on:click={searchToggle}>
-				<i class="material-icons">&#xE147;</i>
+				<img class="edit" src={search_icon} alt="" width="20px" height="20px" />
 				<span>Search Employee</span>
 			</div>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="hover:bg-[#3b923e] flex justify-center items-center gap-[5px] w-[164px] h-[33px] text-white duration-300 bg-[#4aa84d] rounded-[4px] text-[13px] cursor-pointer" on:click={addToggle}>
-				<i class="material-icons">&#xE147;</i>
+				<img class="edit" src={add_icon} alt="" width="20px" height="20px" />
 				<span>Add New Employee</span>
 			</div>
 		</div>
