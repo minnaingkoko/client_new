@@ -109,29 +109,50 @@
 		border-right: 1px solid #e9e9e9;
 	}
 	.col1 {
-		min-width: 100px;
+		width: 100px;
+		white-space: nowrap; 
+  		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.col2 {
-		min-width: 200px;
+		width: 200px;
+		white-space: nowrap; 
+  		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.col3 {
-		min-width: 170px;
+		width: 170px;
+		white-space: nowrap; 
+  		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.col4 {
-		min-width: 180px;
+		width: 180px;
+		white-space: nowrap; 
+  		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.col5 {
-		min-width: 150px;
+		width: 150px;
+		white-space: nowrap; 
+  		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.col6 {
-		min-width: 200px;
+		width: 200px;
+		white-space: nowrap; 
+  		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.col14 {
 		border-right: 0 !important;
 		display: flex;
 		flex-direction: row;
 		gap: 8px;
-		min-width: 120px;
+		width: 120px;
+		white-space: nowrap; 
+  		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.visibility,
 	.edit,

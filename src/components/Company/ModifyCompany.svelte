@@ -37,6 +37,7 @@
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- <div class="add-employee" on:click={assignEmployee}>Add Employee</div> -->
 			<ModifyTextData text='Company Name:' value='companyName' dataF={company.companyName} />
+			
 			<label class="mg" for="companyName">Company Name:</label>
 			<input class="add_input" bind:value={company.companyName} name="companyName" id="companyName" required />
 
