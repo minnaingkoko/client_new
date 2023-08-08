@@ -80,7 +80,7 @@
 				<div />
 			{:else if $CPage1 === false}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div class="next-btn" on:click={Previous}>Previous</div>
+				<div class="bg-[#42a5f5] text-white" on:click={Previous}>Previous</div>
 			{/if}
 			{#if $CPage2 === true}
 				<button class="submit-btn" type="submit">Submit</button>

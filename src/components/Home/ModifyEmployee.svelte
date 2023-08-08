@@ -136,7 +136,7 @@
 					<div />
 				{:else if $HPage1 === false}
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<div class="bg-[#4aa84d] text-white flex justify-center items-center w-[100px] h-[33px] cursor-pointer" on:click={Previous}>Previous</div>
+					<div class="bg-[#42a5f5] text-white flex justify-center items-center w-[100px] h-[33px] cursor-pointer" on:click={Previous}>Previous</div>
 				{/if}
 				{#if $HPage4 === true}
 					<button class="flex justify-center items-center w-[100px] h-[33px] cursor-pointer border-none bg-[#4aa84d] text-white" type="submit">Submit</button>

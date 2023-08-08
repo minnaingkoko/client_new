@@ -32,8 +32,8 @@
 	export const assignEmployee = async () => {
 		resetPage();
 		assign.update((assign) => !assign);
-		companyView.update(() => true);
-		companyAdd.update(() => true);
+		companyView.update((currentValue) => !currentValue);
+		companyAdd.update((currentValue) => !currentValue);
 	};
 
 	export const searchToggle = () => {

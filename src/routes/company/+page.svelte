@@ -69,11 +69,13 @@
 			{/if}
 		</div>
 		<div class="nav-btns">
+			{#if !$assign}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="flex justify-center items-center gap-[5px] w-[164px] h-[33px] text-white duration-300 bg-[#F9A826] rounded-[4px] text-[13px] cursor-pointer" on:click={manageEmployees}>
 				<i class="material-icons">&#xE147;</i>
 				<span>Manage Employees</span>
 			</div>
+			{/if}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="search-btn" on:click={searchToggle}>
 				<i class="material-icons">&#xE147;</i>
