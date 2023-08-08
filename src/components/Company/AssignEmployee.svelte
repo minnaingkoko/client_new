@@ -151,16 +151,11 @@
 		gap: 8px;
 		min-width: 120px;
 	}
-	.visibility,
-	.edit,
-	.delete,
-	.close {
+	.visibility {
 		cursor: pointer;
 		transition: 0.3s;
 	}
-	.visibility:hover,
-	.edit:hover,
-	.delete:hover {
+	.visibility:hover{
 		opacity: 0.6;
 	}
 </style>

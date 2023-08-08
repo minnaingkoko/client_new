@@ -2,45 +2,8 @@
 	import { employeeModifyData, employeeView, HPage1, HPage2, HPage3, HPage4, employeeModify } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 	import { goto } from '$app/navigation';
-
-	const resetPage = () => {
-		HPage1.update(() => true);
-		HPage2.update(() => false);
-		HPage3.update(() => false);
-		HPage4.update(() => false);
-	};
-
-	const modifyToggle = () => {
-		resetPage();
-		employeeView.update((currentValue) => !currentValue);
-		employeeModify.update((currentValue) => !currentValue);
-	};
-
-	const Next = () => {
-		if ($HPage1 === true && $HPage2 === false && $HPage3 === false && $HPage4 === false) {
-			HPage1.update(() => false);
-			HPage2.update(() => true);
-		} else if ($HPage1 === false && $HPage2 === true && $HPage3 === false && $HPage4 == false) {
-			HPage2.update(() => false);
-			HPage3.update(() => true);
-		} else if ($HPage1 === false && $HPage2 === false && $HPage3 === true && $HPage4 == false) {
-			HPage3.update(() => false);
-			HPage4.update(() => true);
-		}
-	};
-
-	const Previous = () => {
-		if ($HPage4 === true && $HPage1 === false && $HPage2 === false && $HPage3 === false) {
-			HPage4.update(() => false);
-			HPage3.update(() => true);
-		} else if ($HPage3 === true && $HPage1 === false && $HPage2 === false && $HPage4 === false) {
-			HPage3.update(() => false);
-			HPage2.update(() => true);
-		} else if ($HPage2 === true && $HPage1 === false && $HPage3 === false && $HPage4 === false) {
-			HPage2.update(() => false);
-			HPage1.update(() => true);
-		}
-	};
+	import { modifyToggle, Next, Previous } from '../Shared/EmployeeFunction.svelte';
+	import ModifyTextData from './ModifyTextData.svelte';
 
 	$: employee = $employeeModifyData;
 
@@ -60,64 +23,48 @@
 </script>
 
 {#if employee}
-	<div class="add-form" style="display: {$employeeModify ? 'block' : 'none'};">
+	<div class="add-form absolute top-[30px] w-[400px] bg-white z-[12] rounded-[4px]" style="display: {$employeeModify ? 'block' : 'none'};">
 		<div class="addForm-heading">
 			<div class="text">Modify Employee</div>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div class="close" on:click={modifyToggle}>
+			<div class="cursor-pointer" on:click={modifyToggle}>
 				<img src={close_icon} alt="" width="24px" height="24px" />
 			</div>
 		</div>
 		<hr />
-		<form class="addForm" on:submit|preventDefault={() => modifyRequest(employee._id)}>
+		<form class="addForm flex flex-col mt-[20px] mb-[95px]" on:submit|preventDefault={() => modifyRequest(employee._id)}>
 			{#if $HPage1}
-				<label class="mg" for="name">Name:</label>
-				<input class="add_input" type="text" bind:value={employee.name} name="name" id="name" required />
-
-				<label class="mg" for="motherName">Mother Name:</label>
-				<input class="add_input" type="text" bind:value={employee.motherName} name="motherName" id="motherName" />
-
-				<label class="mg" for="fatherName">Father Name:</label>
-				<input class="add_input" type="text" bind:value={employee.fatherName} name="fatherName" id="fatherName" />
-
-				<label class="mg" for="address">Address:</label>
-				<input class="add_input" type="text" bind:value={employee.address} name="address" id="address" />
-
-				<label class="mg" for="phNo">Phone Number:</label>
-				<input class="add_input" type="text" bind:value={employee.phNo} name="phNo" id="phNo" />
-
-				<label class="mg" for="nrcNo">NRC No:</label>
-				<input class="add_input" type="text" bind:value={employee.nrcNo} name="nrcNo" id="nrcNo" />
-
-				<label class="mg" for="religion">Religion:</label>
-				<input class="add_input" type="text" bind:value={employee.religion} name="religion" id="religion" />
-
-				<label class="mg" for="agent">Agent:</label>
-				<input class="add_input" type="text" bind:value={employee.agent} name="agent" id="agent" />
+				<ModifyTextData text="Name:" value="name" />
+				<ModifyTextData text="Mother Name:" value="motherName" />
+				<ModifyTextData text="Father Name:" value="fatherName" />
+				<ModifyTextData text="Address:" value="address" />
+				<ModifyTextData text="Phone Number:" value="phNo" />
+				<ModifyTextData text="NRC No:" value="nrcNo" />
+				<ModifyTextData text="Religion:" value="religion" />
+				<ModifyTextData text="Agent:" value="agent" />
 
 				<label class="mg" for="gender">Gender:</label>
-				<select class="add_input" bind:value={employee.gender}>
+				<select class="ml-[30px] mr-[30px] mb-[15px] h-[34px]" bind:value={employee.gender}>
 					<option value="">Select gender</option>
 					<option value="male">Male</option>
 					<option value="female">Female</option>
 				</select>
 
-				<label class="mg" for="passport">Passport:</label>
-				<input class="add_input" type="text" bind:value={employee.passport} name="passport" id="passport" />
+				<ModifyTextData text="Passport:" value="passport" />
 			{/if}
 
 			{#if $HPage2}
 				<label class="mg" for="dob">Date of Birth:</label>
-				<!-- <input class="add_input" type="date" bind:value={dateValue} name="dob" id="dob" /> -->
+				<!-- <input class="ml-[30px] mr-[30px] mb-[15px] h-[34px]" type="date" bind:value={dateValue} name="dob" id="dob" /> -->
 
 				<label class="mg" for="weight">Weight (kg):</label>
-				<input class="add_input" type="number" bind:value={employee.weight} name="weight" id="weight" step="0.1" placeholder="Optional" />
+				<input class="ml-[30px] mr-[30px] mb-[15px] h-[34px]" type="number" bind:value={employee.weight} name="weight" id="weight" step="0.1" placeholder="Optional" />
 
 				<label class="mg" for="height">Height (cm):</label>
-				<input class="add_input" type="number" bind:value={employee.height} name="height" id="height" step="0.1" placeholder="Optional" />
+				<input class="ml-[30px] mr-[30px] mb-[15px] h-[34px]" type="number" bind:value={employee.height} name="height" id="height" step="0.1" placeholder="Optional" />
 
 				<label class="mg" for="marital">Marital Status:</label>
-				<select class="add_input" bind:value={employee.marital}>
+				<select class="ml-[30px] mr-[30px] mb-[15px] h-[34px]" bind:value={employee.marital}>
 					<option value="">Select marital status</option>
 					<option value="single">Single</option>
 					<option value="married">Married</option>
@@ -125,21 +72,18 @@
 					<option value="widowed">Widowed</option>
 				</select>
 
-				<label class="mg" for="education">Education:</label>
-				<input class="add_input" type="text" bind:value={employee.education} name="education" id="education" />
-
-				<label class="mg" for="experience">Experience:</label>
-				<input class="add_input" type="text" bind:value={employee.experience} name="experience" id="experience" />
+				<ModifyTextData text="Education:" value="education" />
+				<ModifyTextData text="Experience:" value="experience" />
 
 				<label class="mg" for="workedCountry">Worked Country:</label>
-				<select class="add_input" bind:value={employee.workedCountry}>
+				<select class="ml-[30px] mr-[30px] mb-[15px] h-[34px]" bind:value={employee.workedCountry}>
 					<option value="myanmar" selected>Myanmar</option>
 					<option value="malaysia">Malaysia</option>
 					<option value="custom">Custom</option>
 				</select>
 
 				<label class="mg" for="spokenLanguage">Spoken Language:</label>
-				<select class="add_input" bind:value={employee.spokenLanguage}>
+				<select class="ml-[30px] mr-[30px] mb-[15px] h-[34px]" bind:value={employee.spokenLanguage}>
 					<option value="basic" selected>English (Basic)</option>
 					<option value="intermediate">English (Intermediate)</option>
 					<option value="advanced">English (Advanced)</option>
@@ -174,41 +118,31 @@
 				<label class="mg" for="familyDataScan">Family Data Scan:</label>
 				<input type="file" class="form-control mg" id="formFile" on:change={(event) => handleFileChange(event, employeeData.familyDataScan)} multiple /> -->
 
-				<label class="mg" for="deposit">Deposit:</label>
-				<input class="add_input" type="text" bind:value={employee.deposit} name="deposit" id="deposit" />
-
-				<label class="mg" for="applyDate">Apply Date:</label>
-				<input class="add_input" type="text" bind:value={employee.applyDate} name="applyDate" id="applyDate" />
-
-				<label class="mg" for="passportExpireDate">Passport Expire Date:</label>
-				<input class="add_input" type="text" bind:value={employee.passportExpireDate} name="passportExpireDate" id="passportExpireDate" />
+				<ModifyTextData text="Deposit:" value="deposit" />
+				<ModifyTextData text="Apply Date:" value="applyDate" />
+				<ModifyTextData text="Passport Expire Date:" value="passportExpireDate" />
 			{/if}
 
 			{#if $HPage4}
-				<label class="mg" for="passportType">Passport Type:</label>
-				<input class="add_input" type="text" bind:value={employee.passportType} name="passportType" id="passportType" />
-
-				<label class="mg" for="medicalOnlineExpire">Medical Online Expire:</label>
-				<input class="add_input" type="text" bind:value={employee.medicalOnlineExpire} name="medicalOnlineExpire" id="medicalOnlineExpire" />
-
-				<label class="mg" for="smartCardNo">Smart Card No:</label>
-				<input class="add_input" type="text" bind:value={employee.smartCardNo} name="smartCardNo" id="smartCardNo" />
-
-				<label class="mg" for="airPlaneNo">Air Plane No:</label>
-				<input class="add_input" type="text" bind:value={employee.airPlaneNo} name="airPlaneNo" id="airPlaneNo" />
-
-				<label class="mg" for="departureDate">Departure Date:</label>
-				<input class="add_input" type="text" bind:value={employee.departureDate} name="departureDate" id="departureDate" />
+				<ModifyTextData text="Passport Type:" value="passportType" />
+				<ModifyTextData text="Medical Online Expire:" value="medicalOnlineExpire" />
+				<ModifyTextData text="Smart Card No:" value="smartCardNo" />
+				<ModifyTextData text="Air Plane No:" value="airPlaneNo" />
+				<ModifyTextData text="Departure Date:" value="departureDate" />
 			{/if}
 
-			<div class="addForm-bot">
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div class="cancel-btn" on:click={modifyToggle}>Cancel</div>
-				{#if $HPage3 === true}
-					<button class="submit-btn" type="submit">Submit</button>
-				{:else if $HPage3 === false}
+			<div class="addForm-bot absolute bottom-0 bg-[#e5e5e5] w-[100%] h-[75px] flex justify-end items-center gap-[12px] rounded-[4px]">
+				{#if $HPage1 === true}
+					<div />
+				{:else if $HPage1 === false}
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<div class="next-btn" on:click={Next}>Next</div>
+					<div class="bg-[#4aa84d] text-white flex justify-center items-center w-[100px] h-[33px] cursor-pointer" on:click={Previous}>Previous</div>
+				{/if}
+				{#if $HPage4 === true}
+					<button class="flex justify-center items-center w-[100px] h-[33px] cursor-pointer border-none bg-[#4aa84d] text-white" type="submit">Submit</button>
+				{:else if $HPage4 === false}
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div class="bg-[#4aa84d] text-white flex justify-center items-center w-[100px] h-[33px] cursor-pointer" on:click={Next}>Next</div>
 				{/if}
 			</div>
 		</form>
@@ -216,30 +150,12 @@
 {/if}
 
 <style>
-	.close {
-		@apply cursor-pointer;
-	}
 	input,
 	select {
 		border: 1px solid gray;
 	}
-	.add_input {
-		@apply ml-[30px] mr-[30px] mb-[15px] h-[34px];
-	}
 	.add-form {
-		@apply absolute top-[30px] w-[400px] bg-white z-[12] rounded-[4px];
 		height: calc(100vh - 60px);
-	}
-	.cancel-btn {
-		@apply bg-white;
-	}
-	.submit-btn,
-	.next-btn {
-		@apply bg-[#4aa84d] text-white;
-	}
-	.submit-btn {
-		@apply flex justify-center items-center w-[100px] h-[33px] cursor-pointer;
-		border: none;
 	}
 	.addForm-heading {
 		@apply w-[100%] h-[66px] flex flex-row justify-between items-center text-[18px] font-[500] text-black;
@@ -247,18 +163,8 @@
 		padding: 0 30px;
 	}
 	.addForm-bot {
-		@apply flex justify-end items-center gap-[12px] rounded-[4px];
-		padding: 0 30px;
-	}
-	.addForm-bot div {
-		@apply flex justify-center items-center w-[100px] h-[33px] cursor-pointer;
-	}
-	.addForm-bot {
-		@apply absolute bottom-0 bg-[#e5e5e5] w-[100%] h-[75px];
 		border-radius: 0 0 4px 4px;
-	}
-	.addForm {
-		@apply flex flex-col mt-[20px] mb-[95px];
+		padding: 0 30px;
 	}
 	.mg {
 		margin: 0 30px;

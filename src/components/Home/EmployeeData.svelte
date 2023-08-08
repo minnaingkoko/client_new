@@ -2,39 +2,8 @@
 	import visibility_icon from '$lib/images/visibility.svg';
 	import edit_icon from '$lib/images/edit.svg';
 	import delete_icon from '$lib/images/delete.svg';
-	import { employeeData, employeeView, employeeModify, employeeModifyData, employeeRemove, employeeRemove_id, employeeList, employeeList_id } from '../../stores/MainStores';
-
-	const listToggle = (value: any) => {
-		employeeList_id.update(() => value);
-		employeeView.update((currentValue) => !currentValue);
-		employeeList.update((currentValue) => !currentValue);
-	};
-
-	const modifyPost = async (value: any) => {
-		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/employeeModify', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ idNo: value })
-		});
-		const data = await response.json();
-
-		// Update the store with the fetched data
-		employeeModifyData.set(data);
-	};
-
-	const modifyToggle = (value: any) => {
-		modifyPost(value);
-		employeeView.update((currentValue) => !currentValue);
-		employeeModify.update((currentValue) => !currentValue);
-	};
-
-	const deleteToggle = (value: any) => {
-		employeeRemove_id.update(() => value);
-		employeeView.update((currentValue) => !currentValue);
-		employeeRemove.update((currentValue) => !currentValue);
-	};
+	import { employeeData } from '../../stores/MainStores';
+	import { listToggle, modifyToggle, deleteToggle } from '../Shared/EmployeeFunction.svelte';
 </script>
 
 <div class="employees_data">

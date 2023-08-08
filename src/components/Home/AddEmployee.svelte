@@ -3,7 +3,7 @@
 	import close_icon from '$lib/images/close.svg';
 	import { goto } from '$app/navigation';
 	import { employeeData } from './AddData.svelte';
-	import { addToggle } from '../Shared/EmployeeFunction.svelte';
+	import { addToggle, Next, Previous } from '../Shared/EmployeeFunction.svelte';
 
 	const addRequest = async () => {
 		console.log(employeeData);
@@ -39,31 +39,6 @@
 		}
 	};
 
-	const Next = () => {
-		if ($HPage1 === true && $HPage2 === false && $HPage3 === false && $HPage4 === false) {
-			HPage1.update(() => false);
-			HPage2.update(() => true);
-		} else if ($HPage1 === false && $HPage2 === true && $HPage3 === false && $HPage4 == false) {
-			HPage2.update(() => false);
-			HPage3.update(() => true);
-		} else if ($HPage1 === false && $HPage2 === false && $HPage3 === true && $HPage4 == false) {
-			HPage3.update(() => false);
-			HPage4.update(() => true);
-		}
-	};
-
-	const Previous = () => {
-		if ($HPage4 === true && $HPage1 === false && $HPage2 === false && $HPage3 === false) {
-			HPage4.update(() => false);
-			HPage3.update(() => true);
-		} else if ($HPage3 === true && $HPage1 === false && $HPage2 === false && $HPage4 === false) {
-			HPage3.update(() => false);
-			HPage2.update(() => true);
-		} else if ($HPage2 === true && $HPage1 === false && $HPage3 === false && $HPage4 === false) {
-			HPage2.update(() => false);
-			HPage1.update(() => true);
-		}
-	};
 </script>
 
 <div class="add-form" style="display: {$employeeAdd ? 'block' : 'none'};">
