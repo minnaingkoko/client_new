@@ -2,7 +2,8 @@
 	import visibility_icon from '$lib/images/visibility.svg';
 	import edit_icon from '$lib/images/edit.svg';
 	import delete_icon from '$lib/images/delete.svg';
-	import { companyData, companyView, companyModify, companyModifyData, companyRemove, companyRemove_id, companyList, companyList_id, assignSingle } from '../../stores/MainStores';
+	import { companyData, companyView, companyList, companyList_id, assignSingle } from '../../stores/MainStores';
+	import { modifyToggle, deleteToggle } from '../Shared/CompanyFunction.svelte';
 
 	const listToggle = async (value: any) => {
 		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companySingleInfo', {
@@ -21,32 +22,6 @@
 		companyList_id.update(() => value);
 		companyView.update((currentValue) => !currentValue);
 		companyList.update((currentValue) => !currentValue);
-	};
-
-	const modifyPost = async (value: any) => {
-		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companyModify', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ idNo: value })
-		});
-		const data = await response.json();
-
-		// Update the store with the fetched data
-		companyModifyData.set(data);
-	};
-
-	const modifyToggle = (value: any) => {
-		modifyPost(value);
-		companyView.update((currentValue) => !currentValue);
-		companyModify.update((currentValue) => !currentValue);
-	};
-
-	const deleteToggle = (value: any) => {
-		companyRemove_id.update(() => value);
-		companyView.update((currentValue) => !currentValue);
-		companyRemove.update((currentValue) => !currentValue);
 	};
 </script>
 

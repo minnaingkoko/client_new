@@ -3,6 +3,7 @@
 	import close_icon from '$lib/images/close.svg';
 	import { goto } from '$app/navigation';
 	import { companyData } from './AddData.svelte';
+	import { addToggle, assignEmployee, Next, Previous } from '../Shared/CompanyFunction.svelte';
 
 	const addRequest = async () => {
 		companyData.employees = $assignData;
@@ -36,42 +37,6 @@
 
 				reader.readAsDataURL(file);
 			}
-		}
-	};
-
-	const resetPage = () => {
-		CPage1.update(() => true);
-		CPage2.update(() => false);
-		CPage3.update(() => false);
-	};
-
-	const assignEmployee = () => {
-		assign.update((assign) => !assign);
-		resetPage();
-		companyView.update((currentValue) => !currentValue);
-		companyAdd.update((currentValue) => !currentValue);
-	};
-
-	const addToggle = () => {
-		resetPage();
-		companyView.update((currentValue) => !currentValue);
-		companyAdd.update((currentValue) => !currentValue);
-	};
-
-	const Next = () => {
-		if ($CPage1 === true && $CPage2 === false && $CPage3 === false) {
-			CPage1.update(() => false);
-			CPage2.update(() => true);
-		} else if ($CPage1 === false && $CPage2 === true && $CPage3 === false) {
-			CPage2.update(() => false);
-			CPage3.update(() => true);
-		}
-	};
-
-	const Previous = () => {
-		if ($CPage1 === false && $CPage2 === true) {
-			CPage1.update(() => true);
-			CPage2.update(() => false);
 		}
 	};
 </script>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import CompanyData from '../../components/Company/CompanyData.svelte';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	import { toggleImg, assignEmployee, searchToggle, addToggle } from '../../components/Shared/CompanyFunction.svelte';
 	import { employeeData, companyData, companyModifyData, companyView, employeeView, companyAdd, companySearch, CPage1, CPage2, CPage3, assign, fullImg, fullImgUrl, fullImgName } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
@@ -11,6 +12,11 @@
 	import ModifyCompany from '../../components/Company/ModifyCompany.svelte';
 	import AssignEmployee from '../../components/Company/AssignEmployee.svelte';
 	import ListEmployee from '../../components/Home/ListEmployee.svelte';
+
+	const manageEmployees = () => {
+		goto('/');
+		location.reload();
+	}
 
 	onMount(async () => {
 		// Fetch data from MongoDB
@@ -64,6 +70,11 @@
 			{/if}
 		</div>
 		<div class="nav-btns">
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="flex justify-center items-center gap-[5px] w-[164px] h-[33px] text-white duration-300 bg-[#F9A826] rounded-[4px] text-[13px] cursor-pointer" on:click={manageEmployees}>
+				<i class="material-icons">&#xE147;</i>
+				<span>Manage Employees</span>
+			</div>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="search-btn" on:click={searchToggle}>
 				<i class="material-icons">&#xE147;</i>

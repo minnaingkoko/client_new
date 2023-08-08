@@ -2,35 +2,8 @@
 	import { companyModifyData, companyView, CPage1, CPage2, CPage3, companyModify } from '../../stores/MainStores';
 	import close_icon from '$lib/images/close.svg';
 	import { goto } from '$app/navigation';
-
-	const resetPage = () => {
-		CPage1.update(() => true);
-		CPage2.update(() => false);
-		CPage3.update(() => false);
-	};
-
-	const modifyToggle = () => {
-		resetPage();
-		companyView.update((currentValue) => !currentValue);
-		companyModify.update((currentValue) => !currentValue);
-	};
-
-	const Next = () => {
-		if ($CPage1 === true && $CPage2 === false && $CPage3 === false) {
-			CPage1.update(() => false);
-			CPage2.update(() => true);
-		} else if ($CPage1 === false && $CPage2 === true && $CPage3 === false) {
-			CPage2.update(() => false);
-			CPage3.update(() => true);
-		}
-	};
-
-	const Previous = () => {
-		if ($CPage1 === false && $CPage2 === true) {
-			CPage1.update(() => true);
-			CPage2.update(() => false);
-		}
-	};
+	import { modifyToggle, Previous, Next } from '../Shared/CompanyFunction.svelte';
+	import ModifyTextData from './ModifyTextData.svelte';
 
 	$: company = $companyModifyData;
 
@@ -63,6 +36,7 @@
 		{#if $CPage1}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- <div class="add-employee" on:click={assignEmployee}>Add Employee</div> -->
+			<ModifyTextData text='Company Name:' value='companyName' dataF={company.companyName} />
 			<label class="mg" for="companyName">Company Name:</label>
 			<input class="add_input" bind:value={company.companyName} name="companyName" id="companyName" required />
 
