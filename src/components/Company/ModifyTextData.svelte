@@ -1,7 +1,5 @@
 <script lang="ts">
 	export let text: any, value: any, dataF: any;
-	import { companyModifyData } from '../../stores/MainStores';
-	$: company = $companyModifyData;
 </script>
 
 <label class="mg" for={value}>{text}</label>

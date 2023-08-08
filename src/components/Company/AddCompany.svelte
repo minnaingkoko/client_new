@@ -3,11 +3,13 @@
 	import close_icon from '$lib/images/close.svg';
 	import { goto } from '$app/navigation';
 	import { companyData } from './AddData.svelte';
+	import { addToggle, assignEmployee, Next, Previous } from '../Shared/CompanyFunction.svelte';
 
 	const addRequest = async () => {
 		companyData.employees = $assignData;
 		console.log(companyData.employees);
-		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companyUpload', {
+		// const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companyUpload', {
+		const response = await fetch('https://localhost:3000/api/companyUpload', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -17,6 +19,9 @@
 		if (response.status === 200) {
 			goto('/company');
 			location.reload();
+		}
+		else{
+			console.log('error');
 		}
 	};
 
@@ -36,42 +41,6 @@
 
 				reader.readAsDataURL(file);
 			}
-		}
-	};
-
-	const resetPage = () => {
-		CPage1.update(() => true);
-		CPage2.update(() => false);
-		CPage3.update(() => false);
-	};
-
-	const assignEmployee = () => {
-		assign.update((assign) => !assign);
-		resetPage();
-		companyView.update((currentValue) => !currentValue);
-		companyAdd.update((currentValue) => !currentValue);
-	};
-
-	const addToggle = () => {
-		resetPage();
-		companyView.update((currentValue) => !currentValue);
-		companyAdd.update((currentValue) => !currentValue);
-	};
-
-	const Next = () => {
-		if ($CPage1 === true && $CPage2 === false && $CPage3 === false) {
-			CPage1.update(() => false);
-			CPage2.update(() => true);
-		} else if ($CPage1 === false && $CPage2 === true && $CPage3 === false) {
-			CPage2.update(() => false);
-			CPage3.update(() => true);
-		}
-	};
-
-	const Previous = () => {
-		if ($CPage1 === false && $CPage2 === true) {
-			CPage1.update(() => true);
-			CPage2.update(() => false);
 		}
 	};
 </script>
@@ -133,7 +102,7 @@
 				<div />
 			{:else if $CPage1 === false}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div class="bg-[#4aa84d] text-white flex justify-center items-center w-[100px] h-[33px] cursor-pointer" on:click={Previous}>Previous</div>
+				<div class="bg-[#42a5f5] text-white flex justify-center items-center w-[100px] h-[33px] cursor-pointer" on:click={Previous}>Previous</div>
 			{/if}
 			{#if $CPage2 === true}
 				<button class="bg-[#4aa84d] text-white border-none flex justify-center items-center w-[100px] h-[33px] cursor-pointer" type="submit">Submit</button>

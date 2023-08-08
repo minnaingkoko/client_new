@@ -8,7 +8,8 @@
 	$: company = $companyModifyData;
 
 	const modifyRequest = async (value: any) => {
-		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companyModifyRequest', {
+		// const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companyModifyRequest', {
+		const response = await fetch('https://localhost:3000/api/companyModifyRequest', {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
@@ -37,24 +38,11 @@
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- <div class="add-employee" on:click={assignEmployee}>Add Employee</div> -->
 			<ModifyTextData text='Company Name:' value='companyName' dataF={company.companyName} />
-			
-			<label class="mg" for="companyName">Company Name:</label>
-			<input class="add_input" bind:value={company.companyName} name="companyName" id="companyName" required />
-
-			<label class="mg" for="companyAddress">Company Address:</label>
-			<input class="add_input" bind:value={company.companyAddress} name="companyAddress" id="companyAddress" required />
-
-			<label class="mg" for="postCode">Post Code:</label>
-			<input class="add_input" bind:value={company.postCode} name="postCode" id="postCode" required />
-
-			<label class="mg" for="demandMale">Demand Male:</label>
-			<input class="add_input" bind:value={company.demandTotal.male} name="demandMale" id="demandMale" required />
-
-			<label class="mg" for="demandFemale">Demand Female:</label>
-			<input class="add_input" bind:value={company.demandTotal.female} name="demandFemale" id="demandFemale" required />
-
-			<label class="mg" for="companyPhNo">Company Phone Number:</label>
-			<input class="add_input" bind:value={company.companyPhNo} name="companyPhNo" id="companyPhNo" required />
+			<ModifyTextData text='Company Address:' value='companyAddress' dataF={company.companyAddress} />
+			<ModifyTextData text='Post Code:' value='postCode' dataF={company.postCode} />
+			<ModifyTextData text='Demand Male:' value='demandMale' dataF={company.demandTotal.male} />
+			<ModifyTextData text='Demand Female:' value='demandFemale' dataF={company.demandTotal.female} />
+			<ModifyTextData text='Company Phone Number:' value='companyPhNo' dataF={company.companyPhNo} />
 
 			<!-- <label class="mg" for="demandLetterScan">Demand Letter Scan:</label>
 			<input type="file" on:change={(event) => handleFileChange(event, companyData.demandLetterScan)} class="form-control mg" name="demandLetterScan" id="demandLetterScan" required />

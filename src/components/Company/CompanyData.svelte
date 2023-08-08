@@ -6,7 +6,8 @@
 	import { modifyToggle, deleteToggle } from '../Shared/CompanyFunction.svelte';
 
 	const listToggle = async (value: any) => {
-		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companySingleInfo', {
+		// const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companySingleInfo', {
+		const response = await fetch('https://localhost:3000/api/companySingleInfo', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

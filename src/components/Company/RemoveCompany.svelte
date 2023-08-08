@@ -10,7 +10,8 @@
 	};
 
 	const deleteRequest = async (value: any) => {
-		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companyDelete', {
+		// const response = await fetch('https://shan-pyae-phyo.onrender.com/api/companyDelete', {
+		const response = await fetch('https://localhost:3000/api/companyDelete', {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json'

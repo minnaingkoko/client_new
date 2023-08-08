@@ -1,11 +1,9 @@
 <script lang="ts">
-    export let text:any, value:any;
-    import { employeeModifyData } from '../../stores/MainStores';
-    $: employee = $employeeModifyData;
+    export let text:any, value:any, dataF:any;
 </script>
 
 <label class="mg" for={value}>{text}</label>
-<input class="ml-[30px] mr-[30px] mb-[15px] h-[34px]" type="text" bind:value={employee.value} name={value} id={value} required />
+<input class="ml-[30px] mr-[30px] mb-[15px] h-[34px]" type="text" bind:value={dataF} name={value} id={value} required />
 
 <style>
     input {

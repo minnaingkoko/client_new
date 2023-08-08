@@ -7,7 +7,8 @@
 
 	const addRequest = async () => {
 		console.log(employeeData);
-		const response = await fetch('https://shan-pyae-phyo.onrender.com/api/employeeUpload', {
+		// const response = await fetch('https://shan-pyae-phyo.onrender.com/api/employeeUpload', {
+		const response = await fetch('https://localhost:3000/api/employeeUpload', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
